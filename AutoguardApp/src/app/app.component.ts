@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router'; // 👈 Necesario para router-outlet
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true, // 👈 Obligatorio para standalone
+  imports: [RouterModule], // 👈 Para que funcione <router-outlet>
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'] // 👈 'styleUrls' en plural
 })
 export class AppComponent {
   title = 'AutoguardApp';
