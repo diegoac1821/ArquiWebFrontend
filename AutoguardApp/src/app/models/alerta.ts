@@ -1,4 +1,4 @@
-import { Vehiculo } from "./vehiculo";
+import { Vehiculo } from "./vehiculo"
 
 export class Alerta{
     id:number=0 
