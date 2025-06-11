@@ -17,3 +17,4 @@ export class UsuarioService {
     return this.http.get<Usuario[]>(this.url);
   }
 }
+//diego

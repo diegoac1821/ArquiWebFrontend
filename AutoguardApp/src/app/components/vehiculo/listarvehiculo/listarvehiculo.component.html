@@ -1,1 +1,42 @@
-<p>listarvehiculo works!</p>
+<div class="container">
+  <div style="text-align: center; margin: 6%">
+    <h1>Lista de Vehículos</h1>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Placa -->
+    <ng-container matColumnDef="placa">
+      <th mat-header-cell *matHeaderCellDef>Placa</th>
+      <td mat-cell *matCellDef="let element">{{ element.placa }}</td>
+    </ng-container>
+
+    <!-- Color -->
+    <ng-container matColumnDef="color">
+      <th mat-header-cell *matHeaderCellDef>Color</th>
+      <td mat-cell *matCellDef="let element">{{ element.color }}</td>
+    </ng-container>
+
+    <!-- Marca -->
+    <ng-container matColumnDef="marca">
+      <th mat-header-cell *matHeaderCellDef>Marca</th>
+      <td mat-cell *matCellDef="let element">{{ element.marca }}</td>
+    </ng-container>
+
+    <!-- Modelo -->
+    <ng-container matColumnDef="modelo">
+      <th mat-header-cell *matHeaderCellDef>Modelo</th>
+      <td mat-cell *matCellDef="let element">{{ element.modelo }}</td>
+    </ng-container>
+
+    <!-- Usuario (solo username) -->
+    <ng-container matColumnDef="usuario">
+      <th mat-header-cell *matHeaderCellDef>Usuario</th>
+      <td mat-cell *matCellDef="let element">{{ element.u.username }}</td>
+    </ng-container>
+
+    <!-- Filas -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

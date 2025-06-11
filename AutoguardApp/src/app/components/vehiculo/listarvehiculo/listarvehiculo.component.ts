@@ -1,11 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { VehiculoService } from '../../../services/vehiculo.service';
+import { Vehiculo } from '../../../models/vehiculo';
 
 @Component({
   selector: 'app-listarvehiculo',
-  imports: [],
+  standalone: true,
+  imports: [MatTableModule],
   templateUrl: './listarvehiculo.component.html',
-  styleUrl: './listarvehiculo.component.css'
+  styleUrls: ['./listarvehiculo.component.css']
 })
-export class ListarvehiculoComponent {
+export class ListarvehiculoComponent implements OnInit {
+  dataSource: MatTableDataSource<Vehiculo> = new MatTableDataSource<Vehiculo>();
 
+  displayedColumns: string[] = ['placa', 'color', 'marca', 'modelo', 'usuario'];
+
+  constructor(private vehiculoService: VehiculoService) {}
+
+  ngOnInit(): void {
+    this.vehiculoService.list().subscribe((data) => {
+      this.dataSource = new MatTableDataSource(data);
+    });
+  }
 }

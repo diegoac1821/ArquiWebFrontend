@@ -1,6 +1,6 @@
 import { Dispositivo_GPS } from "./dispositivo_GPS";
 
-export class Reclamo{
+export class ubicacion_registro {
     id:number=0
     latitud:string=""
     longitud:string=""
