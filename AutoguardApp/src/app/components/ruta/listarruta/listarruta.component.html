@@ -1,0 +1,56 @@
+<div class="container">
+  <div style="text-align: center; margin: 6%">
+    <h1>Lista de Rutas</h1>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="origenLatitud">
+      <th mat-header-cell *matHeaderCellDef>Origen Latitud</th>
+      <td mat-cell *matCellDef="let element">{{ element.origenLatitud }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="origenLongitud">
+      <th mat-header-cell *matHeaderCellDef>Origen Longitud</th>
+      <td mat-cell *matCellDef="let element">{{ element.origenLongitud }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="destinoLatitud">
+      <th mat-header-cell *matHeaderCellDef>Destino Latitud</th>
+      <td mat-cell *matCellDef="let element">{{ element.destinoLatitud }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="destinoLongitud">
+      <th mat-header-cell *matHeaderCellDef>Destino Longitud</th>
+      <td mat-cell *matCellDef="let element">{{ element.destinoLongitud }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha">
+      <th mat-header-cell *matHeaderCellDef>Fecha</th>
+      <td mat-cell *matCellDef="let element">{{ element.fecha | date }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="duracion">
+      <th mat-header-cell *matHeaderCellDef>Duración</th>
+      <td mat-cell *matCellDef="let element">{{ element.duracion }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="distancia">
+      <th mat-header-cell *matHeaderCellDef>Distancia (km)</th>
+      <td mat-cell *matCellDef="let element">{{ element.distancia }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="placa">
+      <th mat-header-cell *matHeaderCellDef>Vehículo (Placa)</th>
+      <td mat-cell *matCellDef="let element">{{ element.v.placa }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
