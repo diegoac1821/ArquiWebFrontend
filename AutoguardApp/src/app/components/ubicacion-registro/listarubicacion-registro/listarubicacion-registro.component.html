@@ -1,1 +1,41 @@
-<p>listarubicacion-registro works!</p>
+<div class="container">
+  <div style="text-align: center; margin: 6%">
+    <h1>Lista de Ubicaciones Registradas</h1>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="latitud">
+      <th mat-header-cell *matHeaderCellDef>Latitud</th>
+      <td mat-cell *matCellDef="let element">{{ element.latitud }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="longitud">
+      <th mat-header-cell *matHeaderCellDef>Longitud</th>
+      <td mat-cell *matCellDef="let element">{{ element.longitud }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha">
+      <th mat-header-cell *matHeaderCellDef>Fecha</th>
+      <td mat-cell *matCellDef="let element">{{ element.fecha | date }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="hora">
+      <th mat-header-cell *matHeaderCellDef>Hora</th>
+      <td mat-cell *matCellDef="let element">{{ element.hora }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="gps">
+      <th mat-header-cell *matHeaderCellDef>ID GPS</th>
+      <td mat-cell *matCellDef="let element">{{ element.dgps.id }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
