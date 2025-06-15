@@ -5,5 +5,5 @@ export class Dispositivo_GPS{
     numeroSerie:string=""
     precio:number=0
     fechaAdquisicion:Date = new Date(Date.now())
-    v:Vehiculo=new Vehiculo()   
+    vehiculo:Vehiculo=new Vehiculo()   
 }
