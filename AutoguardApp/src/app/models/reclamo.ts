@@ -6,5 +6,5 @@ export class Reclamo{
     fecha:Date = new Date(Date.now())
     descripcion:string=""
     resuelto:boolean=false;
-    u:Usuario=new Usuario()   
+    usuario:Usuario=new Usuario()   
 }
