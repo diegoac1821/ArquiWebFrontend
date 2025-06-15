@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ListarconsultaComponent } from './listarconsulta/listarconsulta.component';
 
 @Component({
   selector: 'app-consulta',
-  imports: [],
   templateUrl: './consulta.component.html',
-  styleUrl: './consulta.component.css'
+  styleUrls: ['./consulta.component.css'],
+  imports: [ListarconsultaComponent, RouterOutlet]
 })
 export class ConsultaComponent {
-
+  constructor(public route: ActivatedRoute) {}
 }
+
+
