@@ -1,1 +1,5 @@
-<p>reclamo works!</p>
+<router-outlet></router-outlet>
+
+<div [hidden]="route.children.length !== 0">
+ <app-listarreclamo></app-listarreclamo>
+</div>
