@@ -5,5 +5,5 @@ export class Consulta{
     consulta:string=""
     fecha:Date = new Date(Date.now())
     hora:string=""
-    u:Usuario=new Usuario()   
+    usuario:Usuario=new Usuario()   
 }
