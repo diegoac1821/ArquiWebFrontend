@@ -1,1 +1,5 @@
-<p>dispositivo-gps works!</p>
+<router-outlet></router-outlet>
+
+<div [hidden]="route.children.length !== 0">
+  <app-listardispositivo-gps></app-listardispositivo-gps>
+</div>
