@@ -22,6 +22,7 @@ export class ListarubicacionregistroComponent implements OnInit {
 
   ngOnInit(): void {
     this.ubicacionService.list().subscribe((data) => {
+      console.log('Ubicaciones:', data);
       this.dataSource = new MatTableDataSource(data);
     });
   }
