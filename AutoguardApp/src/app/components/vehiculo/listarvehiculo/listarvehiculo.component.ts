@@ -14,7 +14,8 @@ import { Vehiculo } from '../../../models/vehiculo';
 export class ListarvehiculoComponent implements OnInit {
   dataSource: MatTableDataSource<Vehiculo> = new MatTableDataSource<Vehiculo>();
 
-  displayedColumns: string[] = ['placa', 'color', 'marca', 'modelo', 'usuario'];
+  displayedColumns: string[] = ['placa', 'color', 'marca', 'modelo', 'usuario', 'editar', 'eliminar'];
+
 
   constructor(private vehiculoService: VehiculoService) {}
 

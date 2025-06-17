@@ -5,5 +5,5 @@ export class Vehiculo{
     color:number=0
     marca:string=""
     modelo:string=""
-    u:Usuario=new Usuario()
+    usuario:Usuario=new Usuario()
 }
