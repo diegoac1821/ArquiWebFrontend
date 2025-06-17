@@ -47,7 +47,7 @@
 
     <ng-container matColumnDef="placa">
       <th mat-header-cell *matHeaderCellDef>Vehículo (Placa)</th>
-      <td mat-cell *matCellDef="let element">{{ element.v.placa }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.vehiculo?.placa }}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

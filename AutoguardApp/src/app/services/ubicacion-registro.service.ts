@@ -8,7 +8,7 @@ const base_url = environment.base;
 })
 export class UbicacionRegistroService {
 
-  private url = `${base_url}/ubicacion-registros`;
+  private url = `${base_url}/ubicaciones`;
     
       constructor(private http: HttpClient) {}
     
