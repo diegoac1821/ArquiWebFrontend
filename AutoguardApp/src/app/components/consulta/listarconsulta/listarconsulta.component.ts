@@ -3,25 +3,46 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { ConsultaService } from '../../../services/consulta.service';
 import { Consulta } from '../../../models/consulta';
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-listarconsulta',
-  standalone: true,
-  imports: [MatTableModule, CommonModule],
   templateUrl: './listarconsulta.component.html',
-  styleUrls: ['./listarconsulta.component.css']
+  styleUrl: './listarconsulta.component.css',
+  standalone: true,
+  imports: [MatTableModule, MatButtonModule, MatIconModule, RouterLink, CommonModule],
 })
 export class ListarconsultaComponent implements OnInit {
-  dataSource: MatTableDataSource<Consulta> = new MatTableDataSource<Consulta>();
-  displayedColumns: string[] = ['id', 'consulta', 'fecha', 'hora', 'usuario'];
+  dataSource: MatTableDataSource<Consulta> = new MatTableDataSource();
+  displayedColumns: string[] = [
+    'id',
+    'consulta',
+    'fecha',
+    'hora',
+    'usuario',
+    'editar',
+    'eliminar'
+  ];
 
-  constructor(private cS: ConsultaService) {}
+  constructor(private consultaService: ConsultaService) {}
 
   ngOnInit(): void {
-    this.cS.list().subscribe((data) => {
+    this.consultaService.list().subscribe((data) => {
+      this.dataSource = new MatTableDataSource(data);
+    });
+    this.consultaService.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
     });
   }
-}
 
+  eliminar(id: number) {
+    this.consultaService.delete(id).subscribe(() => {
+      this.consultaService.list().subscribe(data => {
+        this.consultaService.setList(data);
+      });
+    });
+  }
+}
