@@ -17,7 +17,8 @@ import { InsertareditarComponent } from './components/usuario/insertareditar/ins
 import { InsertareditarconsultaComponent } from './components/consulta/insertareditarconsulta/insertareditarconsulta.component';
 import { InsertareditarcomisariaComponent } from './components/comisaria/insertareditarcomisaria/insertareditarcomisaria.component';
 import { InsertareditarvehiculoComponent } from './components/vehiculo/insertareditarvehiculo/insertareditarvehiculo.component';
-
+import { InsertareditarrespuestaComponent } from './components/respuesta/insertareditarrespuesta/insertareditarrespuesta.component';
+import { VerperfilusuarioComponent } from './components/usuario/verperfilusuario/verperfilusuario.component';
 export const routes: Routes = [
   { path: '', component: IndiceComponent },
   { path: 'usuario/listarusuario', component: ListarusuarioComponent },
@@ -38,6 +39,7 @@ export const routes: Routes = [
     path: 'ubicacion-registro/listarubicacionregistro',
     component: ListarubicacionregistroComponent,
   },
+  { path: 'respuesta/listarrespuesta', component: ListarrespuestaComponent },
   { path: 'usuario/insertareditar', component: InsertareditarComponent },
   { path: 'usuario/ediciones/:id', component: InsertareditarComponent },
   {
@@ -63,5 +65,21 @@ export const routes: Routes = [
   {
     path: 'vehiculo/insertareditarvehiculo/:placa',
     component: InsertareditarvehiculoComponent,
+  },
+  {
+    path: 'respuestas/listarrespuesta',
+    component: ListarrespuestaComponent
+  },
+  {
+    path: 'respuestas/insertareditarrespuesta',
+    component: InsertareditarrespuestaComponent
+  },
+  {
+    path: 'respuestas/insertareditarrespuesta/:id',
+    component: InsertareditarrespuestaComponent
+  },
+  {
+    path: 'usuario/perfil/:id',
+    component: VerperfilusuarioComponent
   },
 ];
