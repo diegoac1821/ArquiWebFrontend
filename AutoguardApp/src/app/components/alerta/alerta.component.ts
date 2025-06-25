@@ -10,5 +10,5 @@ import { ListaralertaComponent } from './listaralerta/listaralerta.component';
 })
 export class AlertaComponent {
   constructor(public route: ActivatedRoute) {}
+  
 }
-//leslie
