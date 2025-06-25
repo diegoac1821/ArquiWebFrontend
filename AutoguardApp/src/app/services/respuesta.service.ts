@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Respuesta } from '../models/respuesta';
 import { Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class RespuestaService {
@@ -17,9 +18,10 @@ export class RespuestaService {
   }
 
   // Insertar nueva respuesta
-  insert(respuesta: Respuesta) {
-    return this.http.post(this.url, respuesta);
-  }
+  insert(respuesta: Respuesta): Observable<Respuesta> {
+  return this.http.post<Respuesta>(this.url, respuesta);
+}
+
 
   // Actualizar respuesta existente
   update(respuesta: Respuesta) {
