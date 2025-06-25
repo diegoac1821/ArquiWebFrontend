@@ -15,6 +15,8 @@ import { ListaralertaComponent } from './components/alerta/listaralerta/listaral
 import { ListarrespuestaComponent } from './components/respuesta/listarrespuesta/listarrespuesta.component';
 import { InsertareditarComponent } from './components/usuario/insertareditar/insertareditar.component';
 import { InsertareditarconsultaComponent } from './components/consulta/insertareditarconsulta/insertareditarconsulta.component';
+import { InsertareditaralertaComponent } from './components/alerta/insertareditaralerta/insertareditaralerta.component';
+import { InsertareditardenunciaComponent } from './components/denuncia/insertareditardenuncia/insertareditardenuncia.component';
 
 export const routes: Routes = [
   { path: '', component: IndiceComponent },
@@ -33,7 +35,11 @@ export const routes: Routes = [
   { path: 'usuario/insertareditar', component: InsertareditarComponent },
   { path: 'usuario/ediciones/:id', component: InsertareditarComponent },
 { path: 'consultas/insertareditarconsulta', component: InsertareditarconsultaComponent },
-{ path: 'consultas/insertareditarconsulta/:id', component: InsertareditarconsultaComponent }
+{ path: 'consultas/insertareditarconsulta/:id', component: InsertareditarconsultaComponent },
+{ path: 'alertas/insertareditaralerta', component: InsertareditaralertaComponent },
+{ path: 'alertas/insertareditaralerta/:id', component: InsertareditaralertaComponent },
+{ path: 'denuncia/insertareditardenuncia', component: InsertareditardenunciaComponent },
+{ path: 'denuncia/insertareditardenuncia/:id', component: InsertareditardenunciaComponent },
 
 
   
