@@ -3,11 +3,16 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { Vehiculo } from '../../../models/vehiculo';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-listarvehiculo',
   standalone: true,
-  imports: [MatTableModule],
+  imports: [MatTableModule,MatButtonModule, MatIconModule, CommonModule, RouterLink],
   templateUrl: './listarvehiculo.component.html',
   styleUrls: ['./listarvehiculo.component.css']
 })
@@ -22,6 +27,13 @@ export class ListarvehiculoComponent implements OnInit {
   ngOnInit(): void {
     this.vehiculoService.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
+    });
+  }
+    eliminar(placa: number) {
+    this.vehiculoService.delete(placa).subscribe(() => {
+      this.vehiculoService.list().subscribe(data => {
+        this.vehiculoService.setList(data);
+      });
     });
   }
 }

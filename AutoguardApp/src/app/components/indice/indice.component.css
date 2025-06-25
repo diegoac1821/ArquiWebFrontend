@@ -1,0 +1,125 @@
+/* Asegura que html y body ocupen toda la altura y ancho */
+html, body {
+  background-color: #34495e; /* Gris oscuro */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna */
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Estilo general para el título */
+h2 {
+  font-size: 3rem; /* Aumenta el tamaño del título */
+  color: #ecf0f1; /* Blanco suave */
+  text-align: center;
+  margin: 0;
+  padding: 30px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 4px; /* Mayor espaciado entre letras */
+  z-index: 1000;
+}
+
+/* Estilo para el contenido principal */
+main {
+  background-color: #34495e; /* Gris oscuro */
+  width: 100%;
+  max-width: 800px; /* Ancho máximo */
+  padding: 40px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 20px; /* Bordes más redondeados */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Estilo para los encabezados en main */
+main h1, main h2 {
+  font-size: 2.5rem;
+  color: #ffffff;
+  letter-spacing: 2px;
+  margin: 15px 0;
+}
+
+/* Menú flotante */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background-color: #00779b; /* Azul oscuro */
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 270px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding-top: 30px;
+  transition: all 0.3s ease;
+}
+
+/* Estilo para cada item del menú */
+li {
+  padding: 18px;
+  border-bottom: 1px solid #444;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+/* Último elemento sin borde */
+li:last-child {
+  border-bottom: none;
+}
+
+/* Estilo para los enlaces del menú */
+a {
+  text-decoration: none;
+  font-size: 1.4rem;
+  color: #d0e0f1;
+  display: block;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+/* Efecto hover en los enlaces del menú */
+a:hover {
+  background-color: #f1c40f; /* Amarillo dorado */
+  color: #003366; /* Azul oscuro */
+  transform: scale(1.05);
+}
+
+/* Estilo para los enlaces activos */
+a.router-link-active {
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #003366; /* Azul oscuro */
+  border-radius: 8px;
+  padding: 12px;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+  ul {
+    width: 240px; /* Reduce el tamaño del menú en pantallas más pequeñas */
+  }
+
+  main {
+    margin-left: 0;
+    padding: 25px; /* Reduce el padding del contenido */
+  }
+
+  h2 {
+    font-size: 2.2rem; /* Ajuste de tamaño para pantallas más pequeñas */
+  }
+}

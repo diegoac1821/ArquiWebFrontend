@@ -1,0 +1,61 @@
+<div class="container">
+  <h2 style="text-align: center; margin-top: 2rem;">
+    {{ edicion ? 'Editar Ruta' : 'Registrar Ruta' }}
+  </h2>
+
+  <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem;">
+    <!-- Origen Latitud -->
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Origen Latitud</mat-label>
+      <input matInput formControlName="origenLatitud">
+    </mat-form-field>
+
+    <!-- Origen Longitud -->
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Origen Longitud</mat-label>
+      <input matInput formControlName="origenLongitud">
+    </mat-form-field>
+
+    <!-- Destino Latitud -->
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Destino Latitud</mat-label>
+      <input matInput formControlName="destinoLatitud">
+    </mat-form-field>
+
+    <!-- Destino Longitud -->
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Destino Longitud</mat-label>
+      <input matInput formControlName="destinoLongitud">
+    </mat-form-field>
+
+    <!-- Fecha -->
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Fecha</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="fecha">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+     <!-- Duración -->
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Duración</mat-label>
+      <input matInput formControlName="duracion">
+    </mat-form-field>
+
+      <!-- Distancia -->
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Distancia</mat-label>
+      <input matInput formControlName="distancia">
+    </mat-form-field>
+
+    <!-- ID del Usuario -->
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Vehiculo</mat-label>
+      <input matInput type="string" formControlName="placa">
+    </mat-form-field>
+
+    <div style="margin-top: 2rem;">
+      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+    </div>
+  </form>
+</div>

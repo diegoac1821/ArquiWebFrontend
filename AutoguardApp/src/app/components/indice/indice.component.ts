@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -8,4 +8,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './indice.component.html',
   styleUrls: ['./indice.component.css']
 })
-export class IndiceComponent {}
+export class IndiceComponent implements OnInit {
+  ngOnInit(): void {
+  }
+}

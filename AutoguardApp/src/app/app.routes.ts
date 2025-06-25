@@ -15,6 +15,8 @@ import { ListaralertaComponent } from './components/alerta/listaralerta/listaral
 import { ListarrespuestaComponent } from './components/respuesta/listarrespuesta/listarrespuesta.component';
 import { InsertareditarComponent } from './components/usuario/insertareditar/insertareditar.component';
 import { InsertareditarconsultaComponent } from './components/consulta/insertareditarconsulta/insertareditarconsulta.component';
+import { InsertareditarubicacionRegistroComponent } from './components/ubicacion-registro/insertareditarubicacion-registro/insertareditarubicacion-registro.component';
+import { InsertareditarrutaComponent } from './components/ruta/insertareditarruta/insertareditarruta.component';
 
 export const routes: Routes = [
   { path: '', component: IndiceComponent },
@@ -32,8 +34,14 @@ export const routes: Routes = [
   { path: 'ubicacion-registro/listarubicacionregistro', component: ListarubicacionregistroComponent },
   { path: 'usuario/insertareditar', component: InsertareditarComponent },
   { path: 'usuario/ediciones/:id', component: InsertareditarComponent },
-{ path: 'consultas/insertareditarconsulta', component: InsertareditarconsultaComponent },
-{ path: 'consultas/insertareditarconsulta/:id', component: InsertareditarconsultaComponent }
+  { path: 'consultas/insertareditarconsulta', component: InsertareditarconsultaComponent },
+  { path: 'consultas/insertareditarconsulta/:id', component: InsertareditarconsultaComponent },
+  { path: 'ubicacion-registro/insertareditarubicacion-registro/:id', component: InsertareditarubicacionRegistroComponent },
+  { path: 'ubicacion-registro/insertareditarubicacion-registro', component: InsertareditarubicacionRegistroComponent },
+  { path: 'ruta/insertareditarruta', component: InsertareditarrutaComponent },
+  { path: 'ruta/insertareditarruta/:id', component: InsertareditarrutaComponent },
+
+
 
 
   
