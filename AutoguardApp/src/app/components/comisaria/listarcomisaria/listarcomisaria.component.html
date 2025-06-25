@@ -1,8 +1,14 @@
 <div class="container">
-  <div style="text-align: center; margin: 6%">
-    <h1>Lista de Comisarías</h1>
+  <h2 style="text-align: center; margin-top: 2rem;">Lista de Comisarías</h2>
+
+  <!-- Botón Insertar -->
+  <div style="text-align: left; margin: 1rem 0;">
+    <button mat-raised-button color="primary" [routerLink]="['/comisaria/insertareditarcomisaria']">
+      ➕ Insertar Comisaría
+    </button>
   </div>
 
+  <!-- Tabla -->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!-- ID -->
@@ -35,6 +41,27 @@
       <td mat-cell *matCellDef="let element">{{ element.telefono }}</td>
     </ng-container>
 
+    <!-- Editar -->
+    <ng-container matColumnDef="editar">
+      <th mat-header-cell *matHeaderCellDef>Editar</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="accent" [routerLink]="['/comisaria/insertareditarcomisaria', element.id]">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Eliminar -->
+    <ng-container matColumnDef="eliminar">
+      <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn" (click)="eliminar(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Filas -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
