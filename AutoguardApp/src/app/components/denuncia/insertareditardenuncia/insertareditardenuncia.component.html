@@ -1,9 +1,8 @@
 <div class="container">
-  <h2 style="text-align: center; margin-top: 2rem;">
-    {{ edicion ? 'Editar Denuncia' : 'Registrar Denuncia' }}
-  </h2>
-
-  <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem;">
+  <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem">
+    <h2 style="text-align: center; margin-top: 2rem">
+      {{ edicion ? "Editar Denuncia" : "Registrar Denuncia" }}
+    </h2>
     <!-- Descripción -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Descripción</mat-label>
@@ -43,10 +42,8 @@
     </mat-form-field>
 
     <!-- Botón -->
-    <div style="margin-top: 2rem;">
-      <button mat-raised-button color="primary" type="submit">
-        Aceptar
-      </button>
+    <div style="margin-top: 2rem">
+      <button mat-raised-button color="primary" type="submit">Aceptar</button>
     </div>
   </form>
 </div>

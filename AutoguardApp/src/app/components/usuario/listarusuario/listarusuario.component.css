@@ -1,0 +1,78 @@
+/* Fondo general */
+.container {
+  background-color: #5BC0E4;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Título estilizado */
+h2 {
+  background-color: #472F64;
+  color: white;
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Botón Insertar */
+button[color='primary'] {
+  background-color: #27193E !important;
+  color: white !important;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button[color='primary']:hover {
+  background-color: #3a2d50 !important;
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Encabezado de tabla */
+.mat-header-cell {
+  background-color: white;
+  color: #27193E;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Celdas de tabla */
+.mat-cell {
+  text-align: center;
+  padding: 12px;
+  color: #333;
+}
+
+/* Filas alternas */
+.mat-row:nth-child(even) {
+  background-color: #f2f8fc;
+}
+
+/* Íconos de editar y eliminar con mismo color */
+button[mat-icon-button] mat-icon {
+  color: #27193E !important;
+}
+
+/* Ícono de Ver Perfil (color más claro para mayor visibilidad) */
+button[mat-icon-button][color='primary'] mat-icon {
+  color: #ffffff !important; /* Azul claro profundo */
+}
+
+/* Paginador */
+mat-paginator {
+  margin-top: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
