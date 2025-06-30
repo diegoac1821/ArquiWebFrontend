@@ -23,6 +23,7 @@ import { VerperfilusuarioComponent } from './components/usuario/verperfilusuario
 import { InsertareditarubicacionComponent } from './components/ubicacion-registro/insertareditarubicacion/insertareditarubicacion.component';
 import { InsertareditarrutaComponent } from './components/ruta/insertareditarruta/insertareditarruta.component';
 import { ListaralertaComponent } from './components/alerta/listaralerta/listaralerta.component';
+import { ReportecantdenunciasComponent } from './components/reportes/reportecantdenuncias/reportecantdenuncias.component';
 export const routes: Routes = [
   { path: '', component: IndiceComponent },
   { path: 'usuario/listarusuario', component: ListarusuarioComponent },
@@ -107,5 +108,9 @@ export const routes: Routes = [
     {
     path: 'ruta/insertareditarruta',
     component: InsertareditarrutaComponent,
+  },
+  {
+    path: 'reportes/reportecantdenuncias',
+    component: ReportecantdenunciasComponent,
   },
 ];
