@@ -1,22 +1,21 @@
 <div class="container">
-  <h2 style="text-align: center; margin-top: 2rem;">
-    {{ edicion ? 'Editar Respuesta' : 'Registrar Respuesta' }}
-  </h2>
-
-  <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem;">
+  <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem">
+    <h2 style="text-align: center; margin-top: 2rem">
+      {{ edicion ? "Editar Respuesta" : "Registrar Respuesta" }}
+    </h2>
     <!-- Texto de la respuesta -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Texto</mat-label>
-      <input matInput formControlName="texto">
+      <input matInput formControlName="texto" />
     </mat-form-field>
 
     <!-- ID de la consulta relacionada -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>ID de la Consulta</mat-label>
-      <input matInput type="number" formControlName="consultaId">
+      <input matInput type="number" formControlName="consultaId" />
     </mat-form-field>
 
-    <div style="margin-top: 2rem;">
+    <div style="margin-top: 2rem">
       <button mat-raised-button color="primary" type="submit">Aceptar</button>
     </div>
   </form>

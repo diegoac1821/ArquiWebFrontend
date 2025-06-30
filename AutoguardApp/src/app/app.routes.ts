@@ -11,7 +11,6 @@ import { ListardispositivoGPSComponent } from './components/dispositivo-gps/list
 import { ListardenunciaComponent } from './components/denuncia/listardenuncia/listardenuncia.component';
 import { ListarconsultaComponent } from './components/consulta/listarconsulta/listarconsulta.component';
 import { ListarcomisariaComponent } from './components/comisaria/listarcomisaria/listarcomisaria.component';
-import { ListaralertaComponent } from './components/alerta/listaralerta/listaralerta.component';
 import { ListarrespuestaComponent } from './components/respuesta/listarrespuesta/listarrespuesta.component';
 import { InsertareditarComponent } from './components/usuario/insertareditar/insertareditar.component';
 import { InsertareditarconsultaComponent } from './components/consulta/insertareditarconsulta/insertareditarconsulta.component';
@@ -23,6 +22,7 @@ import { InsertareditarrespuestaComponent } from './components/respuesta/inserta
 import { VerperfilusuarioComponent } from './components/usuario/verperfilusuario/verperfilusuario.component';
 import { InsertareditarubicacionComponent } from './components/ubicacion-registro/insertareditarubicacion/insertareditarubicacion.component';
 import { InsertareditarrutaComponent } from './components/ruta/insertareditarruta/insertareditarruta.component';
+import { ListaralertaComponent } from './components/alerta/listaralerta/listaralerta.component';
 export const routes: Routes = [
   { path: '', component: IndiceComponent },
   { path: 'usuario/listarusuario', component: ListarusuarioComponent },
@@ -108,6 +108,4 @@ export const routes: Routes = [
     path: 'ruta/insertareditarruta',
     component: InsertareditarrutaComponent,
   },
-
-  
 ];

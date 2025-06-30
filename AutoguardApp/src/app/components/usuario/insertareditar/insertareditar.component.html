@@ -1,7 +1,8 @@
 <div class="container">
-  <h2 style="text-align: center; margin-top: 2rem;">{{ edicion ? 'Editar Usuario' : 'Registrar Usuario' }}</h2>
+  
 
   <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem;">
+    <h2 style="text-align: center; margin-top: 2rem;">{{ edicion ? 'Editar Usuario' : 'Registrar Usuario' }}</h2>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>DNI</mat-label>
       <input matInput formControlName="dni">
