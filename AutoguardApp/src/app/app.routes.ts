@@ -21,6 +21,8 @@ import { InsertareditarcomisariaComponent } from './components/comisaria/inserta
 import { InsertareditarvehiculoComponent } from './components/vehiculo/insertareditarvehiculo/insertareditarvehiculo.component';
 import { InsertareditarrespuestaComponent } from './components/respuesta/insertareditarrespuesta/insertareditarrespuesta.component';
 import { VerperfilusuarioComponent } from './components/usuario/verperfilusuario/verperfilusuario.component';
+import { InsertareditarubicacionComponent } from './components/ubicacion-registro/insertareditarubicacion/insertareditarubicacion.component';
+import { InsertareditarrutaComponent } from './components/ruta/insertareditarruta/insertareditarruta.component';
 export const routes: Routes = [
   { path: '', component: IndiceComponent },
   { path: 'usuario/listarusuario', component: ListarusuarioComponent },
@@ -28,8 +30,7 @@ export const routes: Routes = [
   { path: 'alerta/listaralerta', component: ListaralertaComponent },
   { path: 'comisaria/listarcomisaria', component: ListarcomisariaComponent },
   { path: 'consulta/listarconsulta', component: ListarconsultaComponent },
-  { path: 'denuncia/listardenuncia', component: ListardenunciaComponent },
-  {
+  { path: 'denuncia/listardenuncia', component: ListardenunciaComponent },  {
     path: 'dispositivo-gps/listardispositivogps',
     component: ListardispositivoGPSComponent,
   },
@@ -91,4 +92,22 @@ export const routes: Routes = [
     path: 'usuario/perfil/:id',
     component: VerperfilusuarioComponent
   },
+  {
+    path: 'ubicacion-registro/insertareditarubicacion-registro',
+    component: InsertareditarubicacionComponent,
+  },
+  {
+    path: 'ubicacion-registro/insertareditarubicacion-registro/:id',
+    component: InsertareditarubicacionComponent,
+  },
+  {
+    path: 'ruta/insertareditarruta/:id',
+    component: InsertareditarrutaComponent,
+  },
+    {
+    path: 'ruta/insertareditarruta',
+    component: InsertareditarrutaComponent,
+  },
+
+  
 ];
