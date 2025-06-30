@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Comisaria } from '../models/comisaria';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { buscarcomisariaDTO } from '../models/buscarcomisariaDTO';
+import { CantDenunciasComisariaDTO } from '../models/cantDenunciasComisariaDTO';
 const base_url = environment.base;
 
 @Injectable({
@@ -41,5 +43,14 @@ export class ComisariaService {
   setList(listaNueva: Comisaria[]) {
     this.listaCambio.next(listaNueva);
   }
+   getSearchComisaria(): Observable<buscarcomisariaDTO[]> {
+    return this.http.get<buscarcomisariaDTO[]>(`${this.url}/buscarDistrito`);
+  }
+
+ getQuantity():Observable<CantDenunciasComisariaDTO[]>{
+    return this.http.get<CantDenunciasComisariaDTO[]>(`${this.url}/denunciasxcomisaria`);
+
+  }
+
 }
 //leslie
