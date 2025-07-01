@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { UsuarioService } from '../../../services/usuario.service';
@@ -6,36 +6,41 @@ import { Usuario } from '../../../models/usuario';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-listarusuario',
   templateUrl: './listarusuario.component.html',
   styleUrl: './listarusuario.component.css',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatIconModule, RouterLink, CommonModule],
+  imports: [
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterLink,
+    CommonModule,
+    MatPaginatorModule
+  ],
 })
 export class ListarusuarioComponent implements OnInit {
   dataSource: MatTableDataSource<Usuario> = new MatTableDataSource();
-  displayedColumns: string[] = [
-  'dni',
-  'nombres',
-  'apellidos',
-  'correo_electronico',
-  'telefono',
-  'enabled',
-  'editar',
-  'eliminar'
-];
+displayedColumns: string[] = ['dni', 'enabled', 'editar', 'eliminar', 'perfil'];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
     this.usuarioService.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
     });
+
     this.usuarioService.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
     });
   }
 
@@ -47,4 +52,3 @@ export class ListarusuarioComponent implements OnInit {
     });
   }
 }
-
