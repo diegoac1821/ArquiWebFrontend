@@ -60,7 +60,13 @@ export class InsertareditarcomisariaComponent implements OnInit {
       nombre: ['', Validators.required],
       direccion: ['', Validators.required],
       distrito: ['', Validators.required],
-      telefono: ['', Validators.required],
+      telefono: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^9\d{8}$/), // Solo 9 dígitos, empieza con 9
+        ],
+      ],
     });
   }
 
@@ -75,12 +81,16 @@ export class InsertareditarcomisariaComponent implements OnInit {
       if (this.edicion) {
         this.comisaria.id = this.id;
         this.comisariaService.update(this.comisaria).subscribe(() => {
-          this.comisariaService.list().subscribe((data) => this.comisariaService.setList(data));
+          this.comisariaService
+            .list()
+            .subscribe((data) => this.comisariaService.setList(data));
           this.router.navigate(['/comisaria/listarcomisaria']);
         });
       } else {
         this.comisariaService.insert(this.comisaria).subscribe(() => {
-          this.comisariaService.list().subscribe((data) => this.comisariaService.setList(data));
+          this.comisariaService
+            .list()
+            .subscribe((data) => this.comisariaService.setList(data));
           this.router.navigate(['/comisaria/listarcomisaria']);
         });
       }
