@@ -1,8 +1,14 @@
 <div class="container">
-  <div style="text-align: center; margin: 6%">
-    <h1>Lista de Ubicaciones Registradas</h1>
+  <h2 style="text-align: center; margin-top: 2rem;">Lista de Ubicacion</h2>
+
+  <!-- Botón Insertar -->
+  <div style="text-align: left; margin: 1rem 0;">
+    <button mat-raised-button color="primary" [routerLink]="['/ubicacion-registro/insertareditarubicacion-registro']">
+      ➕ Insertar Ubicacion
+    </button>
   </div>
 
+  <!-- Tabla -->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="id">
@@ -20,22 +26,47 @@
       <td mat-cell *matCellDef="let element">{{ element.longitud }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="fecha">
+   <ng-container matColumnDef="fecha">
       <th mat-header-cell *matHeaderCellDef>Fecha</th>
       <td mat-cell *matCellDef="let element">{{ element.fecha | date }}</td>
     </ng-container>
 
     <ng-container matColumnDef="hora">
       <th mat-header-cell *matHeaderCellDef>Hora</th>
-      <td mat-cell *matCellDef="let element">{{ element.hora }}</td>
+      <td mat-cell *matCellDef="let element">
+        {{ element.hora  }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="gps">
       <th mat-header-cell *matHeaderCellDef>NumSerie GPS</th>
-      <td mat-cell *matCellDef="let element">{{ element.disGPS?.numeroSerie }}</td>
+      <td td mat-cell *matCellDef="let element">{{ element.disGPS?.numeroSerie }}</td>
     </ng-container>
 
+    <!-- Editar -->
+    <ng-container matColumnDef="editar">
+      <th mat-header-cell *matHeaderCellDef>Editar</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="accent" [routerLink]="['/ubicacion-registro/insertareditarubicacion-registro', element.id]">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+      <!-- Eliminar -->
+    <ng-container matColumnDef="eliminar">
+      <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn" (click)="eliminar(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Filas -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+  <mat-paginator [pageSizeOptions]="[3, 6, 9]" showFirstLastButtons></mat-paginator>
 </div>
+

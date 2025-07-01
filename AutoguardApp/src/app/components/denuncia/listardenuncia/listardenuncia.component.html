@@ -1,41 +1,89 @@
 <div class="container">
-  <div style="text-align: center; margin: 6%">
-    <h1>Lista de Denuncias</h1>
+  <h2 style="text-align: center; margin-top: 2rem">Lista de Denuncias</h2>
+
+  <!-- Botón Insertar -->
+  <div style="text-align: left; margin: 1rem 0">
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/denuncia/insertareditardenuncia']"
+    >
+      ➕ Insertar Denuncia
+    </button>
   </div>
 
+  <!-- Tabla -->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
+    <!-- ID -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>ID</th>
       <td mat-cell *matCellDef="let element">{{ element.id }}</td>
     </ng-container>
 
+    <!-- Descripción -->
     <ng-container matColumnDef="descripcion">
-      <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+      <th mat-header-cell *matHeaderCellDef>Descripción</th>
       <td mat-cell *matCellDef="let element">{{ element.descripcion }}</td>
     </ng-container>
 
+    <!-- Motivo -->
     <ng-container matColumnDef="motivo">
       <th mat-header-cell *matHeaderCellDef>Motivo</th>
       <td mat-cell *matCellDef="let element">{{ element.motivo }}</td>
     </ng-container>
 
+    <!-- Estado -->
     <ng-container matColumnDef="estado">
       <th mat-header-cell *matHeaderCellDef>Estado</th>
       <td mat-cell *matCellDef="let element">{{ element.estado }}</td>
     </ng-container>
 
-     <ng-container matColumnDef="comisaria">
-      <th mat-header-cell *matHeaderCellDef>Comisaria</th>
-      <td mat-cell *matCellDef="let element">{{ element.comisaria?.nombre }}</td> 
+    <!-- Comisaría -->
+    <ng-container matColumnDef="comisaria">
+      <th mat-header-cell *matHeaderCellDef>Comisaría</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.comisaria?.nombre }}
+      </td>
     </ng-container>
 
-     <ng-container matColumnDef="vehiculo">
-      <th mat-header-cell *matHeaderCellDef>Vehiculo</th>
-      <td mat-cell *matCellDef="let element">{{ element.vehiculo?.placa }}</td> 
+    <!-- Vehículo -->
+    <ng-container matColumnDef="vehiculo">
+      <th mat-header-cell *matHeaderCellDef>Vehículo</th>
+      <td mat-cell *matCellDef="let element">{{ element.vehiculo?.placa }}</td>
     </ng-container>
 
+    <!-- Editar -->
+    <ng-container matColumnDef="editar">
+      <th mat-header-cell *matHeaderCellDef>Editar</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          color="accent"
+          [routerLink]="['/denuncia/insertareditardenuncia', element.id]"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Eliminar -->
+    <ng-container matColumnDef="eliminar">
+      <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn" (click)="eliminar(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Filas -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+
+  <!-- Paginador -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
 </div>

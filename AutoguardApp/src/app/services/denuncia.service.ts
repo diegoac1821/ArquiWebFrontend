@@ -2,18 +2,46 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Denuncia } from '../models/denuncia';
+import { Subject } from 'rxjs';
 
 const base_url = environment.base;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DenunciaService {
-  private url = `${base_url}/denuncias`;
-  constructor(private http: HttpClient) { }
+  private url = `${environment.base}/denuncias`;
+  private listaCambio = new Subject<Denuncia[]>();
+  constructor(private http: HttpClient) {}
+
   list() {
     return this.http.get<Denuncia[]>(this.url);
   }
+  insert(denuncia: Denuncia) {
+    return this.http.post(this.url, denuncia);
+  }
+
+  // Actualizar denuncia existente
+  update(denuncia: Denuncia) {
+    return this.http.put(this.url, denuncia);
+  }
+
+  // Eliminar denuncia por ID
+  delete(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
+
+  // Buscar por ID
+  listId(id: number) {
+    return this.http.get<Denuncia>(`${this.url}/${id}`);
+  }
+
+  // Observable para reactualizar la tabla después de cambios
+  getList() {
+    return this.listaCambio.asObservable();
+  }
+
+  setList(listaNueva: Denuncia[]) {
+    this.listaCambio.next(listaNueva);
+  }
 }
-
-

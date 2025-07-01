@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { VehiculoService } from '../../../services/vehiculo.service';
@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-listarvehiculo',
@@ -17,6 +18,7 @@ import { CommonModule } from '@angular/common';
     MatIconModule,
     RouterLink,
     CommonModule,
+    MatPaginatorModule,
   ],
   templateUrl: './listarvehiculo.component.html',
   styleUrls: ['./listarvehiculo.component.css'],
@@ -34,14 +36,18 @@ export class ListarvehiculoComponent implements OnInit {
     'eliminar',
   ];
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(private vehiculoService: VehiculoService) {}
 
   ngOnInit(): void {
     this.vehiculoService.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
     });
     this.vehiculoService.getList().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
     });
   }
 

@@ -1,0 +1,49 @@
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem">
+    <h2 style="text-align: center; margin-top: 2rem">
+      {{ edicion ? "Editar Denuncia" : "Registrar Denuncia" }}
+    </h2>
+    <!-- Descripción -->
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Descripción</mat-label>
+      <input matInput formControlName="descripcion" />
+    </mat-form-field>
+
+    <!-- Motivo -->
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Motivo</mat-label>
+      <input matInput formControlName="motivo" />
+    </mat-form-field>
+
+    <!-- Estado -->
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Estado</mat-label>
+      <input matInput formControlName="estado" />
+    </mat-form-field>
+
+    <!-- Comisaría -->
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Comisaría</mat-label>
+      <mat-select formControlName="comisariaId">
+        <mat-option *ngFor="let c of comisarias" [value]="c.id">
+          {{ c.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Vehículo (Placa) -->
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Vehículo (placa)</mat-label>
+      <mat-select formControlName="vehiculoId">
+        <mat-option *ngFor="let v of vehiculos" [value]="v.placa">
+          {{ v.placa }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Botón -->
+    <div style="margin-top: 2rem">
+      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+    </div>
+  </form>
+</div>

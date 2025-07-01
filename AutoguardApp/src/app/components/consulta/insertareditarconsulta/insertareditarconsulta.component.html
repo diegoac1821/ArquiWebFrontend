@@ -1,19 +1,18 @@
 <div class="container">
-  <h2 style="text-align: center; margin-top: 2rem;">
-    {{ edicion ? 'Editar Consulta' : 'Registrar Consulta' }}
-  </h2>
-
-  <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem;">
+  <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem">
+    <h2 style="text-align: center; margin-top: 2rem">
+      {{ edicion ? "Editar Consulta" : "Registrar Consulta" }}
+    </h2>
     <!-- Texto de la consulta -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Consulta</mat-label>
-      <input matInput formControlName="consulta">
+      <input matInput formControlName="consulta" />
     </mat-form-field>
 
     <!-- Fecha -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Fecha</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="fecha">
+      <input matInput [matDatepicker]="picker" formControlName="fecha" />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
@@ -21,16 +20,16 @@
     <!-- Hora -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Hora (HH:mm:ss)</mat-label>
-      <input matInput placeholder="10:30:00" formControlName="hora">
+      <input matInput placeholder="10:30:00" formControlName="hora" />
     </mat-form-field>
 
     <!-- ID del Usuario -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>ID del Usuario</mat-label>
-      <input matInput type="number" formControlName="usuarioId">
+      <input matInput type="number" formControlName="usuarioId" />
     </mat-form-field>
 
-    <div style="margin-top: 2rem;">
+    <div style="margin-top: 2rem">
       <button mat-raised-button color="primary" type="submit">Aceptar</button>
     </div>
   </form>

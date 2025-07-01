@@ -1,56 +1,75 @@
 <div class="container">
-  <h2 style="text-align: center; margin-top: 2rem;">
-    {{ edicion ? 'Editar Vehículo' : 'Registrar Vehículo' }}
-  </h2>
-
-  <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem;">
+  <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem">
+    <h2 style="text-align: center; margin-top: 2rem">
+      {{ edicion ? "Editar Vehículo" : "Registrar Vehículo" }}
+    </h2>
     <!-- Placa -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Placa</mat-label>
-      <input matInput formControlName="placa" placeholder="ABC-123">
-      <mat-error *ngIf="form.get('placa')?.invalid && form.get('placa')?.touched">
+      <input matInput formControlName="placa" placeholder="ABC-123" />
+      <mat-error
+        *ngIf="form.get('placa')?.invalid && form.get('placa')?.touched"
+      >
         La placa es obligatoria.
       </mat-error>
     </mat-form-field>
-
+    <br />
     <!-- Color -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Color</mat-label>
-      <input matInput formControlName="color" placeholder="Rojo, Azul, etc.">
-      <mat-error *ngIf="form.get('color')?.invalid && form.get('color')?.touched">
+      <input matInput formControlName="color" placeholder="Rojo, Azul, etc." />
+      <mat-error
+        *ngIf="form.get('color')?.invalid && form.get('color')?.touched"
+      >
         El color es obligatorio.
       </mat-error>
     </mat-form-field>
-
+    <br />
     <!-- Marca -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Marca</mat-label>
-      <input matInput formControlName="marca" placeholder="Toyota, Kia, etc.">
-      <mat-error *ngIf="form.get('marca')?.invalid && form.get('marca')?.touched">
+      <input matInput formControlName="marca" placeholder="Toyota, Kia, etc." />
+      <mat-error
+        *ngIf="form.get('marca')?.invalid && form.get('marca')?.touched"
+      >
         La marca es obligatoria.
       </mat-error>
     </mat-form-field>
-
+    <br />
     <!-- Modelo -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Modelo</mat-label>
-      <input matInput formControlName="modelo" placeholder="Yaris, Rio, etc.">
-      <mat-error *ngIf="form.get('modelo')?.invalid && form.get('modelo')?.touched">
+      <input matInput formControlName="modelo" placeholder="Yaris, Rio, etc." />
+      <mat-error
+        *ngIf="form.get('modelo')?.invalid && form.get('modelo')?.touched"
+      >
         El modelo es obligatorio.
       </mat-error>
     </mat-form-field>
-
+    <br />
     <!-- Usuario -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>ID del Usuario</mat-label>
-      <input matInput type="number" formControlName="usuarioId" placeholder="Ej. 1">
-      <mat-error *ngIf="form.get('usuarioId')?.invalid && form.get('usuarioId')?.touched">
+      <input
+        matInput
+        type="number"
+        formControlName="usuarioId"
+        placeholder="Ej. 1"
+      />
+      <mat-error
+        *ngIf="form.get('usuarioId')?.invalid && form.get('usuarioId')?.touched"
+      >
         El ID de usuario es obligatorio.
       </mat-error>
     </mat-form-field>
-
-    <div style="margin-top: 2rem;">
-      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+    <br />
+    <div style="margin-top: 2rem">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid"
+      >
         Aceptar
       </button>
     </div>

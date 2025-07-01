@@ -9,5 +9,5 @@ export class Ruta{
     fecha:Date = new Date(Date.now())
     duracion:string=""
     distancia:number=0    
-    v:Vehiculo=new Vehiculo()   
+    vehiculo:Vehiculo=new Vehiculo()   
 }
