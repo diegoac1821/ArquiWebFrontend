@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Ruta } from '../models/ruta';
 import { Subject } from 'rxjs';
+import { RutasperiodoplacaDTO } from '../models/RutasperiodoplacaDTO';
 const base_url = environment.base;
 @Injectable({
   providedIn: 'root',
@@ -41,4 +42,9 @@ export class RutaService {
   setList(listaNueva: Ruta[]) {
     this.listaCambio.next(listaNueva);
   }
+  getRutasPeriodoPlaca(params: { fecha1: string; fecha2: string; placa: string }) {
+  return this.http.get<RutasperiodoplacaDTO[]>(`${this.url}/rutas_periodo_placa`, {
+    params
+  });
+}
 }

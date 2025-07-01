@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Reclamo } from '../models/reclamo';
 import { Subject } from 'rxjs';
+import { ReclamoResueltosDTO } from '../models/ReclamoResueltosDTO';
 const base_url = environment.base;
 
 @Injectable({
@@ -40,6 +41,9 @@ export class ReclamoService {private url = `${base_url}/reclamos`;
   setList(listaNueva: Reclamo[]) {
     this.listaCambio.next(listaNueva);
   }
-  
+  getReclamosSinResolver() {
+  return this.http.get<ReclamoResueltosDTO[]>(`${this.url}/reclamossinresolver`);
+}
+
 }
 //JOSE LUIS
