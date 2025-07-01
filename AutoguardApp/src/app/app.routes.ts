@@ -11,7 +11,6 @@ import { ListardispositivoGPSComponent } from './components/dispositivo-gps/list
 import { ListardenunciaComponent } from './components/denuncia/listardenuncia/listardenuncia.component';
 import { ListarconsultaComponent } from './components/consulta/listarconsulta/listarconsulta.component';
 import { ListarcomisariaComponent } from './components/comisaria/listarcomisaria/listarcomisaria.component';
-import { ListaralertaComponent } from './components/alerta/listaralerta/listaralerta.component';
 import { ListarrespuestaComponent } from './components/respuesta/listarrespuesta/listarrespuesta.component';
 import { InsertareditarComponent } from './components/usuario/insertareditar/insertareditar.component';
 import { InsertareditarconsultaComponent } from './components/consulta/insertareditarconsulta/insertareditarconsulta.component';
