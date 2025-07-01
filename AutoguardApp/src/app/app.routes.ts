@@ -21,21 +21,42 @@ import { InsertareditarcomisariaComponent } from './components/comisaria/inserta
 import { InsertareditarvehiculoComponent } from './components/vehiculo/insertareditarvehiculo/insertareditarvehiculo.component';
 import { InsertareditarrespuestaComponent } from './components/respuesta/insertareditarrespuesta/insertareditarrespuesta.component';
 import { VerperfilusuarioComponent } from './components/usuario/verperfilusuario/verperfilusuario.component';
+
+import { InsertareditarreclamosComponent } from './components/reclamo/insertareditarreclamos/insertareditarreclamos.component';
+import { InsertareditardispositivoGpsComponent } from './components/dispositivo-gps/insertareditardispositivo-gps/insertareditardispositivo-gps.component';
+
 import { InsertareditarubicacionComponent } from './components/ubicacion-registro/insertareditarubicacion/insertareditarubicacion.component';
 import { InsertareditarrutaComponent } from './components/ruta/insertareditarruta/insertareditarruta.component';
 import { CrearrutamapaComponent } from './components/ruta/crearrutamapa/crearrutamapa.component';
+
+import { ListaralertaComponent } from './components/alerta/listaralerta/listaralerta.component';
+import { ReportecantdenunciasComponent } from './components/reportes/reportecantdenuncias/reportecantdenuncias.component';
+
+
 export const routes: Routes = [
   { path: '', component: IndiceComponent },
+  { path: 'indice', component: IndiceComponent },
   { path: 'usuario/listarusuario', component: ListarusuarioComponent },
   { path: 'vehiculo/listarvehiculo', component: ListarvehiculoComponent },
   { path: 'alerta/listaralerta', component: ListaralertaComponent },
   { path: 'comisaria/listarcomisaria', component: ListarcomisariaComponent },
   { path: 'consulta/listarconsulta', component: ListarconsultaComponent },
+
+  { path: 'denuncia/listardenuncia', component: ListardenunciaComponent },
+
+  { path: 'dispositivo-gps/listardispositivogps', component: ListardispositivoGPSComponent},
+  { path: 'dispositivo-gps/insertareditardispositivo-gps', component: InsertareditardispositivoGpsComponent },
+  { path: 'dispositivo-gps/insertareditardispositivo-gps/:id', component: InsertareditardispositivoGpsComponent },
+
+
   { path: 'denuncia/listardenuncia', component: ListardenunciaComponent },  {
     path: 'dispositivo-gps/listardispositivogps',
     component: ListardispositivoGPSComponent,
   },
+
   { path: 'reclamo/listarreclamo', component: ListarreclamoComponent },
+  { path: 'reclamo/insertareditarreclamos', component: InsertareditarreclamosComponent },
+  { path: 'reclamo/insertareditarreclamo/:id', component: InsertareditarreclamosComponent },
   { path: 'respuesta/listarrespuesta', component: ListarrespuestaComponent },
   { path: 'rol/listarrol', component: ListarrolComponent },
   { path: 'ruta/listarruta', component: ListarrutaComponent },
