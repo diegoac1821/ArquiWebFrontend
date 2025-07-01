@@ -1,4 +1,3 @@
-/* Fondo general */
 .container {
   background-color: #5BC0E4;
   padding: 2rem;
@@ -6,7 +5,7 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Título estilizado */
+/* Título */
 h2 {
   background-color: #472F64;
   color: white;
@@ -17,6 +16,15 @@ h2 {
   border-radius: 10px;
   margin-bottom: 2rem;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Contenedor de acciones */
+.actions-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
 
 /* Botón Insertar */
@@ -31,6 +39,32 @@ button[color='primary']:hover {
   background-color: #3a2d50 !important;
 }
 
+/* Campo de búsqueda */
+.search-field {
+  width: 300px;
+}
+
+.search-field .mat-form-field-flex {
+  border-bottom: 2px solid #27193E;
+  padding-bottom: 4px;
+  align-items: right;
+  background: transparent;
+}
+
+.search-field input {
+  color: #27193E !important;
+  font-weight: 500;
+}
+
+.search-field mat-label {
+  color: #27193E !important;
+  font-weight: 500;
+}
+
+.search-field mat-icon {
+  color: #27193E !important;
+}
+
 /* Tabla */
 table {
   width: 100%;
@@ -39,7 +73,6 @@ table {
   overflow: hidden;
 }
 
-/* Encabezado de tabla */
 .mat-header-cell {
   background-color: white;
   color: #27193E;
@@ -47,27 +80,28 @@ table {
   text-align: center;
 }
 
-/* Celdas de tabla */
 .mat-cell {
   text-align: center;
   padding: 12px;
   color: #333;
 }
 
-/* Filas alternas */
 .mat-row:nth-child(even) {
   background-color: #f2f8fc;
 }
 
-/* Íconos de editar y eliminar con mismo color */
 button[mat-icon-button] mat-icon {
   color: #27193E !important;
 }
 
-/* Paginador */
 mat-paginator {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  width: 100%;
   background-color: white;
   border-radius: 8px;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: flex-end; /* 🔥 Esto alinea todo a la derecha */
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }

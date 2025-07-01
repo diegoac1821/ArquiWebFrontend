@@ -3,28 +3,85 @@
     <h2 style="text-align: center; margin-top: 2rem">
       {{ edicion ? "Editar Comisaría" : "Registrar Comisaría" }}
     </h2>
+
+    <!-- Nombre -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Nombre</mat-label>
-      <input matInput formControlName="nombre" />
+      <input
+        matInput
+        formControlName="nombre"
+        placeholder="Ej. Comisaría Lima Centro"
+      />
+      <mat-error
+        *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched"
+      >
+        El nombre es obligatorio.
+      </mat-error>
     </mat-form-field>
     <br />
+
+    <!-- Dirección -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Dirección</mat-label>
-      <input matInput formControlName="direccion" />
+      <input
+        matInput
+        formControlName="direccion"
+        placeholder="Ej. Av. Siempre Viva 123"
+      />
+      <mat-error
+        *ngIf="form.get('direccion')?.invalid && form.get('direccion')?.touched"
+      >
+        La dirección es obligatoria.
+      </mat-error>
     </mat-form-field>
     <br />
+
+    <!-- Distrito -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Distrito</mat-label>
-      <input matInput formControlName="distrito" />
+      <input matInput formControlName="distrito" placeholder="Ej. Miraflores" />
+      <mat-error
+        *ngIf="form.get('distrito')?.invalid && form.get('distrito')?.touched"
+      >
+        El distrito es obligatorio.
+      </mat-error>
     </mat-form-field>
     <br />
+
+    <!-- Teléfono -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Teléfono</mat-label>
-      <input matInput type="number" formControlName="telefono" />
+      <input
+        matInput
+        type="number"
+        formControlName="telefono"
+        placeholder="Ej. 987654321"
+      />
+      <mat-error
+        *ngIf="form.get('telefono')?.invalid && form.get('telefono')?.touched"
+      >
+        El teléfono es obligatorio.
+      </mat-error>
+      <mat-error
+        *ngIf="
+          form.get('telefono')?.hasError('pattern') &&
+          form.get('telefono')?.touched
+        "
+      >
+        Debe ser un número válido de 9 dígitos que empiece con 9.
+      </mat-error>
     </mat-form-field>
     <br />
-    <div style="margin-top: 2rem">
-      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+
+    <div style="margin-top: 2rem; text-align: center">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid"
+      >
+        Aceptar
+      </button>
     </div>
   </form>
 </div>

@@ -8,6 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-listarvehiculo',
@@ -19,6 +22,9 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     RouterLink,
     CommonModule,
     MatPaginatorModule,
+    MatFormFieldModule, //PARA EL FILTRO
+    MatInputModule,
+    FormsModule,
   ],
   templateUrl: './listarvehiculo.component.html',
   styleUrls: ['./listarvehiculo.component.css'],
@@ -38,11 +44,22 @@ export class ListarvehiculoComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  //FILTRO
+  filtro: string = '';
+
+
   constructor(private vehiculoService: VehiculoService) {}
 
   ngOnInit(): void {
     this.vehiculoService.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
+
+      // FILTRA VEHICULO POR PLACA
+      this.dataSource.filterPredicate = (vehiculo: Vehiculo, filter: string) => {
+        return vehiculo.placa
+          .toLowerCase()
+          .includes(filter.trim().toLowerCase());
+      };
       this.dataSource.paginator = this.paginator;
     });
     this.vehiculoService.getList().subscribe((data) => {
@@ -53,9 +70,14 @@ export class ListarvehiculoComponent implements OnInit {
 
   eliminar(placa: string) {
     this.vehiculoService.delete(placa).subscribe(() => {
-      this.vehiculoService.list().subscribe(data => {
+      this.vehiculoService.list().subscribe((data) => {
         this.vehiculoService.setList(data);
       });
     });
+  }
+
+  //FUNCION PARA APLICARFILTRO
+  aplicarfiltro() {
+    this.dataSource.filter = this.filtro.trim().toLowerCase();
   }
 }
