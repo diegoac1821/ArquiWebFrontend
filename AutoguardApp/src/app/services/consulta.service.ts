@@ -55,7 +55,7 @@ export class ConsultaService {
       ],
     };
 
-    const apiKey = 'AIzaSyAK4ytmqUFnU-Dyj48ojNncGFi6jAK-HsQ'; // Tu clave de prueba
+    const apiKey = 'AIzaSyCaFF12cp6ywFINlt6CTDuMx6JW_XJyEbA'; // Tu clave de prueba
 
     return this.http.post<any>(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
