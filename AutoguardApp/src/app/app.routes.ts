@@ -19,6 +19,8 @@ import { InsertareditarcomisariaComponent } from './components/comisaria/inserta
 import { InsertareditarvehiculoComponent } from './components/vehiculo/insertareditarvehiculo/insertareditarvehiculo.component';
 import { InsertareditarrespuestaComponent } from './components/respuesta/insertareditarrespuesta/insertareditarrespuesta.component';
 import { VerperfilusuarioComponent } from './components/usuario/verperfilusuario/verperfilusuario.component';
+import { InsertareditarreclamosComponent } from './components/reclamo/insertareditarreclamos/insertareditarreclamos.component';
+import { InsertareditardispositivoGpsComponent } from './components/dispositivo-gps/insertareditardispositivo-gps/insertareditardispositivo-gps.component';
 export const routes: Routes = [
   { path: '', component: IndiceComponent },
   { path: 'usuario/listarusuario', component: ListarusuarioComponent },
@@ -27,11 +29,15 @@ export const routes: Routes = [
   { path: 'comisaria/listarcomisaria', component: ListarcomisariaComponent },
   { path: 'consulta/listarconsulta', component: ListarconsultaComponent },
   { path: 'denuncia/listardenuncia', component: ListardenunciaComponent },
-  {
-    path: 'dispositivo-gps/listardispositivogps',
-    component: ListardispositivoGPSComponent,
-  },
+
+  { path: 'dispositivo-gps/listardispositivogps', component: ListardispositivoGPSComponent},
+  { path: 'dispositivo-gps/insertareditardispositivo-gps', component: InsertareditardispositivoGpsComponent },
+  { path: 'dispositivo-gps/insertareditardispositivo-gps/:id', component: InsertareditardispositivoGpsComponent },
+
+
   { path: 'reclamo/listarreclamo', component: ListarreclamoComponent },
+  { path: 'reclamo/insertareditarreclamos', component: InsertareditarreclamosComponent },
+  { path: 'reclamo/insertareditarreclamo/:id', component: InsertareditarreclamosComponent },
   { path: 'respuesta/listarrespuesta', component: ListarrespuestaComponent },
   { path: 'rol/listarrol', component: ListarrolComponent },
   { path: 'ruta/listarruta', component: ListarrutaComponent },
