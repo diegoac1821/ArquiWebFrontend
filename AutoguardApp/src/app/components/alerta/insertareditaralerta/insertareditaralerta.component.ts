@@ -28,7 +28,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatButtonModule,
     CommonModule,
     MatDatepickerModule,
-    MatNativeDateModule,MatOptionModule,MatSelectModule
+    MatNativeDateModule,
+    MatOptionModule,
+    MatSelectModule,
   ],
   templateUrl: './insertareditaralerta.component.html',
   styleUrl: './insertareditaralerta.component.css',
@@ -76,6 +78,9 @@ export class InsertareditaralertaComponent {
       this.alerta.descripcion = this.form.value.descripcion;
       this.alerta.v = new Vehiculo();
       this.alerta.v.placa = this.form.value.vehiculoId;
+
+      // Mostramos el objeto alerta para verificar su contenido
+      console.log('Objeto alerta a enviar:', this.alerta);
 
       if (this.edicion) {
         this.alerta.id = this.id;
