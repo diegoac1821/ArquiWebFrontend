@@ -39,7 +39,7 @@
     <ng-container matColumnDef="placa">
       <th mat-header-cell *matHeaderCellDef>Vehículo</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.v?.placa }}
+        {{ element.v?.placa || 'Sin vehículo' }}
       </td>
     </ng-container>
 
