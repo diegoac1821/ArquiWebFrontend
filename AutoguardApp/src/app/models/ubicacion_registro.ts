@@ -6,5 +6,5 @@ export class ubicacion_registro {
     longitud:string=""
     fecha:Date = new Date(Date.now())
     hora:number=0
-    dgps:Dispositivo_GPS=new Dispositivo_GPS()   
+    disGPS:Dispositivo_GPS=new Dispositivo_GPS()   
 }

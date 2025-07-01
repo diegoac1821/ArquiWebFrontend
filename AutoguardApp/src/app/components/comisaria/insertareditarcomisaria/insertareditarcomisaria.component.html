@@ -1,32 +1,30 @@
 <div class="container">
-  <h2 style="text-align: center; margin-top: 2rem;">
-    {{ edicion ? 'Editar Comisaría' : 'Registrar Comisaría' }}
-  </h2>
-
-  <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem;">
+  <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem">
+    <h2 style="text-align: center; margin-top: 2rem">
+      {{ edicion ? "Editar Comisaría" : "Registrar Comisaría" }}
+    </h2>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Nombre</mat-label>
-      <input matInput formControlName="nombre">
+      <input matInput formControlName="nombre" />
     </mat-form-field>
-
+    <br />
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Dirección</mat-label>
-      <input matInput formControlName="direccion">
+      <input matInput formControlName="direccion" />
     </mat-form-field>
-
+    <br />
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Distrito</mat-label>
-      <input matInput formControlName="distrito">
+      <input matInput formControlName="distrito" />
     </mat-form-field>
-
+    <br />
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Teléfono</mat-label>
-      <input matInput type="number" formControlName="telefono">
+      <input matInput type="number" formControlName="telefono" />
     </mat-form-field>
-
-    <div style="margin-top: 2rem;">
+    <br />
+    <div style="margin-top: 2rem">
       <button mat-raised-button color="primary" type="submit">Aceptar</button>
     </div>
   </form>
 </div>
-

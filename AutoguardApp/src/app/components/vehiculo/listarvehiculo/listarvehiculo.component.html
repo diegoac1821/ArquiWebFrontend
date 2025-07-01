@@ -1,16 +1,19 @@
 <div class="container">
-  <h2 style="text-align: center; margin-top: 2rem;">Lista de Vehículos</h2>
+  <h2 style="text-align: center; margin-top: 2rem">Lista de Vehículos</h2>
 
   <!-- Botón Insertar -->
-  <div style="text-align: left; margin: 1rem 0;">
-    <button mat-raised-button color="primary" [routerLink]="['/vehiculo/insertareditarvehiculo']">
+  <div style="text-align: left; margin: 1rem 0">
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/vehiculo/insertareditarvehiculo']"
+    >
       ➕ Insertar Vehículo
     </button>
   </div>
 
   <!-- Tabla -->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
     <!-- Placa -->
     <ng-container matColumnDef="placa">
       <th mat-header-cell *matHeaderCellDef>Placa</th>
@@ -38,14 +41,20 @@
     <!-- Usuario -->
     <ng-container matColumnDef="usuario">
       <th mat-header-cell *matHeaderCellDef>Usuario</th>
-      <td mat-cell *matCellDef="let element">{{ element.usuario?.username }}</td>
+      <td mat-cell *matCellDef="let element">
+        {{ element.usuario?.username }}
+      </td>
     </ng-container>
 
     <!-- Editar -->
     <ng-container matColumnDef="editar">
       <th mat-header-cell *matHeaderCellDef>Editar</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="accent" [routerLink]="['/vehiculo/insertareditarvehiculo', element.placa]">
+        <button
+          mat-icon-button
+          color="accent"
+          [routerLink]="['/vehiculo/insertareditarvehiculo', element.placa]"
+        >
           <mat-icon>edit</mat-icon>
         </button>
       </td>
@@ -65,4 +74,10 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+
+  <!-- Paginador -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
 </div>

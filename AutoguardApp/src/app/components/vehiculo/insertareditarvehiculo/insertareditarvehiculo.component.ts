@@ -45,7 +45,7 @@ export class InsertareditarvehiculoComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
       this.placa = data['placa']; 
-      this.edicion = !!this.placa;
+      this.edicion = data['placa'] != null;
       this.init();
     });
 
@@ -85,11 +85,11 @@ export class InsertareditarvehiculoComponent implements OnInit {
     if (this.edicion) {
       this.vS.listId(this.placa).subscribe((data) => {
         this.form = new FormGroup({
-          placa: new FormControl(data.placa, Validators.required),
-          color: new FormControl(data.color, Validators.required),
-          marca: new FormControl(data.marca, Validators.required),
-          modelo: new FormControl(data.modelo, Validators.required),
-          usuarioId: new FormControl(data.usuario.id, Validators.required),
+          placa: new FormControl(data.placa),
+          color: new FormControl(data.color),
+          marca: new FormControl(data.marca),
+          modelo: new FormControl(data.modelo),
+          usuarioId: new FormControl(data.usuario.id),
         });
       });
     }

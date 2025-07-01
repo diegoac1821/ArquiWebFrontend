@@ -2,17 +2,43 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Ruta } from '../models/ruta';
+import { Subject } from 'rxjs';
 const base_url = environment.base;
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RutaService {
-
   private url = `${base_url}/rutas`;
-    
-      constructor(private http: HttpClient) {}
-    
-      list() {
-        return this.http.get<Ruta[]>(this.url);
-      }
+  private listaCambio = new Subject<Ruta[]>();
+
+
+  constructor(private http: HttpClient) {}
+
+  list() {
+    return this.http.get<Ruta[]>(this.url);
+  }
+
+  insert(comisaria: Ruta) {
+    return this.http.post(this.url, comisaria);
+  }
+
+  update(comisaria: Ruta) {
+    return this.http.put(this.url, comisaria);
+  }
+
+  delete(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
+
+  listId(id: number) {
+    return this.http.get<Ruta>(`${this.url}/${id}`);
+  }
+
+  getList() {
+    return this.listaCambio.asObservable();
+  }
+
+  setList(listaNueva: Ruta[]) {
+    this.listaCambio.next(listaNueva);
+  }
 }

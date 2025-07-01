@@ -1,0 +1,117 @@
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem">
+    <h2 style="text-align: center; margin-top: 2rem">
+      {{ edicion ? "Editar Ruta" : "Registrar Ruta" }}
+    </h2>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Origen Latitud</mat-label>
+      <input matInput formControlName="origenLatitud" placeholder="19.523101" />
+      <mat-error
+        *ngIf="
+          form.get('origenLatitud')?.invalid &&
+          form.get('origenLatitud')?.touched
+        "
+      >
+        El Origen Latitud es obligatoria.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Origen Longitud</mat-label>
+      <input
+        matInput
+        formControlName="origenLongitud"
+        placeholder="99.175332"
+      />
+      <mat-error
+        *ngIf="
+          form.get('origenLongitud')?.invalid &&
+          form.get('origenLongitud')?.touched
+        "
+      >
+        El Origen Longitud es obligatoria.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Destino Latitud</mat-label>
+      <input
+        matInput
+        formControlName="destinoLatitud"
+        placeholder="19.523607"
+      />
+      <mat-error
+        *ngIf="
+          form.get('destinoLatitud')?.invalid &&
+          form.get('destinoLatitud')?.touched
+        "
+      >
+        El Destino Latitud es obligatoria.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Destino Longitud</mat-label>
+      <input
+        matInput
+        formControlName="destinoLongitud"
+        placeholder="-99.173847"
+      />
+      <mat-error
+        *ngIf="
+          form.get('destinoLongitud')?.invalid &&
+          form.get('destinoLongitud')?.touched
+        "
+      >
+        El Destino Longitud es obligatoria.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Fecha</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="fecha" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Duracion</mat-label>
+      <input matInput formControlName="duracion" placeholder="00:01:00" />
+      <mat-error
+        *ngIf="form.get('duracion')?.invalid && form.get('duracion')?.touched"
+      >
+        La Duracion es obligatoria.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Distancia</mat-label>
+      <input
+        matInput
+        type="number"
+        formControlName="distancia"
+        placeholder="3"
+      />
+      <mat-error
+        *ngIf="form.get('distancia')?.invalid && form.get('distancia')?.touched"
+      >
+        La Distancia es obligatoria.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Placa del vehiculo</mat-label>
+      <input matInput formControlName="placav" placeholder="ABC123" />
+      <mat-error
+        *ngIf="form.get('placav')?.invalid && form.get('placav')?.touched"
+      >
+        La placa del vehiculo obligatorio.
+      </mat-error>
+    </mat-form-field>
+
+    <div style="margin-top: 2rem">
+      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+    </div>
+  </form>
+</div>
