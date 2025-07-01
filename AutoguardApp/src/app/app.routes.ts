@@ -15,25 +15,23 @@ import { ListaralertaComponent } from './components/alerta/listaralerta/listaral
 import { ListarrespuestaComponent } from './components/respuesta/listarrespuesta/listarrespuesta.component';
 import { InsertareditarComponent } from './components/usuario/insertareditar/insertareditar.component';
 import { InsertareditarconsultaComponent } from './components/consulta/insertareditarconsulta/insertareditarconsulta.component';
-<<<<<<<<< Temporary merge branch 1
+import { InsertareditaralertaComponent } from './components/alerta/insertareditaralerta/insertareditaralerta.component';
+import { InsertareditardenunciaComponent } from './components/denuncia/insertareditardenuncia/insertareditardenuncia.component';
 import { InsertareditarcomisariaComponent } from './components/comisaria/insertareditarcomisaria/insertareditarcomisaria.component';
 import { InsertareditarvehiculoComponent } from './components/vehiculo/insertareditarvehiculo/insertareditarvehiculo.component';
 import { InsertareditarrespuestaComponent } from './components/respuesta/insertareditarrespuesta/insertareditarrespuesta.component';
 import { VerperfilusuarioComponent } from './components/usuario/verperfilusuario/verperfilusuario.component';
-=========
-import { InsertareditaralertaComponent } from './components/alerta/insertareditaralerta/insertareditaralerta.component';
-import { InsertareditardenunciaComponent } from './components/denuncia/insertareditardenuncia/insertareditardenuncia.component';
-
->>>>>>>>> Temporary merge branch 2
+import { InsertareditarubicacionComponent } from './components/ubicacion-registro/insertareditarubicacion/insertareditarubicacion.component';
+import { InsertareditarrutaComponent } from './components/ruta/insertareditarruta/insertareditarruta.component';
 export const routes: Routes = [
   { path: '', component: IndiceComponent },
+  { path: 'indice', component: IndiceComponent },
   { path: 'usuario/listarusuario', component: ListarusuarioComponent },
   { path: 'vehiculo/listarvehiculo', component: ListarvehiculoComponent },
   { path: 'alerta/listaralerta', component: ListaralertaComponent },
   { path: 'comisaria/listarcomisaria', component: ListarcomisariaComponent },
   { path: 'consulta/listarconsulta', component: ListarconsultaComponent },
-  { path: 'denuncia/listardenuncia', component: ListardenunciaComponent },
-  {
+  { path: 'denuncia/listardenuncia', component: ListardenunciaComponent },  {
     path: 'dispositivo-gps/listardispositivogps',
     component: ListardispositivoGPSComponent,
   },
@@ -48,7 +46,13 @@ export const routes: Routes = [
   { path: 'respuesta/listarrespuesta', component: ListarrespuestaComponent },
   { path: 'usuario/insertareditar', component: InsertareditarComponent },
   { path: 'usuario/ediciones/:id', component: InsertareditarComponent },
-<<<<<<<<< Temporary merge branch 1
+{ path: 'consultas/insertareditarconsulta', component: InsertareditarconsultaComponent },
+{ path: 'consultas/insertareditarconsulta/:id', component: InsertareditarconsultaComponent },
+{ path: 'alertas/insertareditaralerta', component: InsertareditaralertaComponent },
+{ path: 'alertas/insertareditaralerta/:id', component: InsertareditaralertaComponent },
+{ path: 'denuncia/insertareditardenuncia', component: InsertareditardenunciaComponent },
+{ path: 'denuncia/insertareditardenuncia/:id', component: InsertareditardenunciaComponent },
+
   {
     path: 'consultas/insertareditarconsulta',
     component: InsertareditarconsultaComponent,
@@ -89,16 +93,22 @@ export const routes: Routes = [
     path: 'usuario/perfil/:id',
     component: VerperfilusuarioComponent
   },
-];
-=========
-{ path: 'consultas/insertareditarconsulta', component: InsertareditarconsultaComponent },
-{ path: 'consultas/insertareditarconsulta/:id', component: InsertareditarconsultaComponent },
-{ path: 'alertas/insertareditaralerta', component: InsertareditaralertaComponent },
-{ path: 'alertas/insertareditaralerta/:id', component: InsertareditaralertaComponent },
-{ path: 'denuncia/insertareditardenuncia', component: InsertareditardenunciaComponent },
-{ path: 'denuncia/insertareditardenuncia/:id', component: InsertareditardenunciaComponent },
-
+  {
+    path: 'ubicacion-registro/insertareditarubicacion-registro',
+    component: InsertareditarubicacionComponent,
+  },
+  {
+    path: 'ubicacion-registro/insertareditarubicacion-registro/:id',
+    component: InsertareditarubicacionComponent,
+  },
+  {
+    path: 'ruta/insertareditarruta/:id',
+    component: InsertareditarrutaComponent,
+  },
+    {
+    path: 'ruta/insertareditarruta',
+    component: InsertareditarrutaComponent,
+  },
 
   
 ];
->>>>>>>>> Temporary merge branch 2
