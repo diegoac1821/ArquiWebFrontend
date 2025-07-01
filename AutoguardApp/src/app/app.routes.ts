@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { IndiceComponent } from './components/indice/indice.component';
-
+import { InsertarUbicacionComponent } from './components/ubicacion-registro/insertarubicacion/insertarubicacion.component';
 import { ListarusuarioComponent } from './components/usuario/listarusuario/listarusuario.component';
 import { ListarvehiculoComponent } from './components/vehiculo/listarvehiculo/listarvehiculo.component';
 import { ListarubicacionregistroComponent } from './components/ubicacion-registro/listarubicacion-registro/listarubicacion-registro.component';
@@ -27,6 +27,8 @@ import { InsertareditardispositivoGpsComponent } from './components/dispositivo-
 
 import { InsertareditarubicacionComponent } from './components/ubicacion-registro/insertareditarubicacion/insertareditarubicacion.component';
 import { InsertareditarrutaComponent } from './components/ruta/insertareditarruta/insertareditarruta.component';
+import { CrearrutamapaComponent } from './components/ruta/crearrutamapa/crearrutamapa.component';
+
 import { ListaralertaComponent } from './components/alerta/listaralerta/listaralerta.component';
 import { ReportecantdenunciasComponent } from './components/reportes/reportecantdenuncias/reportecantdenuncias.component';
 
@@ -128,6 +130,15 @@ export const routes: Routes = [
     path: 'ruta/insertareditarruta',
     component: InsertareditarrutaComponent,
   },
+  {
+  path: 'ruta/crearrutamapa',
+  component: CrearrutamapaComponent
+},
+{
+  path: 'ubicacion/insertarubicacion',
+  component: InsertarUbicacionComponent
+}
+
 
   
 ];
