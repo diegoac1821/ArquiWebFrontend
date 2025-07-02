@@ -33,6 +33,10 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.url}/${id}`);
   }
 
+  buscarPorUsername(username: string) {
+    return this.http.get<Usuario>(`${this.url}/buscar-por-username/${username}`);
+  }
+
   getList() {
     return this.listaCambio.asObservable();
   }
