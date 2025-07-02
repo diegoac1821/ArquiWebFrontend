@@ -1,14 +1,29 @@
 <div class="container">
   <h2 style="text-align: center; margin-top: 2rem">Lista de Comisarías</h2>
 
-  <!-- Botón Insertar -->
-  <div style="text-align: left; margin: 1rem 0">
+  <!-- Acciones superiores -->
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin: 1rem 0">
+    <!-- Insertar -->
     <button
       mat-raised-button
       color="primary"
       [routerLink]="['/comisaria/insertareditarcomisaria']"
     >
       ➕ Insertar Comisaría
+    </button>
+    <button mat-raised-button color="warn" (click)="ngOnInit()">
+      <mat-icon>refresh</mat-icon> Ver Todas las Comisarías
+    </button>
+
+    <!-- Input de búsqueda -->
+    <mat-form-field appearance="fill" style="flex: 1; min-width: 200px">
+      <mat-label>Buscar por Distrito</mat-label>
+      <input matInput [(ngModel)]="distritoFiltro" placeholder="Ej. Surco" />
+    </mat-form-field>
+
+    <!-- Botón buscar -->
+    <button mat-raised-button color="accent" (click)="filtrarComisariaDistrito()">
+      <mat-icon>search</mat-icon> Buscar Comisarías por Distrito
     </button>
   </div>
 

@@ -52,5 +52,9 @@ export class ComisariaService {
 
   }
 
+   getComisariaporDistrito(distrito: string): Observable<Comisaria[]>  {
+    return this.http.get<Comisaria[]>(`${this.url}/buscarDistrito?distrito=${distrito}`);
+  }
+
 }
 //leslie
