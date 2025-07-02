@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Alerta } from '../models/alerta';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { UsuarioConTotalAlertasDTO } from '../models/UsuarioConTotalAlertasDTO';
 const base_url = environment.base;
 
 @Injectable({
@@ -44,5 +45,9 @@ export class AlertaService {
 
   setList(listaNueva: Alerta[]) {
     this.listaCambio.next(listaNueva);
+  }
+
+  getQuantity() :Observable<UsuarioConTotalAlertasDTO[]>{
+    return this.http.get<UsuarioConTotalAlertasDTO[]>(`${this.url}/usuarios_maslertas`);
   }
 }

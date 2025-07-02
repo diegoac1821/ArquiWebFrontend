@@ -30,6 +30,7 @@ import { CrearrutamapaComponent } from './components/ruta/crearrutamapa/crearrut
 
 import { ListaralertaComponent } from './components/alerta/listaralerta/listaralerta.component';
 import { ReportecantdenunciasComponent } from './components/reportes/reportecantdenuncias/reportecantdenuncias.component';
+
 import { ConsultarutaperiodoComponent } from './components/ruta/consultarutaperiodo/consultarutaperiodo.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
