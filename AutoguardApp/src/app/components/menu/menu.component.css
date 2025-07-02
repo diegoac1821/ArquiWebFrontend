@@ -1,7 +1,7 @@
 mat-toolbar {
   display: flex;
   justify-content: flex-start;
-  background-color: #ffffff;
+  background-color: #5BC0E4;
   color: white;
 }
 
@@ -21,4 +21,6 @@ mat-menu-item mat-icon {
   background-color: #5BC0E4;
   color: white;
 }
-
+.spacer {
+  flex: 1 1 auto;
+}
