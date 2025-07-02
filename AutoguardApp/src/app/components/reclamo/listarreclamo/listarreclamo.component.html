@@ -55,12 +55,14 @@
         {{ element.resuelto ? "Sí" : "No" }}
       </td>
     </ng-container>
-
-    <!-- Usuario (solo ID) -->
-    <ng-container matColumnDef="usuario">
-      <th mat-header-cell *matHeaderCellDef>Usuario (ID)</th>
-      <td mat-cell *matCellDef="let element">{{ element.usuario }}</td>
-    </ng-container>
+    
+<!-- Usuario (solo ID) -->
+<ng-container matColumnDef="usuario">
+  <th mat-header-cell *matHeaderCellDef>Usuario (ID)</th>
+  <td mat-cell *matCellDef="let element">
+    {{ element.usuario?.id }}
+  </td>
+</ng-container>
 
     <!-- Editar -->
     <ng-container matColumnDef="editar">

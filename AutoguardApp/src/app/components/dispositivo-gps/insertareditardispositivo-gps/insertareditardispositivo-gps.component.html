@@ -48,11 +48,14 @@
     </mat-form-field>
 
     <!-- ID del Vehiculo -->
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Placa del Vehiculo</mat-label>
-      <input matInput type="number" formControlName="placav">
-    </mat-form-field>
-
+<mat-form-field appearance="fill" class="w-100">
+  <mat-label>Placa del Vehículo</mat-label>
+  <mat-select formControlName="placav">
+    <mat-option *ngFor="let v of vehiculos" [value]="v.placa">
+      {{ v.placa }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
     <div style="margin-top: 2rem;">
       <button mat-raised-button color="primary" type="submit">Aceptar</button>
     </div>

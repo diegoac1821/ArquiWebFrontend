@@ -177,6 +177,8 @@ export const routes: Routes = [
         path: 'reportes/usuarios-mas-alertas',
         component: ReporteusuariomasalertaComponent,
       },
+      { path: 'reportes/cantconsultasusuario', 
+        component: ReportecantconsultasusuarioComponent },
     ],
   },
 ];
