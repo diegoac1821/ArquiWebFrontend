@@ -38,6 +38,7 @@ import { ReportebuscardenunciasporestadoComponent } from './components/reportes/
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { seguridadGuard } from './guard/seguridad.guard';
+import { ReporteusuariomasalertaComponent } from './components/reportes/reporteusuariomasalerta/reporteusuariomasalerta.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -172,6 +173,10 @@ export const routes: Routes = [
         component: InsertareditarvehiculoComponent,
       },
       { path: 'homes', component: HomeComponent },
+      {
+        path: 'reportes/usuarios-mas-alertas',
+        component: ReporteusuariomasalertaComponent,
+      },
     ],
   },
 ];

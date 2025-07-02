@@ -1,7 +1,7 @@
 <ng-container *ngIf="verificar()">
   <mat-toolbar color="primary">
     <button mat-button [matMenuTriggerFor]="mainMenu">
-      <mat-icon>menu</mat-icon> Indice
+      <mat-icon>menu</mat-icon> Menú
     </button>
 
     <button mat-button [matMenuTriggerFor]="reportMenu">
@@ -63,7 +63,7 @@
 
   <!-- Menú Reportes -->
   <mat-menu #reportMenu="matMenu">
-    <button mat-menu-item routerLink="/reportes/reporte1">
+    <button mat-menu-item routerLink="/reportes/usuarios-mas-alertas">
       <mat-icon>description</mat-icon>Reporte 1
     </button>
     <button mat-menu-item routerLink="/reportes/reporte2">

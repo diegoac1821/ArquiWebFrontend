@@ -1,0 +1,14 @@
+<div class="container">
+  <h2>Usuarios con mayor número de alertas</h2>
+
+  <div class="chart-container">
+    <canvas
+      baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [legend]="barChartLegend"
+      [type]="barCharType"
+    ></canvas>
+  </div>
+</div>
