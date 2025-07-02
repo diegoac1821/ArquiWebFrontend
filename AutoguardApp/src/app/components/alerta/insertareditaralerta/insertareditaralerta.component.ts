@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -12,15 +12,16 @@ import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { Alerta } from '../../../models/alerta';
 import { Vehiculo } from '../../../models/vehiculo';
 import { AlertaService } from '../../../services/alerta.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
 import { VehiculoService } from '../../../services/vehiculo.service';
-import { MatSelectModule } from '@angular/material/select';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-insertareditaralerta',
+  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -33,14 +34,15 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
   ],
   templateUrl: './insertareditaralerta.component.html',
-  styleUrl: './insertareditaralerta.component.css',
+  styleUrls: ['./insertareditaralerta.component.css'],
 })
-export class InsertareditaralertaComponent {
+export class InsertareditaralertaComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   alerta: Alerta = new Alerta();
   id: number = 0;
   edicion: boolean = false;
   vehiculo: Vehiculo[] = [];
+
   constructor(
     private alertaService: AlertaService,
     private formBuilder: FormBuilder,
@@ -50,17 +52,18 @@ export class InsertareditaralertaComponent {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((data: Params) => {
-      this.id = data['id'];
-      this.edicion = this.id != null;
-      this.init();
-    });
-
+    // Inicializar formulario una sola vez
     this.form = this.formBuilder.group({
       asunto: ['', Validators.required],
       fecha: [new Date(), Validators.required],
       descripcion: ['', Validators.required],
       vehiculoId: [null, Validators.required],
+    });
+
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = this.id != null;
+      this.init();
     });
 
     this.listarVehiculos();
@@ -71,16 +74,27 @@ export class InsertareditaralertaComponent {
       this.vehiculo = data;
     });
   }
+
+  init() {
+    if (this.edicion) {
+      this.alertaService.listId(this.id).subscribe((data) => {
+        this.form.setValue({
+          asunto: data.asunto,
+          fecha: data.fecha,
+          descripcion: data.descripcion,
+          vehiculoId: data.vehiculo.placa,
+        });
+      });
+    }
+  }
+
   aceptar() {
     if (this.form.valid) {
       this.alerta.asunto = this.form.value.asunto;
       this.alerta.fecha = this.form.value.fecha;
       this.alerta.descripcion = this.form.value.descripcion;
-      this.alerta.v = new Vehiculo();
-      this.alerta.v.placa = this.form.value.vehiculoId;
-
-      // Mostramos el objeto alerta para verificar su contenido
-      console.log('Objeto alerta a enviar:', this.alerta);
+      this.alerta.vehiculo = new Vehiculo();
+      this.alerta.vehiculo.placa = this.form.value.vehiculoId;
 
       if (this.edicion) {
         this.alerta.id = this.id;
@@ -88,29 +102,20 @@ export class InsertareditaralertaComponent {
           this.alertaService.list().subscribe((data) => {
             this.alertaService.setList(data);
           });
-          this.router.navigate(['/alertas/listaralerta']);
+          console.log('Actualización exitosa');
+          this.router.navigate(['/alerta/listaralerta']);
         });
       } else {
         this.alertaService.insert(this.alerta).subscribe(() => {
           this.alertaService.list().subscribe((data) => {
             this.alertaService.setList(data);
           });
-          this.router.navigate(['/alertas/listaralerta']);
+          console.log('Inserción exitosa');
+          this.router.navigate(['/alerta/listaralerta']);
         });
       }
-    }
-  }
-
-  init() {
-    if (this.edicion) {
-      this.alertaService.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          asunto: new FormControl(data.asunto),
-          fecha: new FormControl(data.fecha),
-          descripcion: new FormControl(data.descripcion),
-          vehiculoId: new FormControl(data.v.placa),
-        });
-      });
+    } else {
+      console.log('Formulario inválido');
     }
   }
 }
