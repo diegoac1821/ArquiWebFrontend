@@ -11,7 +11,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-
+import { LoginService } from '../../../services/login.service';
 @Component({
   selector: 'app-listarvehiculo',
   standalone: true,
@@ -47,24 +47,33 @@ export class ListarvehiculoComponent implements OnInit {
   //FILTRO
   filtro: string = '';
 
-
-  constructor(private vehiculoService: VehiculoService) {}
+  constructor(
+    private vehiculoService: VehiculoService,
+    private loginService: LoginService
+  ) {}
 
   ngOnInit(): void {
-    this.vehiculoService.list().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
+    const username = this.loginService.getUsername();
+    const esCliente = this.loginService.showRole() === 'CLIENTE';
 
-      // FILTRA VEHICULO POR PLACA
-      this.dataSource.filterPredicate = (vehiculo: Vehiculo, filter: string) => {
+    this.vehiculoService.list().subscribe((data) => {
+      let vehiculos = data;
+
+      if (esCliente && username !== null) {
+        vehiculos = vehiculos.filter((v) => v.usuario?.username === username);
+      }
+
+      this.dataSource = new MatTableDataSource(vehiculos);
+      this.dataSource.paginator = this.paginator;
+
+      this.dataSource.filterPredicate = (
+        vehiculo: Vehiculo,
+        filter: string
+      ) => {
         return vehiculo.placa
           .toLowerCase()
           .includes(filter.trim().toLowerCase());
       };
-      this.dataSource.paginator = this.paginator;
-    });
-    this.vehiculoService.getList().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
     });
   }
 

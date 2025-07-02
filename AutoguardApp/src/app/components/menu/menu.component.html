@@ -4,7 +4,7 @@
       <mat-icon>menu</mat-icon> Menú
     </button>
 
-    <button mat-button [matMenuTriggerFor]="reportMenu">
+    <button *ngIf="esAdmin()" mat-button [matMenuTriggerFor]="reportMenu">
       <mat-icon>book</mat-icon> Reportes
     </button>
 
@@ -12,10 +12,8 @@
       <mat-icon>home</mat-icon> Home
     </button>
 
-    <!-- Espaciador -->
     <span class="spacer"></span>
 
-    <!-- Cerrar sesión -->
     <button mat-button [matMenuTriggerFor]="menuSalir">
       <mat-icon>account_circle</mat-icon> Salir
     </button>
@@ -23,45 +21,69 @@
 
   <!-- Menú principal -->
   <mat-menu #mainMenu="matMenu">
-    <button mat-menu-item routerLink="/usuario/listarusuario">
+    <!-- Solo ADMIN -->
+    <button *ngIf="esAdmin()" mat-menu-item routerLink="/usuario/listarusuario">
       <mat-icon>person</mat-icon>Usuarios
     </button>
+
+    <!-- Ambos -->
     <button mat-menu-item routerLink="/vehiculo/listarvehiculo">
       <mat-icon>directions_car</mat-icon>Vehículos
     </button>
-    <button mat-menu-item routerLink="/ubicacion-registro/listarubicacionregistro">
+
+    <button
+      mat-menu-item
+      routerLink="/ubicacion-registro/listarubicacionregistro"
+    >
       <mat-icon>location_on</mat-icon>Ubicación Registro
     </button>
+
     <button mat-menu-item routerLink="/ruta/listarruta">
       <mat-icon>alt_route</mat-icon>Rutas
     </button>
-    <button mat-menu-item routerLink="/rol/listarrol">
+
+    <!-- Solo ADMIN -->
+    <button *ngIf="esAdmin()" mat-menu-item routerLink="/rol/listarrol">
       <mat-icon>https</mat-icon>Roles
     </button>
+
+    <!-- Ambos -->
     <button mat-menu-item routerLink="/reclamo/listarreclamo">
       <mat-icon>report_problem</mat-icon>Reclamos
     </button>
+
     <button mat-menu-item routerLink="/dispositivo-gps/listardispositivogps">
       <mat-icon>gps_fixed</mat-icon>Dispositivos GPS
     </button>
+
     <button mat-menu-item routerLink="/denuncia/listardenuncia">
       <mat-icon>gavel</mat-icon>Denuncias
     </button>
+
     <button mat-menu-item routerLink="/consulta/listarconsulta">
       <mat-icon>question_answer</mat-icon>Consultas
     </button>
-    <button mat-menu-item routerLink="/comisaria/listarcomisaria">
+
+    <!-- Solo ADMIN -->
+    <button
+      *ngIf="esAdmin()"
+      mat-menu-item
+      routerLink="/comisaria/listarcomisaria"
+    >
       <mat-icon>local_police</mat-icon>Comisarías
     </button>
+
+    <!-- Ambos -->
     <button mat-menu-item routerLink="/alerta/listaralerta">
       <mat-icon>warning</mat-icon>Alertas
     </button>
+
     <button mat-menu-item routerLink="/respuesta/listarrespuesta">
       <mat-icon>reply</mat-icon>Respuestas
     </button>
   </mat-menu>
 
-  <!-- Menú Reportes -->
+  <!-- Menú Reportes solo para ADMIN -->
   <mat-menu #reportMenu="matMenu">
     <button mat-menu-item routerLink="/reportes/usuarios-mas-alertas">
       <mat-icon>description</mat-icon>Reporte 1
@@ -76,11 +98,16 @@
 
   <!-- Menú Salir -->
   <mat-menu #menuSalir="matMenu">
-    <button mat-menu-item routerLink="/login" (click)="cerrar()">
-      <mat-icon>logout</mat-icon>
-      <span>Cerrar sesión</span>
-    </button>
-  </mat-menu>
+  <!-- Mostrar el nombre de usuario extraído del token -->
+  <button mat-menu-item disabled>
+    <mat-icon>person</mat-icon> {{ username }}
+  </button>
+  <!-- Opción para cerrar sesión -->
+  <button mat-menu-item routerLink="/login" (click)="cerrar()">
+    <mat-icon>logout</mat-icon>
+    <span>Cerrar sesión</span>
+  </button>
+</mat-menu>
 </ng-container>
 
 <router-outlet></router-outlet>

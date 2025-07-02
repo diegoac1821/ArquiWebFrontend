@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,6 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { LoginService } from '../../services/login.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-menu',
   standalone: true,
@@ -16,31 +17,40 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    MatMenuModule,
-    MatIconModule,
     RouterLink,
     CommonModule,
   ],
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  styleUrls: ['./menu.component.css'],
 })
-export class MenuComponent {
-role: string = '';
+export class MenuComponent implements OnInit {
+  role: string = '';
+  logueado: boolean = false;
+  username: string = '';
+
   constructor(private loginService: LoginService) {}
-  cerrar() {
-    
+
+  ngOnInit(): void {
+    this.verificar();
+  }
+
+  cerrar(): void {
     sessionStorage.clear();
   }
 
-  verificar() {
-    this.role = this.loginService.showRole();
-    return this.loginService.verificar();
+  verificar(): boolean {
+    this.role = this.loginService.showRole() ?? '';
+    this.username = this.loginService.getUsername() ?? '';
+    this.logueado = this.loginService.verificar();
+    console.log('USERNAME en verificar():', this.username);
+    return this.logueado;
   }
-  isDeveloper() {
+
+  esAdmin(): boolean {
     return this.role === 'ADMIN';
   }
 
-  isTester() {
+  esCliente(): boolean {
     return this.role === 'CLIENTE';
   }
 }
