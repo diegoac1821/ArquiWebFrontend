@@ -50,4 +50,13 @@ export class AlertaService {
   getQuantity() :Observable<UsuarioConTotalAlertasDTO[]>{
     return this.http.get<UsuarioConTotalAlertasDTO[]>(`${this.url}/usuarios_maslertas`);
   }
+
+  getAlertasPorPlaca(placa: string): Observable<Alerta[]> {
+  return this.http.get<Alerta[]>(`${this.url}/alertas_vehiculo?placa=${placa}`);
+}
+
+// Buscar por fechas
+getAlertasPorFechas(fechaInicio: string, fechaFin: string): Observable<Alerta[]> {
+  return this.http.get<Alerta[]>(`${this.url}/buscarPorFechas?inicio=${fechaInicio}&fin=${fechaFin}`);
+}
 }

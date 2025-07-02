@@ -8,6 +8,17 @@
     </button>
   </div>
 
+    <div class="filtros-container">
+    <!-- Buscar por Placa -->
+    <mat-form-field appearance="fill">
+      <mat-label>Buscar por Placa</mat-label>
+      <input matInput [(ngModel)]="placaFiltro" placeholder="Ej. ABC-123" />
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="buscarPorPlaca()">
+      <mat-icon>search</mat-icon> Buscar Placa
+    </button>
+  </div>
+
   <!-- Tabla -->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
