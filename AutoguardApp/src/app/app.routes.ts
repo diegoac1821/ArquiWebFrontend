@@ -31,6 +31,10 @@ import { ListaralertaComponent } from './components/alerta/listaralerta/listaral
 import { ReportecantdenunciasComponent } from './components/reportes/reportecantdenuncias/reportecantdenuncias.component';
 
 import { ConsultarutaperiodoComponent } from './components/ruta/consultarutaperiodo/consultarutaperiodo.component';
+
+import { ReportecantconsultasusuarioComponent } from './components/reportes/reportecantconsultasusuario/reportecantconsultasusuario.component';
+import { ReportebuscardenunciasporestadoComponent } from './components/reportes/reportebuscardenunciasporestado/reportebuscardenunciasporestado.component';
+
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { seguridadGuard } from './guard/seguridad.guard';
