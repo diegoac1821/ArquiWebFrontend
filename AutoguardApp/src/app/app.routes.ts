@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { IndiceComponent } from './components/indice/indice.component';
 import { InsertarUbicacionComponent } from './components/ubicacion-registro/insertarubicacion/insertarubicacion.component';
 import { ListarusuarioComponent } from './components/usuario/listarusuario/listarusuario.component';
 import { ListarvehiculoComponent } from './components/vehiculo/listarvehiculo/listarvehiculo.component';
@@ -51,7 +50,7 @@ export const routes: Routes = [
     path: '',
     canActivate: [seguridadGuard],
     children: [
-      { path: 'indice', component: IndiceComponent },
+      { path: 'home', component: HomeComponent },
       { path: 'alerta/listaralerta', component: ListaralertaComponent },
       {
         path: 'alertas/insertareditaralerta',
