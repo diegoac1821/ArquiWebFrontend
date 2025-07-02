@@ -45,6 +45,10 @@ export class InsertareditardenunciaComponent {
   comisarias: Comisaria[] = [];
   vehiculos: Vehiculo[] = [];
 
+  estado: { value: string; viewValue: string }[] = [
+    { value: 'Abierto', viewValue: 'Abierto' },
+    { value: 'Cerrado', viewValue: 'Cerrado' },
+  ];
   constructor(
     private dS: DenunciaService,
     private formBuilder: FormBuilder,
@@ -118,7 +122,5 @@ listarVehiculos() {
         });
       });
     }
-  }
-
-  
+  }  
 }

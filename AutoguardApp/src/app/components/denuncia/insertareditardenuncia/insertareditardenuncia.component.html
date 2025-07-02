@@ -16,10 +16,14 @@
     </mat-form-field>
 
     <!-- Estado -->
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Estado</mat-label>
-      <input matInput formControlName="estado" />
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="tipo">
+          @for (t of estado; track t) {
+          <mat-option [value]="t.value">{{ t.viewValue }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
 
     <!-- Comisaría -->
     <mat-form-field appearance="fill" class="w-100">
