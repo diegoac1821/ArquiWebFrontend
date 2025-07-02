@@ -32,6 +32,10 @@ import { ListaralertaComponent } from './components/alerta/listaralerta/listaral
 import { ReportecantdenunciasComponent } from './components/reportes/reportecantdenuncias/reportecantdenuncias.component';
 
 import { ConsultarutaperiodoComponent } from './components/ruta/consultarutaperiodo/consultarutaperiodo.component';
+
+import { ReportecantconsultasusuarioComponent } from './components/reportes/reportecantconsultasusuario/reportecantconsultasusuario.component';
+import { ReportebuscardenunciasporestadoComponent } from './components/reportes/reportebuscardenunciasporestado/reportebuscardenunciasporestado.component';
+
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { seguridadGuard } from './guard/seguridad.guard';
@@ -44,6 +48,64 @@ export const routes: Routes = [
 
   // Todas las rutas protegidas por seguridadGuard
   {
+
+    path: 'vehiculo/insertareditarvehiculo/:placa',
+    component: InsertareditarvehiculoComponent,
+  },
+  {
+    path: 'respuestas/listarrespuesta',
+    component: ListarrespuestaComponent
+  },
+  {
+    path: 'respuestas/insertareditarrespuesta',
+    component: InsertareditarrespuestaComponent
+  },
+  {
+    path: 'respuestas/insertareditarrespuesta/:id',
+    component: InsertareditarrespuestaComponent
+  },
+  {
+    path: 'usuario/perfil/:id',
+    component: VerperfilusuarioComponent
+  },
+  {
+    path: 'ubicacion-registro/insertareditarubicacion-registro',
+    component: InsertareditarubicacionComponent,
+  },
+  {
+    path: 'ubicacion-registro/insertareditarubicacion-registro/:id',
+    component: InsertareditarubicacionComponent,
+  },
+  {
+    path: 'ruta/insertareditarruta/:id',
+    component: InsertareditarrutaComponent,
+  },
+    {
+    path: 'ruta/insertareditarruta',
+    component: InsertareditarrutaComponent,
+  },
+  {
+  path: 'ruta/crearrutamapa',
+  component: CrearrutamapaComponent
+},
+{
+  path: 'ubicacion/insertarubicacion',
+  component: InsertarUbicacionComponent
+},
+{
+  path: 'ruta/consultarutaperiodo',
+  component: ConsultarutaperiodoComponent
+},
+{
+  path: 'reportes/cantconsultasusuario',
+  component: ReportecantconsultasusuarioComponent
+},
+{
+  path: 'reportes/buscardenunciasporestado',
+  component: ReportebuscardenunciasporestadoComponent
+}
+];
+=======
     path: '',
     canActivate: [seguridadGuard],
     children: [
@@ -92,3 +154,4 @@ export const routes: Routes = [
     ]
   }
 ];
+
