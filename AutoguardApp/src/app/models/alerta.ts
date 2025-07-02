@@ -5,5 +5,5 @@ export class Alerta{
     asunto:string=""
     fecha:Date = new Date(Date.now())
     descripcion:string=""
-    v:Vehiculo=new Vehiculo()   
+    vehiculo:Vehiculo=new Vehiculo()   
 }
