@@ -1,11 +1,24 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.main-login-wrapper {
+  display: flex;
+  height: 100vh;
+}
+
+/* Lado izquierdo (formulario) */
 .login-container {
   background-color: #27193E;
   padding: 2rem;
-  border-radius: 16px;
-  max-width: 400px;
-  margin: 3rem auto;
-  text-align: center;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: #FFFFFF;
 }
 
@@ -22,6 +35,7 @@ h2 {
 
 .mat-form-field {
   width: 100%;
+  max-width: 300px;
 }
 
 .custom-button {
@@ -38,7 +52,15 @@ h2 {
   background-color: #45b3d1;
 }
 
-/* Estilos para los campos de Angular Material */
+/* Imagen de fondo lado derecho */
+.login-image {
+  width: 50%;
+  background-image: url('/assets/fondologin.jpeg'); /* ← cambia a tu ruta */
+  background-size: cover;
+  background-position: center;
+}
+
+/* Ajustes de Angular Material */
 ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
   background-color: #FFFFFF;
 }
