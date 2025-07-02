@@ -76,7 +76,7 @@ export class ListarvehiculoComponent implements OnInit {
     });
   }
 
-  //FUNCION PARA APLICARFILTRO
+  //FUNCION PARA FILTRO
   aplicarfiltro() {
     this.dataSource.filter = this.filtro.trim().toLowerCase();
   }

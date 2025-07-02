@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Consulta } from '../models/consulta';
 import { Subject } from 'rxjs';
 import { Observable } from 'rxjs';
+import { CantConsultasxUsuarioDTO } from '../models/cantConsultasxUsuarioDTO';
 
 @Injectable({ providedIn: 'root' })
 export class ConsultaService {
@@ -65,4 +66,9 @@ export class ConsultaService {
       }
     );
   }
+  
+   getQuantity():Observable<CantConsultasxUsuarioDTO[]>{
+      return this.http.get<CantConsultasxUsuarioDTO[]>(`${this.url}/cantidadconsultas`);
+  
+    }
 }

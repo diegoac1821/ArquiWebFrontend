@@ -8,6 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @Component({
@@ -20,6 +23,9 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     RouterLink,
     CommonModule,
     MatPaginatorModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   templateUrl: './listarcomisaria.component.html',
   styleUrls: ['./listarcomisaria.component.css'],
@@ -51,6 +57,18 @@ export class ListarcomisariaComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     });
   }
+
+  distritoFiltro: string = '';
+  
+  filtrarComisariaDistrito(): void {
+  if (this.distritoFiltro.trim() === '') return;
+
+  this.comisariaService.getComisariaporDistrito(this.distritoFiltro).subscribe((data: Comisaria[]) => {
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.paginator = this.paginator;
+  });
+}
+  
 
   eliminar(id: number) {
     this.comisariaService.delete(id).subscribe(() => {

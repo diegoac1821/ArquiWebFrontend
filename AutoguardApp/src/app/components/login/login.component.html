@@ -1,0 +1,30 @@
+<div class="main-login-wrapper">
+  <div class="login-container">
+    <div>
+      <img src="assets/logoautoguard.png" alt="Logo de la empresa" class="logo">
+    </div>
+
+    <h2>Inicie sesión</h2>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Usuario</mat-label>
+      <input matInput placeholder="Username" [(ngModel)]="username" />
+    </mat-form-field>
+    <br />
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Contraseña</mat-label>
+      <input
+        type="password"
+        matInput
+        placeholder="Password"
+        [(ngModel)]="password"
+      />
+    </mat-form-field>
+    <br />
+
+    <button mat-raised-button class="custom-button" (click)="login()">Ingresar</button>
+  </div>
+
+  <div class="login-image"></div>
+</div>
