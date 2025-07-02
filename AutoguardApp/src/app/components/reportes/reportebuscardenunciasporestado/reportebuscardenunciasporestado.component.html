@@ -1,0 +1,55 @@
+<div class="container">
+  <h2>📄 Reporte de Denuncias por Estado</h2>
+
+<div>
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Estado</mat-label>
+      <input matInput formControlName="cajita">
+    </mat-form-field>
+  </form>
+</div>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Columna c1: ID -->
+    <ng-container matColumnDef="c1">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let d">{{ d.id }}</td>
+    </ng-container>
+
+    <!-- Columna c2: Estado -->
+    <ng-container matColumnDef="c2">
+      <th mat-header-cell *matHeaderCellDef>Estado</th>
+      <td mat-cell *matCellDef="let d">{{ d.estado }}</td>
+    </ng-container>
+
+    <!-- Columna c3: Motivo -->
+    <ng-container matColumnDef="c3">
+      <th mat-header-cell *matHeaderCellDef>Motivo</th>
+      <td mat-cell *matCellDef="let d">{{ d.motivo }}</td>
+    </ng-container>
+
+    <!-- Columna c4: Descripción -->
+    <ng-container matColumnDef="c4">
+      <th mat-header-cell *matHeaderCellDef>Descripción</th>
+      <td mat-cell *matCellDef="let d">{{ d.descripcion }}</td>
+    </ng-container>
+
+    <!-- Columna c5: Comisaría -->
+    <ng-container matColumnDef="c5">
+      <th mat-header-cell *matHeaderCellDef>Comisaría</th>
+      <td mat-cell *matCellDef="let d">{{ d.comisaria?.nombre }}</td>
+    </ng-container>
+
+    <!-- Columna 6: Vehículo -->
+    <ng-container matColumnDef="c6">
+      <th mat-header-cell *matHeaderCellDef>Vehículo</th>
+      <td mat-cell *matCellDef="let d">{{ d.vehiculo?.placa }}</td>
+    </ng-container>
+
+    <!-- Filas -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

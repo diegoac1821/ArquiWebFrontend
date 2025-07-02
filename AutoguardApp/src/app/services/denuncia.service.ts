@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Denuncia } from '../models/denuncia';
-import { Subject } from 'rxjs';
-
+import { Observable, Subject } from 'rxjs';
+import { buscarcomisariaDTO } from '../models/buscarcomisariaDTO';
 const base_url = environment.base;
 
 @Injectable({
@@ -44,4 +44,10 @@ export class DenunciaService {
   setList(listaNueva: Denuncia[]) {
     this.listaCambio.next(listaNueva);
   }
+
+buscarPorEstado(estado: string): Observable<Denuncia[]> {
+  const params = new HttpParams().set('estado', estado);
+  return this.http.get<Denuncia[]>(`${this.url}/Denuncias`, { params });
+}
+
 }

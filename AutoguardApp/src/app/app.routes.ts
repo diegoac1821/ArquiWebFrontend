@@ -31,6 +31,8 @@ import { CrearrutamapaComponent } from './components/ruta/crearrutamapa/crearrut
 import { ListaralertaComponent } from './components/alerta/listaralerta/listaralerta.component';
 import { ReportecantdenunciasComponent } from './components/reportes/reportecantdenuncias/reportecantdenuncias.component';
 import { ConsultarutaperiodoComponent } from './components/ruta/consultarutaperiodo/consultarutaperiodo.component';
+import { ReportecantconsultasusuarioComponent } from './components/reportes/reportecantconsultasusuario/reportecantconsultasusuario.component';
+import { ReportebuscardenunciasporestadoComponent } from './components/reportes/reportebuscardenunciasporestado/reportebuscardenunciasporestado.component';
 
 export const routes: Routes = [
   { path: '', component: IndiceComponent },
@@ -140,9 +142,13 @@ export const routes: Routes = [
 {
   path: 'ruta/consultarutaperiodo',
   component: ConsultarutaperiodoComponent
+},
+{
+  path: 'reportes/cantconsultasusuario',
+  component: ReportecantconsultasusuarioComponent
+},
+{
+  path: 'reportes/buscardenunciasporestado',
+  component: ReportebuscardenunciasporestadoComponent
 }
-
-
-
-  
 ];
