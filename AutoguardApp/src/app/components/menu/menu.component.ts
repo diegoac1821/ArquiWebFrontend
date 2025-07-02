@@ -42,7 +42,6 @@ export class MenuComponent implements OnInit {
     this.role = this.loginService.showRole() ?? '';
     this.username = this.loginService.getUsername() ?? '';
     this.logueado = this.loginService.verificar();
-    console.log('USERNAME en verificar():', this.username);
     return this.logueado;
   }
 

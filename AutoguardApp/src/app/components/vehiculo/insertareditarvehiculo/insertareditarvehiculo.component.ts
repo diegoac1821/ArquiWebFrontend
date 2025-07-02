@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { UsuarioService } from '../../../services/usuario.service';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-insertareditarvehiculo',
@@ -34,18 +36,23 @@ export class InsertareditarvehiculoComponent implements OnInit {
 
   placa: string = '';
   edicion: boolean = false;
+  rol: string = '';
 
   constructor(
     private vS: VehiculoService,
+    private uS: UsuarioService,
+    private loginService: LoginService,
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.rol = this.loginService.showRole() ?? '';
+
     this.route.params.subscribe((data: Params) => {
-      this.placa = data['placa']; 
-      this.edicion = data['placa'] != null;
+      this.placa = data['placa'];
+      this.edicion = this.placa != null;
       this.init();
     });
 
@@ -56,6 +63,15 @@ export class InsertareditarvehiculoComponent implements OnInit {
       modelo: ['', Validators.required],
       usuarioId: [null, Validators.required],
     });
+
+    if (!this.edicion && this.rol === 'CLIENTE') {
+      const username = this.loginService.getUsername();
+      if (username) {
+        this.uS.buscarPorUsername(username).subscribe((usuario) => {
+          this.form.get('usuarioId')?.setValue(usuario.id);
+        });
+      }
+    }
   }
 
   aceptar() {
@@ -93,5 +109,9 @@ export class InsertareditarvehiculoComponent implements OnInit {
         });
       });
     }
+  }
+
+  esAdmin(): boolean {
+    return this.rol === 'ADMIN';
   }
 }

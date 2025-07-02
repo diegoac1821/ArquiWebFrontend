@@ -3,52 +3,49 @@
     <h2 style="text-align: center; margin-top: 2rem">
       {{ edicion ? "Editar Vehículo" : "Registrar Vehículo" }}
     </h2>
+
     <!-- Placa -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Placa</mat-label>
       <input matInput formControlName="placa" placeholder="ABC-123" />
-      <mat-error
-        *ngIf="form.get('placa')?.invalid && form.get('placa')?.touched"
-      >
+      <mat-error *ngIf="form.get('placa')?.invalid && form.get('placa')?.touched">
         La placa es obligatoria.
       </mat-error>
     </mat-form-field>
     <br />
+
     <!-- Color -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Color</mat-label>
       <input matInput formControlName="color" placeholder="Rojo, Azul, etc." />
-      <mat-error
-        *ngIf="form.get('color')?.invalid && form.get('color')?.touched"
-      >
+      <mat-error *ngIf="form.get('color')?.invalid && form.get('color')?.touched">
         El color es obligatorio.
       </mat-error>
     </mat-form-field>
     <br />
+
     <!-- Marca -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Marca</mat-label>
       <input matInput formControlName="marca" placeholder="Toyota, Kia, etc." />
-      <mat-error
-        *ngIf="form.get('marca')?.invalid && form.get('marca')?.touched"
-      >
+      <mat-error *ngIf="form.get('marca')?.invalid && form.get('marca')?.touched">
         La marca es obligatoria.
       </mat-error>
     </mat-form-field>
     <br />
+
     <!-- Modelo -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Modelo</mat-label>
       <input matInput formControlName="modelo" placeholder="Yaris, Rio, etc." />
-      <mat-error
-        *ngIf="form.get('modelo')?.invalid && form.get('modelo')?.touched"
-      >
+      <mat-error *ngIf="form.get('modelo')?.invalid && form.get('modelo')?.touched">
         El modelo es obligatorio.
       </mat-error>
     </mat-form-field>
     <br />
-    <!-- Usuario -->
-    <mat-form-field appearance="fill" class="w-100">
+
+    <!-- Usuario (solo visible para ADMIN) -->
+    <mat-form-field *ngIf="esAdmin()" appearance="fill" class="w-100">
       <mat-label>ID del Usuario</mat-label>
       <input
         matInput
@@ -56,13 +53,13 @@
         formControlName="usuarioId"
         placeholder="Ej. 1"
       />
-      <mat-error
-        *ngIf="form.get('usuarioId')?.invalid && form.get('usuarioId')?.touched"
-      >
+      <mat-error *ngIf="form.get('usuarioId')?.invalid && form.get('usuarioId')?.touched">
         El ID de usuario es obligatorio.
       </mat-error>
     </mat-form-field>
+
     <br />
+
     <div style="margin-top: 2rem">
       <button
         mat-raised-button

@@ -28,7 +28,7 @@ export class ListaralertaComponent implements OnInit {
     'asunto',
     'fecha',
     'descripcion',
-    'placa',
+    'vehiculo',
     'editar',
     'eliminar',
   ];
