@@ -4,10 +4,10 @@ import { JwtRequest } from '../models/jwtRequest';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
   login(request: JwtRequest) {
     return this.http.post('http://localhost:8082/login', request);
   }
@@ -23,6 +23,14 @@ constructor(private http: HttpClient) {}
     }
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
-    return decodedToken?.role;
+    return decodedToken?.rol; // ← CAMBIADO de 'role' a 'rol'
   }
+  getUsername(): string | null {
+    const token = sessionStorage.getItem('token');
+    if (!token) return null;
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(token);
+    return decodedToken?.sub ?? null;
+  }
+  
 }

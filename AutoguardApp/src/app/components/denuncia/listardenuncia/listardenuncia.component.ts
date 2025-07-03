@@ -42,4 +42,21 @@ export class ListardenunciaComponent implements OnInit {
       });
     });
   }
+  filtrarPorEstado(estado: string): void {
+  this.dS.list().subscribe((data: Denuncia[]) => {
+    const filtrado = data.filter(d =>
+      d.estado.toLowerCase().trim() === estado.toLowerCase().trim()
+    );
+    this.dataSource = new MatTableDataSource(filtrado);
+    this.dataSource.paginator = this.paginator;
+  });
+}
+
+listarTodos(): void {
+  this.dS.list().subscribe((data: Denuncia[]) => {
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.paginator = this.paginator;
+  });
+}
+
 }
