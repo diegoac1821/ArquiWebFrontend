@@ -18,7 +18,7 @@
     <!-- Estado -->
       <mat-form-field>
         <mat-label>Estado</mat-label>
-        <mat-select formControlName="tipo">
+        <mat-select formControlName="estado">
           @for (t of estado; track t) {
           <mat-option [value]="t.value">{{ t.viewValue }}</mat-option>
           }
