@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatOptionModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { LoginService } from '../../../services/login.service';
 declare var google: any;
 
 @Component({
@@ -44,14 +44,23 @@ export class CrearrutamapaComponent implements OnInit {
   constructor(
     private vehiculoService: VehiculoService,
     private rutaService: RutaService,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
-    this.vehiculoService.list().subscribe((data) => {
+  const username = this.loginService.getUsername();
+  const esCliente = this.loginService.showRole() === 'CLIENTE';
+
+  this.vehiculoService.list().subscribe((data) => {
+    if (esCliente && username !== null) {
+      this.vehiculos = data.filter(v => v.usuario?.username === username);
+    } else {
       this.vehiculos = data;
-    });
-  }
+    }
+  });
+}
+
 
   ngAfterViewInit(): void {
     this.initMap();

@@ -9,37 +9,73 @@ import { ubicacion_registro } from '../../../models/ubicacion_registro';
 import { UbicacionRegistroService } from '../../../services/ubicacion-registro.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-
+import { LoginService } from '../../../services/login.service';
 @Component({
   selector: 'app-listarubicacionregistro',
   standalone: true,
-  imports: [  MatTableModule,
+  imports: [
+    MatTableModule,
     MatButtonModule,
     MatIconModule,
     RouterLink,
     CommonModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
   ],
   templateUrl: './listarubicacion-registro.component.html',
-  styleUrls: ['./listarubicacion-registro.component.css']
+  styleUrls: ['./listarubicacion-registro.component.css'],
 })
 export class ListarubicacionregistroComponent implements OnInit {
-   dataSource: MatTableDataSource<ubicacion_registro> = new MatTableDataSource<ubicacion_registro>();
+  dataSource: MatTableDataSource<ubicacion_registro> =
+    new MatTableDataSource<ubicacion_registro>();
 
-  displayedColumns: string[] = ['id', 'latitud', 'longitud', 'fecha', 'hora', 'gps','editar','eliminar'];
+  displayedColumns: string[] = [
+    'id',
+    'latitud',
+    'longitud',
+    'fecha',
+    'hora',
+    'gps',
+    'editar',
+    'eliminar',
+  ];
+  esCliente: boolean = false;
 
-  constructor(private ubicacionService: UbicacionRegistroService) {}
+  constructor(
+    private ubicacionService: UbicacionRegistroService,
+    private loginService: LoginService
+  ) {}
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
- ngOnInit(): void {
+  ngOnInit(): void {
+    const username = this.loginService.getUsername();
+    const rol = this.loginService.showRole()?.trim().toUpperCase();
+    this.esCliente = rol === 'CLIENTE';
+
     this.ubicacionService.list().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-    });
-    this.ubicacionService.getList().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
+      let lista = data;
+
+      if (this.esCliente && username !== null) {
+        lista = lista.filter(
+          (u) => u.disGPS?.vehiculo?.usuario?.username === username
+        );
+      }
+
+      this.displayedColumns = this.esCliente
+        ? ['fecha', 'hora', 'gps', 'ver', 'eliminar']
+        : [
+            'id',
+            'latitud',
+            'longitud',
+            'fecha',
+            'hora',
+            'gps',
+            'editar',
+            'eliminar',
+          ];
+
+      this.dataSource = new MatTableDataSource(lista);
       this.dataSource.paginator = this.paginator;
     });
   }
@@ -47,7 +83,7 @@ export class ListarubicacionregistroComponent implements OnInit {
   eliminar(id: number) {
     this.ubicacionService.delete(id).subscribe(() => {
       this.ubicacionService.list().subscribe((data) => {
-        this.ubicacionService.setList(data);
+        this.dataSource.data = data; // ← recarga los datos directamente en la tabla
       });
     });
   }
