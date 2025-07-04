@@ -20,7 +20,9 @@ import { Vehiculo } from '../../../models/vehiculo';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { ComisariaService } from '../../../services/comisaria.service';
 import { MatSelectModule } from '@angular/material/select';
-
+import { LoginService } from '../../../services/login.service';
+import { UsuarioService } from '../../../services/usuario.service';
+import { Usuario } from '../../../models/usuario';
 @Component({
   selector: 'app-insertareditardenuncia',
   standalone: true,
@@ -32,7 +34,8 @@ import { MatSelectModule } from '@angular/material/select';
     CommonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatOptionModule,MatSelectModule
+    MatOptionModule,
+    MatSelectModule,
   ],
   templateUrl: './insertareditardenuncia.component.html',
   styleUrl: './insertareditardenuncia.component.css',
@@ -49,14 +52,21 @@ export class InsertareditardenunciaComponent {
     { value: 'Abierto', viewValue: 'Abierto' },
     { value: 'Cerrado', viewValue: 'Cerrado' },
   ];
+
   constructor(
     private dS: DenunciaService,
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private comisariaService: ComisariaService,
-    private vehiculoService: VehiculoService
+    private vehiculoService: VehiculoService,
+    private loginService: LoginService,
+    private usuarioService: UsuarioService
   ) {}
+
+  get isAdmin(): boolean {
+    return this.loginService.showRole() === 'ADMIN';
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
@@ -68,59 +78,92 @@ export class InsertareditardenunciaComponent {
     this.form = this.formBuilder.group({
       descripcion: ['', Validators.required],
       motivo: ['', Validators.required],
-      estado: ['', Validators.required],
       comisariaId: [null, Validators.required],
-      vehiculoId: [null, Validators.required],
+      vehiculoId: new FormControl(
+        { value: null, disabled: !this.isAdmin },
+        Validators.required
+      ),
+      ...(this.isAdmin && {
+        estado: ['', Validators.required],
+      }),
     });
-     this.listarComisarias();
-     this.listarVehiculos();
+
+    this.listarComisarias();
+    this.listarVehiculos();
   }
 
   listarComisarias() {
-  this.comisariaService.list().subscribe(data => {
-    this.comisarias = data;
-  });
-}
+    this.comisariaService.list().subscribe((data) => {
+      this.comisarias = data;
+    });
+  }
 
-listarVehiculos() {
-  this.vehiculoService.list().subscribe(data => {
-    this.vehiculos = data;
-  });
-}
+  listarVehiculos() {
+    if (this.isAdmin) {
+      this.vehiculoService.list().subscribe((data) => {
+        this.vehiculos = data;
+      });
+    } else {
+      const username = this.loginService.getUsername();
+      if (username) {
+        this.usuarioService.buscarPorUsername(username).subscribe((usuario) => {
+          this.vehiculoService.list().subscribe((vehiculos) => {
+            const vehiculosCliente = vehiculos.filter(
+              (v) => v.usuario?.id === usuario.id
+            );
+            this.vehiculos = vehiculosCliente;
+
+            if (vehiculosCliente.length === 1) {
+              // Si solo tiene uno, asignarlo y mantenerlo deshabilitado
+              this.form.patchValue({ vehiculoId: vehiculosCliente[0].placa });
+            } else if (vehiculosCliente.length > 1) {
+              // Si tiene más de uno, habilitar el campo para que elija
+              this.form.get('vehiculoId')?.enable();
+            }
+          });
+        });
+      }
+    }
+  }
+
   aceptar() {
     if (this.form.valid) {
       this.denuncia.descripcion = this.form.value.descripcion;
       this.denuncia.motivo = this.form.value.motivo;
-      this.denuncia.estado = this.form.value.estado;
       this.denuncia.comisaria = new Comisaria();
       this.denuncia.comisaria.id = this.form.value.comisariaId;
       this.denuncia.vehiculo = new Vehiculo();
       this.denuncia.vehiculo.placa = this.form.value.vehiculoId;
-    }
-    if (this.edicion) {
-      this.denuncia.id = this.id;
-      this.dS.update(this.denuncia).subscribe(() => {
-        this.dS.list().subscribe((data) => this.dS.setList(data));
-        this.router.navigate(['/denuncia/listardenuncia']);
-      });
-    } else {
-      this.dS.insert(this.denuncia).subscribe(() => {
-        this.dS.list().subscribe((data) => this.dS.setList(data));
-        this.router.navigate(['/denuncia/listardenuncia']);
-      });
+
+      // Si es CLIENTE, asigna automáticamente el estado "Cerrado"
+      this.denuncia.estado = this.isAdmin ? this.form.value.estado : 'Abierto';
+
+      if (this.edicion) {
+        this.denuncia.id = this.id;
+        this.dS.update(this.denuncia).subscribe(() => {
+          this.dS.list().subscribe((data) => this.dS.setList(data));
+          this.router.navigate(['/denuncia/listardenuncia']);
+        });
+      } else {
+        this.dS.insert(this.denuncia).subscribe(() => {
+          this.dS.list().subscribe((data) => this.dS.setList(data));
+          this.router.navigate(['/denuncia/listardenuncia']);
+        });
+      }
     }
   }
+
   init() {
     if (this.edicion) {
       this.dS.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          descripcion: new FormControl(data.descripcion),
-          motivo: new FormControl(data.motivo),
-          estado: new FormControl(data.estado),
-          comisariaId: new FormControl(data.comisaria.id),
-          vehiculoId: new FormControl(data.vehiculo.placa),
+        this.form.patchValue({
+          descripcion: data.descripcion,
+          motivo: data.motivo,
+          estado: data.estado,
+          comisariaId: data.comisaria.id,
+          vehiculoId: data.vehiculo.placa,
         });
       });
     }
-  }  
+  }
 }
