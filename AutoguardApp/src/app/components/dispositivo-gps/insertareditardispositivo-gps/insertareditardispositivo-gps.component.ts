@@ -22,8 +22,10 @@ import { Vehiculo } from '../../../models/vehiculo';
 import { DispositivoGPSService } from '../../../services/dispositivo-gps.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { LoginService } from '../../../services/login.service';
+
 @Component({
   selector: 'app-insertareditardispositivo-gps',
+  standalone: true,
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -46,7 +48,8 @@ export class InsertareditardispositivoGpsComponent {
 
   id: number = 0;
   edicion: boolean = false;
-  esCliente: boolean = false; 
+  esCliente: boolean = false;
+
   constructor(
     private dS: DispositivoGPSService,
     private vehiculoService: VehiculoService,
@@ -57,50 +60,81 @@ export class InsertareditardispositivoGpsComponent {
   ) {}
 
   ngOnInit(): void {
+
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = this.id != null;
       this.init();
       this.esCliente = this.loginService.showRole() === 'CLIENTE';
-
     });
-    this.esCliente = this.loginService.showRole() === 'CLIENTE';
+
     this.form = this.formBuilder.group({
       codigo: [''],
-      numeroSerie: ['', Validators.required],
-      precio: ['', Validators.required],
-      fechaAdquisicion: ['', Validators.required],
+      numeroSerie: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^\d{1,3}$/), // Solo números de hasta 3 cifras
+        ],
+      ],
+      precio: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^\d+(\.\d{1,2})?$/),
+          Validators.min(0.01),
+        ],
+      ],
+      fechaAdquisicion: [
+        '',
+        [Validators.required, this.fechaNoFuturaValidator()],
+      ],
       placav: [null, Validators.required],
     });
   }
 
-  // ✅ Lógica de carga de vehículos, con excepción para edición
+  fechaNoFuturaValidator() {
+    return (control: FormControl) => {
+      const valor = control.value;
+      if (!valor) return null;
+
+      const fechaSeleccionada = new Date(valor);
+      const hoy = new Date();
+      hoy.setHours(0, 0, 0, 0);
+
+      return fechaSeleccionada > hoy ? { fechaFutura: true } : null;
+    };
+  }
+
   cargarVehiculosDisponibles(placaActual: string | null = null) {
-  const username = this.loginService.getUsername();
-  const esCliente = this.loginService.showRole() === 'CLIENTE';
+    const username = this.loginService.getUsername();
+    const esCliente = this.loginService.showRole() === 'CLIENTE';
 
-  this.vehiculoService.list().subscribe(vehiculos => {
-    if (esCliente && username !== null) {
-      vehiculos = vehiculos.filter(v => v.usuario?.username === username);
-    }
+    this.vehiculoService.list().subscribe((vehiculos) => {
+      if (esCliente && username !== null) {
+        vehiculos = vehiculos.filter((v) => v.usuario?.username === username);
+      }
 
-    this.dS.list().subscribe(gpsList => {
-      const placasUsadas = gpsList
-        .filter(g => g.vehiculo?.placa !== placaActual)
-        .map(g => g.vehiculo?.placa);
+      this.dS.list().subscribe((gpsList) => {
+        const placasUsadas = gpsList
+          .filter((g) => g.vehiculo?.placa !== placaActual)
+          .map((g) => g.vehiculo?.placa);
 
-      this.vehiculos = vehiculos.filter(v => !placasUsadas.includes(v.placa));
+        this.vehiculos = vehiculos.filter(
+          (v) => !placasUsadas.includes(v.placa)
+        );
+      });
     });
-  });
-}
-
+  }
 
   aceptar() {
     if (this.form.valid) {
       this.dispositivo_gps.id = this.form.value.codigo;
-      this.dispositivo_gps.numeroSerie = this.form.value.numeroSerie;
+      this.dispositivo_gps.numeroSerie =
+        'GPS' + this.form.value.numeroSerie.padStart(3, '0');
       this.dispositivo_gps.precio = this.form.value.precio;
-      this.dispositivo_gps.fechaAdquisicion = this.form.value.fechaAdquisicion;
+      this.dispositivo_gps.fechaAdquisicion =
+        this.form.value.fechaAdquisicion;
 
       this.dispositivo_gps.vehiculo = new Vehiculo();
       this.dispositivo_gps.vehiculo.placa = this.form.value.placav;
@@ -119,19 +153,18 @@ export class InsertareditardispositivoGpsComponent {
   init() {
     if (this.edicion) {
       this.dS.listId(this.id).subscribe((data) => {
+        const soloNumero = data.numeroSerie?.replace('GPS', '') || '';
         this.form = this.formBuilder.group({
           codigo: [data.id],
-          numeroSerie: [data.numeroSerie],
-          precio: [data.precio],
-          fechaAdquisicion: [data.fechaAdquisicion],
-          placav: [data.vehiculo.placa],
+          numeroSerie: [soloNumero, [Validators.required, Validators.pattern(/^\d{1,3}$/)]],
+          precio: [data.precio, [Validators.required]],
+          fechaAdquisicion: [data.fechaAdquisicion, [Validators.required]],
+          placav: [data.vehiculo.placa, Validators.required],
         });
 
-        // ✅ Cargar vehículos pero dejando disponible la placa actual
         this.cargarVehiculosDisponibles(data.vehiculo.placa);
       });
     } else {
-      // ✅ Crear: cargar solo placas sin GPS
       this.cargarVehiculosDisponibles();
     }
   }

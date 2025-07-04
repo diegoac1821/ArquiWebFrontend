@@ -7,8 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { LoginService } from '../../../services/login.service';
+import { MatCardModule } from '@angular/material/card';
 @Component({
   selector: 'app-listardispositivo-gps',
   standalone: true,
@@ -20,6 +21,12 @@ import { LoginService } from '../../../services/login.service';
     MatPaginatorModule,
     MatSortModule,
     RouterLink, 
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatPaginatorModule,
+    RouterModule
   ],
   templateUrl: './listardispositivo-gps.component.html',
   styleUrl: './listardispositivo-gps.component.css'
