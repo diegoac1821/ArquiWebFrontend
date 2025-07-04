@@ -60,7 +60,11 @@
       <mat-icon>gavel</mat-icon>Denuncias
     </button>
 
-    <button mat-menu-item routerLink="/consulta/listarconsulta">
+    <button
+      *ngIf="esAdmin()"
+      mat-menu-item
+      routerLink="/consulta/listarconsulta"
+    >
       <mat-icon>question_answer</mat-icon>Consultas
     </button>
 
@@ -74,11 +78,15 @@
     </button>
 
     <!-- Ambos -->
-    <button mat-menu-item routerLink="/alerta/listaralerta">
+    <button *ngIf="esAdmin()" mat-menu-item routerLink="/alerta/listaralerta">
       <mat-icon>warning</mat-icon>Alertas
     </button>
 
-    <button mat-menu-item routerLink="/respuesta/listarrespuesta">
+    <button
+      *ngIf="esAdmin()"
+      mat-menu-item
+      routerLink="/respuesta/listarrespuesta"
+    >
       <mat-icon>reply</mat-icon>Respuestas
     </button>
   </mat-menu>
@@ -98,16 +106,24 @@
 
   <!-- Menú Salir -->
   <mat-menu #menuSalir="matMenu">
-  <!-- Mostrar el nombre de usuario extraído del token -->
-  <button mat-menu-item disabled>
-    <mat-icon>person</mat-icon> {{ username }}
-  </button>
-  <!-- Opción para cerrar sesión -->
-  <button mat-menu-item routerLink="/login" (click)="cerrar()">
-    <mat-icon>logout</mat-icon>
-    <span>Cerrar sesión</span>
-  </button>
-</mat-menu>
+    <!-- Mostrar el nombre de usuario extraído del token -->
+    <button mat-menu-item disabled>
+      <mat-icon>person</mat-icon> {{ username }}
+    </button>
+    <!-- Opción para cerrar sesión -->
+
+    <!-- Botón Ver Perfil -->
+    <!-- Botón Ver Perfil -->
+    <button mat-menu-item [routerLink]="['/usuario/perfil', userId]">
+      <mat-icon>visibility</mat-icon>
+      <span>Ver perfil</span>
+    </button>
+
+    <button mat-menu-item routerLink="/login" (click)="cerrar()">
+      <mat-icon>logout</mat-icon>
+      <span>Cerrar sesión</span>
+    </button>
+  </mat-menu>
 </ng-container>
 
 <router-outlet></router-outlet>

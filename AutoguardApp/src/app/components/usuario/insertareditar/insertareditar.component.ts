@@ -72,53 +72,52 @@ export class InsertareditarComponent implements OnInit {
   }
 
   aceptar() {
-  console.log('👉 Se hizo clic en Aceptar');
-  console.log('📝 Formulario válido:', this.form.valid);
-  console.log('📦 Datos del formulario:', this.form.value);
+    console.log('👉 Se hizo clic en Aceptar');
+    console.log('📝 Formulario válido:', this.form.valid);
+    console.log('📦 Datos del formulario:', this.form.value);
 
-  if (this.form.valid) {
-    this.usuario.dni = this.form.value.dni;
-    this.usuario.nombres = this.form.value.nombres;
-    this.usuario.apellidos = this.form.value.apellidos;
-    this.usuario.direccion = this.form.value.direccion;
-    this.usuario.correo_electronico = this.form.value.correo_electronico;
-    this.usuario.fechaNacimiento = this.form.value.fechaNacimiento;
-    this.usuario.edad = this.form.value.edad;
-    this.usuario.telefono = this.form.value.telefono;
-    this.usuario.username = this.form.value.username;
-    this.usuario.password = this.form.value.password;
-    this.usuario.enabled = this.form.value.enabled;
+    if (this.form.valid) {
+      this.usuario.dni = this.form.value.dni;
+      this.usuario.nombres = this.form.value.nombres;
+      this.usuario.apellidos = this.form.value.apellidos;
+      this.usuario.direccion = this.form.value.direccion;
+      this.usuario.correo_electronico = this.form.value.correo_electronico;
+      this.usuario.fechaNacimiento = this.form.value.fechaNacimiento;
+      this.usuario.edad = this.form.value.edad;
+      this.usuario.telefono = this.form.value.telefono;
+      this.usuario.username = this.form.value.username;
+      this.usuario.password = this.form.value.password;
+      this.usuario.enabled = this.form.value.enabled;
 
-    if (this.edicion) {
-      this.usuario.id = this.id;
-      console.log('🆔 Editando usuario con ID:', this.usuario.id);
+      if (this.edicion) {
+        this.usuario.id = this.id;
 
-      this.uS.update(this.usuario).subscribe(() => {
-        console.log('✅ Usuario actualizado');
-        this.uS.list().subscribe((data) => {
-          this.uS.setList(data);
+        // ✅ roles no se tocan, se preservan
+        this.uS.update(this.usuario).subscribe(() => {
+          this.uS.list().subscribe((data) => {
+            this.uS.setList(data);
+          });
+          this.router.navigate(['/usuario/listarusuario']);
         });
-        this.router.navigate(['/usuario/listarusuario']);
-      });
+      } else {
+        console.log('➕ Insertando nuevo usuario');
+        this.uS.insert(this.usuario).subscribe(() => {
+          console.log('✅ Usuario insertado');
+          this.uS.list().subscribe((data) => {
+            this.uS.setList(data);
+          });
+          this.router.navigate(['/usuario/listarusuario']);
+        });
+      }
     } else {
-      console.log('➕ Insertando nuevo usuario');
-      this.uS.insert(this.usuario).subscribe(() => {
-        console.log('✅ Usuario insertado');
-        this.uS.list().subscribe((data) => {
-          this.uS.setList(data);
-        });
-        this.router.navigate(['/usuario/listarusuario']);
-      });
+      console.warn('❌ Formulario inválido');
     }
-  } else {
-    console.warn('❌ Formulario inválido');
   }
-}
-
 
   init() {
     if (this.edicion) {
       this.uS.listId(this.id).subscribe((data) => {
+        this.usuario = data; // ⬅️ Guardamos el usuario completo con roles
         this.form = new FormGroup({
           dni: new FormControl(data.dni),
           nombres: new FormControl(data.nombres),

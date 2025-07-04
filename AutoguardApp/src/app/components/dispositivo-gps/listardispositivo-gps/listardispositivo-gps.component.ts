@@ -10,6 +10,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { RouterLink, RouterModule } from '@angular/router';
 import { LoginService } from '../../../services/login.service';
 import { MatCardModule } from '@angular/material/card';
+
 @Component({
   selector: 'app-listardispositivo-gps',
   standalone: true,
@@ -27,12 +28,14 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatPaginatorModule,
     RouterModule
+
   ],
   templateUrl: './listardispositivo-gps.component.html',
-  styleUrl: './listardispositivo-gps.component.css'
+  styleUrl: './listardispositivo-gps.component.css',
 })
-export class ListardispositivoGPSComponent implements OnInit{
-  dataSource: MatTableDataSource<Dispositivo_GPS> = new MatTableDataSource<Dispositivo_GPS>();
+export class ListardispositivoGPSComponent implements OnInit {
+  dataSource: MatTableDataSource<Dispositivo_GPS> =
+    new MatTableDataSource<Dispositivo_GPS>();
 
   displayedColumns: string[] = [
     'id',
@@ -43,37 +46,48 @@ export class ListardispositivoGPSComponent implements OnInit{
     'editar',
     'eliminar',
   ];
-  
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private dispositivo_gpsService: DispositivoGPSService,  private loginService: LoginService 
-) {}
+  constructor(
+    private dispositivo_gpsService: DispositivoGPSService,
+    private loginService: LoginService,
+  ) {}
+  get isAdmin(): boolean {
+    return this.loginService.showRole() === 'ADMIN';
+  }
+  ngOnInit(): void {
+    const username = this.loginService.getUsername();
+    const esCliente = this.loginService.showRole() === 'CLIENTE';
 
- ngOnInit(): void {
-  const username = this.loginService.getUsername();
-  const esCliente = this.loginService.showRole() === 'CLIENTE';
+    this.dispositivo_gpsService.list().subscribe((data) => {
+      let lista = data;
+      if (esCliente && username !== null) {
+        lista = lista.filter((d) => d.vehiculo?.usuario?.username === username);
+      }
 
-  this.dispositivo_gpsService.list().subscribe((data) => {
-    let lista = data;
-    if (esCliente && username !== null) {
-      lista = lista.filter(d => d.vehiculo?.usuario?.username === username);
-    }
-
-    this.dataSource = new MatTableDataSource(lista);
-    this.dataSource.paginator = this.paginator;
-  });
-}
-
-
-
+      this.dataSource = new MatTableDataSource(lista);
+      this.dataSource.paginator = this.paginator;
+    });
+  }
 
   eliminar(id: number) {
     this.dispositivo_gpsService.delete(id).subscribe(() => {
+      const username = this.loginService.getUsername();
+      const esCliente = this.loginService.showRole() === 'CLIENTE';
+
       this.dispositivo_gpsService.list().subscribe((data) => {
-        this.dispositivo_gpsService.setList(data);
+        let lista = data;
+        if (esCliente && username !== null) {
+          lista = lista.filter(
+            (d) => d.vehiculo?.usuario?.username === username
+          );
+        }
+
+        this.dataSource = new MatTableDataSource(lista);
+        this.dataSource.paginator = this.paginator;
       });
     });
   }
+  
 }
-
-
