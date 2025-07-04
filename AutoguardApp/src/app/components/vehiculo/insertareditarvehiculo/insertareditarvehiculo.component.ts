@@ -57,7 +57,10 @@ export class InsertareditarvehiculoComponent implements OnInit {
     });
 
     this.form = this.formBuilder.group({
-      placa: ['', Validators.required],
+      placa: [
+        '',
+        [Validators.required, Validators.pattern(/^[A-Z]{3}-\d{3}$/)], //VALIDACION PLACA ABC-123
+      ],
       color: ['', Validators.required],
       marca: ['', Validators.required],
       modelo: ['', Validators.required],
@@ -95,6 +98,10 @@ export class InsertareditarvehiculoComponent implements OnInit {
         });
       }
     }
+  }
+
+  cancelar() {
+    this.router.navigate(['/vehiculo/listarvehiculo']);
   }
 
   init() {

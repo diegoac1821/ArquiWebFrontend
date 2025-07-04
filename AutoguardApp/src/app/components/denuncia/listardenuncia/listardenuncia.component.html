@@ -1,8 +1,9 @@
 <div class="container">
   <h2 style="text-align: center; margin-top: 2rem">Lista de Denuncias</h2>
 
-  <!-- Botón Insertar -->
-  <div style="text-align: left; margin: 1rem 0">
+  <!-- Botones -->
+  <div class="botones-denuncia">
+    <!-- Botón Insertar a la izquierda -->
     <button
       mat-raised-button
       color="primary"
@@ -10,15 +11,27 @@
     >
       ➕ Insertar Denuncia
     </button>
-      <button mat-raised-button color="accent" (click)="filtrarPorEstado('abierto')">
-    🟢 Mostrar Denuncias Abiertas
-  </button>
-  <button mat-raised-button color="warn" (click)="filtrarPorEstado('cerrado')">
-    🔴 Mostrar Denuncias Cerradas
-  </button>
-  <button mat-raised-button color="primary" (click)="listarTodos()">
-    📄 Ver Todas las Denuncias
-  </button>
+
+    <!-- Botones de filtro a la derecha -->
+    <div class="botones-filtro">
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="filtrarPorEstado('abierto')"
+      >
+        🟢 Mostrar Denuncias Abiertas
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="filtrarPorEstado('cerrado')"
+      >
+        🔴 Mostrar Denuncias Cerradas
+      </button>
+      <button mat-raised-button color="primary" (click)="listarTodos()">
+        📄 Ver Todas las Denuncias
+      </button>
+    </div>
   </div>
 
   <!-- Tabla -->
