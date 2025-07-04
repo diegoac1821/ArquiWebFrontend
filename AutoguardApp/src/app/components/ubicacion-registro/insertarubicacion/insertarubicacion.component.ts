@@ -97,4 +97,7 @@ export class InsertarUbicacionComponent implements OnInit, AfterViewInit {
       error: () => alert("❌ Error al registrar ubicación"),
     });
   }
+  cancelar(): void {
+    this.router.navigate(['/ubicacion-registro/listarubicacionregistro']);
+  }
 }
