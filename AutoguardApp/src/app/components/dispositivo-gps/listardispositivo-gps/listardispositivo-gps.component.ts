@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { RouterLink } from '@angular/router';
-
+import { LoginService } from '../../../services/login.service';
 @Component({
   selector: 'app-listardispositivo-gps',
   standalone: true,
@@ -39,19 +39,26 @@ export class ListardispositivoGPSComponent implements OnInit{
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private dispositivo_gpsService: DispositivoGPSService) {}
+  constructor(private dispositivo_gpsService: DispositivoGPSService,  private loginService: LoginService 
+) {}
 
-  ngOnInit(): void {
-    this.dispositivo_gpsService.list().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator; // asignación aquí también por si acaso
-     
-    });
-    this.dispositivo_gpsService.getList().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator; // asignación aquí también por si acaso
-    });
-  }
+ ngOnInit(): void {
+  const username = this.loginService.getUsername();
+  const esCliente = this.loginService.showRole() === 'CLIENTE';
+
+  this.dispositivo_gpsService.list().subscribe((data) => {
+    let lista = data;
+    if (esCliente && username !== null) {
+      lista = lista.filter(d => d.vehiculo?.usuario?.username === username);
+    }
+
+    this.dataSource = new MatTableDataSource(lista);
+    this.dataSource.paginator = this.paginator;
+  });
+}
+
+
+
 
   eliminar(id: number) {
     this.dispositivo_gpsService.delete(id).subscribe(() => {

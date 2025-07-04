@@ -1,24 +1,15 @@
-<div class="container">
+<div class="container" *ngIf="form && form.controls['asunto']">
   <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem">
     <h2 style="text-align: center; margin-top: 2rem">
       {{ edicion ? "Editar Reclamo" : "Registrar Reclamo" }}
     </h2>
-    <!-- Texto de la consulta -->
-    <mat-form-field class="example-full-width" *ngIf="edicion">
-      <mat-label>ID</mat-label>
-      <input matInput formControlName="codigo" />
-      <mat-error *ngIf="form.get('codigo')?.hasError('required')">
-        El código es obligatorio!!
-      </mat-error>
-    </mat-form-field>
 
     <!-- Asunto -->
-
     <mat-form-field class="example-full-width">
       <mat-label>Asunto</mat-label>
-      <input matInput placeholder="Al caso" formControlName="asunto" />
+      <input matInput formControlName="asunto" placeholder="Escriba el asunto" />
       <mat-error *ngIf="form.get('asunto')?.hasError('required')">
-        El asunto es obligatoria!!
+        El asunto es obligatorio.
       </mat-error>
     </mat-form-field>
 
@@ -30,39 +21,21 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngIf="form.get('fecha')?.hasError('required')">
-        La fecha es obligatoria!!
+        La fecha es obligatoria.
       </mat-error>
     </mat-form-field>
 
-    <!-- Descripcion -->
-
+    <!-- Descripción -->
     <mat-form-field class="example-full-width">
-      <mat-label>Descripcion</mat-label>
-      <input matInput placeholder="Describa" formControlName="descripcion" />
+      <mat-label>Descripción</mat-label>
+      <input matInput formControlName="descripcion" placeholder="Detalle el reclamo" />
       <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
-        La descripcion es obligatoria!!
+        La descripción es obligatoria.
       </mat-error>
     </mat-form-field>
 
-    <!-- Estado del reclamo -->
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>¿Resuelto?</mat-label>
-      <mat-select formControlName="resuelto">
-        <mat-option [value]="true">Sí</mat-option>
-        <mat-option [value]="false">No</mat-option>
-      </mat-select>
-      <mat-error *ngIf="form.get('resuelto')?.hasError('required')">
-        El estado de resolución es obligatorio
-      </mat-error>
-    </mat-form-field>
-
-    <!-- ID del Usuario -->
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>ID del Usuario</mat-label>
-      <input matInput type="number" formControlName="usuarioId" />
-    </mat-form-field>
-
-    <div style="margin-top: 2rem">
+    <!-- Botón -->
+    <div style="margin-top: 2rem; text-align: center">
       <button mat-raised-button color="primary" type="submit">Aceptar</button>
     </div>
   </form>
