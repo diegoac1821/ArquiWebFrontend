@@ -158,4 +158,8 @@ export class CrearrutamapaComponent implements OnInit {
   });
 }
 
+cancelar(): void {
+  this.router.navigate(['/ruta/listarruta']);
+}
+
 }

@@ -1,0 +1,65 @@
+/* Fondo general */
+.container {
+  background-color: #5BC0E4;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'Akshar', sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Título estilizado */
+h2 {
+  background-color: #472F64;
+  color: white;
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Botones en fila */
+.botones-acciones {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Botón Guardar y Cancelar */
+button[color="primary"],
+.btn-cancelar {
+  background-color: #27193E !important;
+  color: white !important;
+  font-weight: bold;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+button[color="primary"]:hover,
+.btn-cancelar:hover {
+  background-color: #3d2b5c !important;
+}
+
+/* Caja informativa de la ruta */
+.info-ruta {
+  background-color: #ffffff;
+  border-left: 6px solid #27193E;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* Títulos de datos destacados */
+.info-ruta p {
+  margin: 0.5rem 0;
+  font-weight: 600;
+  color: #27193E;
+}
