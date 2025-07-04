@@ -11,6 +11,8 @@ import { RouterLink } from '@angular/router';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { LoginService } from '../../../services/login.service';
+
 @Component({
   selector: 'app-listarreclamo',
   templateUrl: './listarreclamo.component.html',
@@ -27,57 +29,96 @@ import { MatTableModule } from '@angular/material/table';
   ],
 })
 export class ListarreclamoComponent implements OnInit {
-  dataSource = new MatTableDataSource<any>(); // tipo flexible
-  displayedColumns: string[] = [
-    'id',
-    'asunto',
-    'fecha',
-    'descripcion',
-    'estado',
-    'usuario',
-    'editar',
-    'eliminar',
-  ];
+  dataSource = new MatTableDataSource<any>();
+  displayedColumns: string[] = [];
+  esCliente: boolean = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private reclamoService: ReclamoService) {}
+  constructor(
+    private reclamoService: ReclamoService,
+    private loginService: LoginService
+  ) {}
 
   ngOnInit(): void {
+    const username = this.loginService.getUsername();
+    const rol = this.loginService.showRole()?.trim().toUpperCase();
+    this.esCliente = rol === 'CLIENTE';
+
     this.reclamoService.list().subscribe((data: Reclamo[]) => {
-      this.dataSource = new MatTableDataSource(data);
+      let lista = data;
+
+      if (this.esCliente && username) {
+        lista = lista.filter((r) => r.usuario?.username === username);
+        this.displayedColumns = [
+          'asunto',
+          'fecha',
+          'descripcion',
+          'accion',
+          'eliminar',
+        ];
+      } else {
+        this.displayedColumns = [
+          'id',
+          'asunto',
+          'fecha',
+          'descripcion',
+          'estado',
+          'usuario',
+          'accion',
+          'eliminar',
+        ];
+      }
+
+      this.dataSource = new MatTableDataSource(lista);
       this.dataSource.paginator = this.paginator;
     });
   }
 
   eliminar(id: number): void {
     this.reclamoService.delete(id).subscribe(() => {
-      this.reclamoService.list().subscribe((data: Reclamo[]) => {
+      this.ngOnInit(); // recargar con la lógica aplicada
+    });
+  }
+
+  filtrarSinResolver(): void {
+    if (this.esCliente) return;
+
+    this.reclamoService
+      .getReclamosSinResolver()
+      .subscribe((data: ReclamoResueltosDTO[]) => {
+        const adaptado = data.map((dto) => ({
+          id: dto.id,
+          asunto: dto.asunto,
+          fecha: new Date(dto.fecha),
+          descripcion: dto.descripcion,
+          resuelto: dto.resuelto,
+          usuario: dto.usuario,
+        }));
+        this.dataSource = new MatTableDataSource(adaptado);
+        this.dataSource.paginator = this.paginator;
+      });
+  }
+
+  listarTodos(): void {
+    if (this.esCliente) return;
+
+    this.reclamoService.list().subscribe((data: Reclamo[]) => {
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+    });
+  }
+  marcarComoResuelto(reclamo: Reclamo): void {
+    const actualizado: Reclamo = {
+      ...reclamo,
+      resuelto: true,
+    };
+
+    this.reclamoService.update(actualizado).subscribe(() => {
+      this.reclamoService.list().subscribe((data) => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
       });
     });
   }
-
-  filtrarSinResolver(): void {
-    this.reclamoService.getReclamosSinResolver().subscribe((data: ReclamoResueltosDTO[]) => {
-      const adaptado = data.map(dto => ({
-        id: dto.id,
-        asunto: dto.asunto,
-        fecha: new Date(dto.fecha),
-        descripcion: dto.descripcion,
-        resuelto: dto.resuelto,
-        usuario: dto.usuario // solo es el ID
-      }));
-      this.dataSource = new MatTableDataSource(adaptado);
-      this.dataSource.paginator = this.paginator;
-    });
-  }
-  listarTodos(): void {
-  this.reclamoService.list().subscribe((data: Reclamo[]) => {
-    this.dataSource = new MatTableDataSource(data);
-    this.dataSource.paginator = this.paginator;
-  });
-}
-
 }

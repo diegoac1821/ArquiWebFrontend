@@ -3,7 +3,6 @@
 
   <!-- Botones -->
   <div class="botones-superiores">
-    <!-- Botón Insertar a la izquierda -->
     <div class="izquierda">
       <button
         mat-raised-button
@@ -14,8 +13,7 @@
       </button>
     </div>
 
-    <!-- Botón Consultar a la derecha -->
-    <div class="derecha">
+    <div class="derecha" *ngIf="!esCliente">
       <button
         mat-raised-button
         class="boton-consultar"
@@ -29,28 +27,51 @@
   <!-- Tabla -->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      <th mat-header-cell *matHeaderCellDef>
+        <span *ngIf="!esCliente">ID</span>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <span *ngIf="!esCliente">{{ element.id }}</span>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="origenLatitud">
-      <th mat-header-cell *matHeaderCellDef>Origen Latitud</th>
-      <td mat-cell *matCellDef="let element">{{ element.origenLatitud }}</td>
+      <th mat-header-cell *matHeaderCellDef>
+        <span *ngIf="!esCliente">Origen Latitud</span>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <span *ngIf="!esCliente">{{ element.origenLatitud }}</span>
+      </td>
     </ng-container>
 
+    <!-- Origen Longitud -->
     <ng-container matColumnDef="origenLongitud">
-      <th mat-header-cell *matHeaderCellDef>Origen Longitud</th>
-      <td mat-cell *matCellDef="let element">{{ element.origenLongitud }}</td>
+      <th mat-header-cell *matHeaderCellDef>
+        <span *ngIf="!esCliente">Origen Longitud</span>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <span *ngIf="!esCliente">{{ element.origenLongitud }}</span>
+      </td>
     </ng-container>
 
+    <!-- Destino Latitud -->
     <ng-container matColumnDef="destinoLatitud">
-      <th mat-header-cell *matHeaderCellDef>Destino Latitud</th>
-      <td mat-cell *matCellDef="let element">{{ element.destinoLatitud }}</td>
+      <th mat-header-cell *matHeaderCellDef>
+        <span *ngIf="!esCliente">Destino Latitud</span>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <span *ngIf="!esCliente">{{ element.destinoLatitud }}</span>
+      </td>
     </ng-container>
 
+    <!-- Destino Longitud -->
     <ng-container matColumnDef="destinoLongitud">
-      <th mat-header-cell *matHeaderCellDef>Destino Longitud</th>
-      <td mat-cell *matCellDef="let element">{{ element.destinoLongitud }}</td>
+      <th mat-header-cell *matHeaderCellDef>
+        <span *ngIf="!esCliente">Destino Longitud</span>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <span *ngIf="!esCliente">{{ element.destinoLongitud }}</span>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="fecha">
@@ -73,7 +94,7 @@
       <td mat-cell *matCellDef="let element">{{ element.vehiculo?.placa }}</td>
     </ng-container>
 
-    <!-- Editar -->
+    <!-- Editar (solo admin) -->
     <ng-container matColumnDef="editar">
       <th mat-header-cell *matHeaderCellDef>Editar</th>
       <td mat-cell *matCellDef="let element">
@@ -87,7 +108,21 @@
       </td>
     </ng-container>
 
-    <!-- Eliminar -->
+    <!-- Ver Ruta (solo cliente) -->
+    <ng-container matColumnDef="verRuta">
+      <th mat-header-cell *matHeaderCellDef>Ver Ruta</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          color="primary"
+          [routerLink]="['/ruta/vermaparuta', element.id]"
+        >
+          <mat-icon>visibility</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Eliminar (ambos roles) -->
     <ng-container matColumnDef="eliminar">
       <th mat-header-cell *matHeaderCellDef>Eliminar</th>
       <td mat-cell *matCellDef="let element">
@@ -97,10 +132,10 @@
       </td>
     </ng-container>
 
-    <!-- Filas -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+
   <mat-paginator
     [pageSizeOptions]="[3, 6, 9]"
     showFirstLastButtons

@@ -82,11 +82,19 @@ export class ListarvehiculoComponent implements OnInit {
   }
 
   eliminar(placa: string) {
-    this.vehiculoService.delete(placa).subscribe(() => {
-      this.vehiculoService.list().subscribe((data) => {
-        this.vehiculos = data;
-        this.aplicarfiltro(); // Reaplica todo al eliminar
-      });
+  this.vehiculoService.delete(placa).subscribe(() => {
+    const username = this.loginService.getUsername();
+    const esCliente = this.loginService.showRole() === 'CLIENTE';
+
+    this.vehiculoService.list().subscribe((data) => {
+      let lista = data;
+      if (esCliente && username !== null) {
+        lista = lista.filter((v) => v.usuario?.username === username);
+      }
+
+      this.vehiculos = lista;
+      this.aplicarfiltro(); // vuelve a aplicar filtro y paginación
     });
-  }
+  });
+}
 }

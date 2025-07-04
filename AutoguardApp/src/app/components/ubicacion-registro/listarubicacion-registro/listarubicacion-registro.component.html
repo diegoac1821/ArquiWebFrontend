@@ -1,59 +1,109 @@
 <div class="container">
-  <h2 style="text-align: center; margin-top: 2rem;">Lista de Ubicacion</h2>
+  <h2 style="text-align: center; margin-top: 2rem">Lista de Ubicaciones</h2>
 
-  <!-- Botón Insertar -->
-  <div style="text-align: left; margin: 1rem 0;">
-    <button mat-raised-button color="primary" [routerLink]="['/ubicacion/insertarubicacion']">
-      ➕ Insertar Ubicacion
+  <!-- Botón Insertar (visible para ambos) -->
+  <div style="text-align: left; margin: 1rem 0">
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/ubicacion/insertarubicacion']"
+    >
+      ➕ Insertar Ubicación
     </button>
   </div>
 
   <!-- Tabla -->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
+    <!-- ID (solo admin) -->
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      <th mat-header-cell *matHeaderCellDef>
+        <span *ngIf="!esCliente">ID</span>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <span *ngIf="!esCliente">{{ element.id }}</span>
+      </td>
     </ng-container>
 
+    <!-- Latitud (solo admin) -->
     <ng-container matColumnDef="latitud">
-      <th mat-header-cell *matHeaderCellDef>Latitud</th>
-      <td mat-cell *matCellDef="let element">{{ element.latitud }}</td>
+      <th mat-header-cell *matHeaderCellDef>
+        <span *ngIf="!esCliente">Latitud</span>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <span *ngIf="!esCliente">{{ element.latitud }}</span>
+      </td>
     </ng-container>
 
+    <!-- Longitud (solo admin) -->
     <ng-container matColumnDef="longitud">
-      <th mat-header-cell *matHeaderCellDef>Longitud</th>
-      <td mat-cell *matCellDef="let element">{{ element.longitud }}</td>
+      <th mat-header-cell *matHeaderCellDef>
+        <span *ngIf="!esCliente">Longitud</span>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <span *ngIf="!esCliente">{{ element.longitud }}</span>
+      </td>
     </ng-container>
 
-   <ng-container matColumnDef="fecha">
+    <!-- Fecha -->
+    <ng-container matColumnDef="fecha">
       <th mat-header-cell *matHeaderCellDef>Fecha</th>
       <td mat-cell *matCellDef="let element">{{ element.fecha | date }}</td>
     </ng-container>
 
+    <!-- Hora -->
     <ng-container matColumnDef="hora">
       <th mat-header-cell *matHeaderCellDef>Hora</th>
-      <td mat-cell *matCellDef="let element">
-        {{ element.hora  }}
-      </td>
+      <td mat-cell *matCellDef="let element">{{ element.hora }}</td>
     </ng-container>
 
+    <!-- Número de Serie GPS -->
     <ng-container matColumnDef="gps">
       <th mat-header-cell *matHeaderCellDef>NumSerie GPS</th>
-      <td td mat-cell *matCellDef="let element">{{ element.disGPS?.numeroSerie }}</td>
-    </ng-container>
-
-    <!-- Editar -->
-    <ng-container matColumnDef="editar">
-      <th mat-header-cell *matHeaderCellDef>Editar</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="accent" [routerLink]="['/ubicacion-registro/insertareditarubicacion-registro', element.id]">
-          <mat-icon>edit</mat-icon>
-        </button>
+        {{ element.disGPS?.numeroSerie }}
       </td>
     </ng-container>
 
-      <!-- Eliminar -->
+    <!-- Ver Ubicación (solo cliente) -->
+    <ng-container matColumnDef="ver">
+      <th mat-header-cell *matHeaderCellDef>
+        <span *ngIf="esCliente">Ver</span>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="esCliente">
+          <button
+            mat-icon-button
+            color="primary"
+            [routerLink]="['/ubicacion/verubicacion', element.id]"
+          >
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <!-- Editar (solo admin) -->
+    <ng-container matColumnDef="editar">
+      <th mat-header-cell *matHeaderCellDef>
+        <span *ngIf="!esCliente">Editar</span>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="!esCliente">
+          <button
+            mat-icon-button
+            color="accent"
+            [routerLink]="[
+              '/ubicacion-registro/insertareditarubicacion-registro',
+              element.id
+            ]"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <!-- Eliminar (ambos roles) -->
     <ng-container matColumnDef="eliminar">
       <th mat-header-cell *matHeaderCellDef>Eliminar</th>
       <td mat-cell *matCellDef="let element">
@@ -63,10 +113,12 @@
       </td>
     </ng-container>
 
-    <!-- Filas -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[3, 6, 9]" showFirstLastButtons></mat-paginator>
-</div>
 
+  <mat-paginator
+    [pageSizeOptions]="[3, 6, 9]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

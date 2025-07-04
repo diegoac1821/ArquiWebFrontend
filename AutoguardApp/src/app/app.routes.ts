@@ -34,12 +34,12 @@ import { ConsultarutaperiodoComponent } from './components/ruta/consultarutaperi
 
 import { ReportecantconsultasusuarioComponent } from './components/reportes/reportecantconsultasusuario/reportecantconsultasusuario.component';
 import { ReportebuscardenunciasporestadoComponent } from './components/reportes/reportebuscardenunciasporestado/reportebuscardenunciasporestado.component';
-
+import { VerMapaRutaComponent } from './components/ruta/vermaparuta/vermaparuta.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { seguridadGuard } from './guard/seguridad.guard';
 import { ReporteusuariomasalertaComponent } from './components/reportes/reporteusuariomasalerta/reporteusuariomasalerta.component';
-
+import { VerUbicacionComponent } from './components/ubicacion-registro/verubicacion/verubicacion.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 
@@ -178,11 +178,21 @@ export const routes: Routes = [
         component: ReporteusuariomasalertaComponent,
       },
 
-      { path: 'reportes/cantconsultasusuario', 
-        component: ReportecantconsultasusuarioComponent },
-       {
+      {
+        path: 'reportes/cantconsultasusuario',
+        component: ReportecantconsultasusuarioComponent,
+      },
+      {
         path: 'reportes/reportecantdenuncias',
-        component: ReportecantdenunciasComponent
+        component: ReportecantdenunciasComponent,
+      },
+      {
+        path: 'ruta/vermaparuta/:id',
+        component: VerMapaRutaComponent,
+      },
+      {
+        path: 'ubicacion/verubicacion/:id',
+        component: VerUbicacionComponent,
       },
     ],
   },

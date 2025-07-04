@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
 
 import { Router } from '@angular/router'; 
-
+import { LoginService } from '../../../services/login.service';
 declare const google: any;
 
 @Component({
@@ -37,15 +37,26 @@ export class InsertarUbicacionComponent implements OnInit, AfterViewInit {
   constructor(
     private gpsService: DispositivoGPSService,
     private ubicacionService: UbicacionRegistroService,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
-    this.gpsService.list().subscribe(data => {
-      this.dispositivos = data;
-    });
-  }
+  const username = this.loginService.getUsername();
+  const esCliente = this.loginService.showRole() === 'CLIENTE';
 
+  this.gpsService.list().subscribe(data => {
+    let lista = data;
+
+    if (esCliente && username !== null) {
+      lista = data.filter(gps =>
+        gps.vehiculo?.usuario?.username === username
+      );
+    }
+
+    this.dispositivos = lista;
+  });
+}
   ngAfterViewInit(): void {
     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       const map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
