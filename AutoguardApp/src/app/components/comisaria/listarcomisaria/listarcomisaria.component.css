@@ -4,6 +4,7 @@
   min-height: 100vh; 
   padding: 2rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-family: 'Akshar', sans-serif;
 }
 
 /* Título estilizado */
@@ -19,7 +20,37 @@ h2 {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Botón Insertar */
+/* Acciones superiores */
+.acciones-superiores {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+/* Botón insertar a la izquierda */
+.insertar-comisaria {
+  flex: 1;
+}
+
+/* Agrupa búsqueda y botones a la derecha */
+.grupo-busqueda {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Campo de búsqueda más compacto */
+.campo-busqueda {
+  width: 220px;
+  min-width: 200px;
+}
+
+/* Botones Buscar y Ver Todas (mismo estilo que insertar) */
+.btn-buscar,
+.btn-ver,
 button[color='primary'] {
   background-color: #27193E !important;
   color: white !important;
@@ -27,6 +58,8 @@ button[color='primary'] {
   transition: background-color 0.3s ease;
 }
 
+.btn-buscar:hover,
+.btn-ver:hover,
 button[color='primary']:hover {
   background-color: #3a2d50 !important;
 }
@@ -47,7 +80,7 @@ table {
   text-align: center;
 }
 
-/* Celdas de tabla */
+/* Celdas */
 .mat-cell {
   text-align: center;
   padding: 12px;
@@ -59,7 +92,7 @@ table {
   background-color: #f2f8fc;
 }
 
-/* Íconos de editar y eliminar con mismo color */
+/* Íconos de editar y eliminar */
 button[mat-icon-button] mat-icon {
   color: #27193E !important;
 }
@@ -71,3 +104,29 @@ mat-paginator {
   border-radius: 8px;
   padding: 0.5rem;
 }
+
+/* Responsive básico */
+@media (max-width: 768px) {
+  .acciones-superiores {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .grupo-busqueda {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .campo-busqueda {
+    width: 100%;
+  }
+
+  .btn-buscar,
+  .btn-ver {
+    width: 100%;
+  }
+}
+
+
+

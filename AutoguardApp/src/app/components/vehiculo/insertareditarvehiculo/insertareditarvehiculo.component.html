@@ -75,14 +75,18 @@
 
     <br />
 
-    <div style="margin-top: 2rem">
+    <div class="botones-acciones">
+      <button mat-raised-button type="submit" [disabled]="form.invalid">
+        Aceptar
+      </button>
+
       <button
         mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="form.invalid"
+        type="button"
+        (click)="cancelar()"
+        class="btn-cancelar"
       >
-        Aceptar
+        Cancelar
       </button>
     </div>
   </form>

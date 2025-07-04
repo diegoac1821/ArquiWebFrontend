@@ -1,54 +1,26 @@
-<div class="container">
-  <form [formGroup]="form" style="margin: 2rem">
-    <h2 style="text-align: center; margin-top: 2rem">Perfil del Usuario</h2>
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>DNI</mat-label>
-      <input matInput formControlName="dni" />
-    </mat-form-field>
+<div class="perfil-container">
+  <mat-card class="perfil-card">
+    <mat-card-header>
+      <div mat-card-avatar class="perfil-avatar">
+        <mat-icon>person</mat-icon>
+      </div>
+      <mat-card-title>{{ form.get('nombres')?.value }} {{ form.get('apellidos')?.value }}</mat-card-title>
+      <mat-card-subtitle>DNI: {{ form.get('dni')?.value }}</mat-card-subtitle>
+    </mat-card-header>
 
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Nombres</mat-label>
-      <input matInput formControlName="nombres" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Apellidos</mat-label>
-      <input matInput formControlName="apellidos" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Dirección</mat-label>
-      <input matInput formControlName="direccion" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Correo electrónico</mat-label>
-      <input matInput formControlName="correo_electronico" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Fecha de nacimiento</mat-label>
-      <input matInput formControlName="fechaNacimiento" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Edad</mat-label>
-      <input matInput formControlName="edad" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Teléfono</mat-label>
-      <input matInput formControlName="telefono" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Nombre de usuario</mat-label>
-      <input matInput formControlName="username" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Activo</mat-label>
-      <input matInput formControlName="enabled" />
-    </mat-form-field>
-  </form>
+    <mat-card-content>
+      <div class="perfil-info">
+        <p><mat-icon>place</mat-icon> <strong>Dirección:</strong> {{ form.get('direccion')?.value }}</p>
+        <p><mat-icon>email</mat-icon> <strong>Correo:</strong> {{ form.get('correo_electronico')?.value }}</p>
+        <p><mat-icon>calendar_today</mat-icon> <strong>Fecha de nacimiento:</strong> {{ form.get('fechaNacimiento')?.value }}</p>
+        <p><mat-icon>cake</mat-icon> <strong>Edad:</strong> {{ form.get('edad')?.value }}</p>
+        <p><mat-icon>phone</mat-icon> <strong>Teléfono:</strong> {{ form.get('telefono')?.value }}</p>
+        <p><mat-icon>person</mat-icon> <strong>Usuario:</strong> {{ form.get('username')?.value }}</p>
+        <p>
+          <mat-icon>{{ form.get('enabled')?.value === 'Sí' ? 'check_circle' : 'cancel' }}</mat-icon>
+          <strong>Activo:</strong> {{ form.get('enabled')?.value }}
+        </p>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

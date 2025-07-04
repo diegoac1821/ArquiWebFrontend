@@ -37,18 +37,28 @@ mat-form-field {
   text-align: left;
 }
 
-/* Botón Aceptar */
-button[type="submit"] {
+/* Contenedor de botones en fila */
+.botones-acciones {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Botones Aceptar y Cancelar */
+button[type="submit"],
+.btn-cancelar {
   background-color: #27193E !important;
   color: white !important;
   font-weight: bold;
-  width: 100%;
-  padding: 0.75rem;
+  padding: 0.75rem 2rem;
   font-size: 1rem;
   border-radius: 8px;
   transition: background-color 0.3s ease;
 }
 
-button[type="submit"]:hover {
+/* Hover para ambos botones */
+button[type="submit"]:hover,
+.btn-cancelar:hover {
   background-color: #3d2b5c !important;
 }

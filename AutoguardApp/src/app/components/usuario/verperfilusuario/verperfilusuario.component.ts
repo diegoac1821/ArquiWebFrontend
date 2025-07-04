@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-verperfilusuario',
@@ -24,7 +25,8 @@ import { MatCardModule } from '@angular/material/card';
     MatFormFieldModule,
     MatInputModule,
     CommonModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule
   ]
 })
 export class VerperfilusuarioComponent implements OnInit {

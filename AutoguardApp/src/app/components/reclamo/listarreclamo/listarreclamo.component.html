@@ -1,23 +1,30 @@
 <div class="container">
-  <div style="text-align: center; margin: 6%">
+  <div style="text-align: center; margin-top: 2rem">
     <h1>Lista de Reclamos</h1>
   </div>
 
   <!-- Botones -->
-  <div style="display: flex; gap: 1rem; margin: 1rem 0">
-    <button
-      mat-raised-button
-      color="primary"
-      [routerLink]="['/reclamo/insertareditarreclamos']"
-    >
-      ➕ Insertar
-    </button>
-    <button mat-raised-button color="accent" (click)="filtrarSinResolver()">
-      ❌ Ver Reclamos sin Resolver
-    </button>
-    <button mat-raised-button color="warn" (click)="listarTodos()">
-      🔁 Ver Todos los Reclamos
-    </button>
+  <div class="botones-reclamo">
+    <!-- Botón Insertar a la izquierda -->
+    <div>
+      <button
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/reclamo/insertareditarreclamos']"
+      >
+        ➕ Insertar
+      </button>
+    </div>
+
+    <!-- Botones de filtro a la derecha -->
+    <div class="botones-filtro">
+      <button mat-raised-button color="accent" (click)="filtrarSinResolver()">
+        ❌ Ver Reclamos sin Resolver
+      </button>
+      <button mat-raised-button color="warn" (click)="listarTodos()">
+        🔁 Ver Todos los Reclamos
+      </button>
+    </div>
   </div>
 
   <!-- Tabla -->
@@ -55,14 +62,14 @@
         {{ element.resuelto ? "Sí" : "No" }}
       </td>
     </ng-container>
-    
-<!-- Usuario (solo ID) -->
-<ng-container matColumnDef="usuario">
-  <th mat-header-cell *matHeaderCellDef>Usuario (ID)</th>
-  <td mat-cell *matCellDef="let element">
-    {{ element.usuario?.id }}
-  </td>
-</ng-container>
+
+    <!-- Usuario (solo ID) -->
+    <ng-container matColumnDef="usuario">
+      <th mat-header-cell *matHeaderCellDef>Usuario (ID)</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.usuario?.id }}
+      </td>
+    </ng-container>
 
     <!-- Editar -->
     <ng-container matColumnDef="editar">

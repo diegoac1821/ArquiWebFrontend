@@ -1,22 +1,29 @@
 <div class="container">
   <h2 style="text-align: center; margin-top: 2rem">Lista de Rutas</h2>
 
-  <!-- Botón Insertar -->
-  <div style="text-align: left; margin: 1rem 0">
-    <button
-      mat-raised-button
-      color="primary"
-      [routerLink]="['/ruta/crearrutamapa']"
-    >
-      ➕ Insertar Ruta
-    </button>
-    <button
-      mat-raised-button
-      color="accent"
-      [routerLink]="['/ruta/consultarutaperiodo']"
-    >
-      📅 Consultar Rutas por Periodo y Placa
-    </button>
+  <!-- Botones -->
+  <div class="botones-superiores">
+    <!-- Botón Insertar a la izquierda -->
+    <div class="izquierda">
+      <button
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/ruta/crearrutamapa']"
+      >
+        ➕ Insertar Ruta
+      </button>
+    </div>
+
+    <!-- Botón Consultar a la derecha -->
+    <div class="derecha">
+      <button
+        mat-raised-button
+        class="boton-consultar"
+        [routerLink]="['/ruta/consultarutaperiodo']"
+      >
+        📅 Consultar Rutas por Periodo y Placa
+      </button>
+    </div>
   </div>
 
   <!-- Tabla -->

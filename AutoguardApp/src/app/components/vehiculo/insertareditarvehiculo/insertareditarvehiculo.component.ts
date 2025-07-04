@@ -100,6 +100,10 @@ export class InsertareditarvehiculoComponent implements OnInit {
     }
   }
 
+  cancelar() {
+    this.router.navigate(['/vehiculo/listarvehiculo']);
+  }
+
   init() {
     if (this.edicion) {
       this.vS.listId(this.placa).subscribe((data) => {
