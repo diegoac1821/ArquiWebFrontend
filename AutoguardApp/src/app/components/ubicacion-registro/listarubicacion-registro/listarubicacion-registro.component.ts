@@ -10,6 +10,9 @@ import { UbicacionRegistroService } from '../../../services/ubicacion-registro.s
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { LoginService } from '../../../services/login.service';
+import { MatCardModule } from '@angular/material/card'; // Importa el módulo MatCardModule
+import { GoogleMapsModule } from '@angular/google-maps';  // Importar GoogleMapsModule
+
 @Component({
   selector: 'app-listarubicacionregistro',
   standalone: true,
@@ -21,13 +24,15 @@ import { LoginService } from '../../../services/login.service';
     CommonModule,
     MatPaginatorModule,
     MatSortModule,
+    MatCardModule,
+    GoogleMapsModule
   ],
   templateUrl: './listarubicacion-registro.component.html',
   styleUrls: ['./listarubicacion-registro.component.css'],
 })
 export class ListarubicacionregistroComponent implements OnInit {
-  dataSource: MatTableDataSource<ubicacion_registro> =
-    new MatTableDataSource<ubicacion_registro>();
+
+   dataSource: MatTableDataSource<ubicacion_registro> = new MatTableDataSource<ubicacion_registro>(); 
 
   displayedColumns: string[] = [
     'id',
@@ -39,7 +44,9 @@ export class ListarubicacionregistroComponent implements OnInit {
     'editar',
     'eliminar',
   ];
+
   esCliente: boolean = false;
+  locations: any[] = []; // Declarar la variable locations como un array vacío
 
   constructor(
     private ubicacionService: UbicacionRegistroService,
@@ -50,33 +57,49 @@ export class ListarubicacionregistroComponent implements OnInit {
 
   ngOnInit(): void {
     const username = this.loginService.getUsername();
-    const rol = this.loginService.showRole()?.trim().toUpperCase();
-    this.esCliente = rol === 'CLIENTE';
+  const rol = this.loginService.showRole()?.trim().toUpperCase();
+  this.esCliente = rol === 'CLIENTE';
 
-    this.ubicacionService.list().subscribe((data) => {
-      let lista = data;
+  this.ubicacionService.list().subscribe((data) => {
+    let lista = data;
 
-      if (this.esCliente && username !== null) {
-        lista = lista.filter(
-          (u) => u.disGPS?.vehiculo?.usuario?.username === username
-        );
-      }
+    if (this.esCliente && username !== null) {
+      lista = lista.filter(
+        (u) => u.disGPS?.vehiculo?.usuario?.username === username
+      );
+    }
 
-      this.displayedColumns = this.esCliente
-        ? ['fecha', 'hora', 'gps', 'ver', 'eliminar']
-        : [
-            'id',
-            'latitud',
-            'longitud',
-            'fecha',
-            'hora',
-            'gps',
-            'editar',
-            'eliminar',
-          ];
+    this.displayedColumns = this.esCliente
+      ? ['fecha', 'hora', 'gps', 'ver', 'eliminar']
+      : [
+          'id',
+          'latitud',
+          'longitud',
+          'fecha',
+          'hora',
+          'gps',
+          'editar',
+          'eliminar',
+        ];
 
-      this.dataSource = new MatTableDataSource(lista);
-      this.dataSource.paginator = this.paginator;
+    this.dataSource = new MatTableDataSource(lista);
+    this.dataSource.paginator = this.paginator;
+
+    // Asegúrate de convertir latitud y longitud a números
+    this.locations = lista
+     .filter((location) => {
+    const lat = parseFloat(location.latitud); // Convertir a número
+    const lng = parseFloat(location.longitud); // Convertir a número
+    return !isNaN(lat) && !isNaN(lng); // Filtrar solo si son números válidos
+  })
+    .map((location) => ({
+      lat: parseFloat(location.latitud), // Convertir a número
+      lng: parseFloat(location.longitud), // Convertir a número
+      id: location.id,
+      fecha: location.fecha,  // Añadir fecha
+      hora: location.hora,    // Añadir hora
+      gps: location.disGPS?.numeroSerie, // Añadir GPS
+    }));
     });
   }
 
