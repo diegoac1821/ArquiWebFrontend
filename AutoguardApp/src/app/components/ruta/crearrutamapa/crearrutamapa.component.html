@@ -20,11 +20,16 @@
     <p><strong>Duración:</strong> {{ duracion }}</p>
   </div>
 
-  <!-- Botón para guardar ruta -->
-  <button mat-raised-button color="primary"
-          style="margin-top: 1rem;"
-          (click)="guardarRuta()"
-          [disabled]="!origen || !destino || !vehiculoSeleccionado || guardando">
-    {{ guardando ? 'Guardando...' : 'Guardar Ruta' }}
-  </button>
+  <!-- Botones -->
+  <div class="botones-acciones">
+    <button mat-raised-button color="primary"
+            (click)="guardarRuta()"
+            [disabled]="!origen || !destino || !vehiculoSeleccionado || guardando">
+      {{ guardando ? 'Guardando...' : 'Guardar Ruta' }}
+    </button>
+
+    <button mat-raised-button class="btn-cancelar" (click)="cancelar()">
+      Cancelar
+    </button>
+  </div>
 </div>
