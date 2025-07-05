@@ -37,20 +37,22 @@ mat-form-field {
   text-align: left;
 }
 
-/* Botón Aceptar */
-button[type="button"],
+/* Botones Aceptar y Cancelar */
+button[type="submit"],
 .btn-cancelar {
   background-color: #27193E !important;
   color: white !important;
+  font-weight: bold;
   padding: 0.75rem 2rem;
   font-size: 1rem;
   border-radius: 8px;
   transition: background-color 0.3s ease;
 }
 
-button[type="button"]:hover {
+/* Hover para ambos botones */
+button[type="submit"]:hover,
+.btn-cancelar:hover {
   background-color: #3d2b5c !important;
 }
-
 
 

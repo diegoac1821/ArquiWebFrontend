@@ -126,6 +126,10 @@ export class InsertareditardenunciaComponent {
     }
   }
 
+    cancelar() {
+    this.router.navigate(['/alerta/listaralerta']);
+  }
+
   aceptar() {
     if (this.form.valid) {
       this.denuncia.descripcion = this.form.value.descripcion;
