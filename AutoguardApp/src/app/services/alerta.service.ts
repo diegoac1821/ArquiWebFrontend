@@ -7,10 +7,9 @@ import { UsuarioConTotalAlertasDTO } from '../models/UsuarioConTotalAlertasDTO';
 const base_url = environment.base;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AlertaService {
-
   private url = `${environment.base}/alertas`;
   private listaCambio = new Subject<Alerta[]>();
 
@@ -19,7 +18,7 @@ export class AlertaService {
   list() {
     return this.http.get<Alerta[]>(this.url);
   }
-    insert(alerta: Alerta) {
+  insert(alerta: Alerta) {
     return this.http.post(this.url, alerta);
   }
 
@@ -47,7 +46,20 @@ export class AlertaService {
     this.listaCambio.next(listaNueva);
   }
 
-  getQuantity() :Observable<UsuarioConTotalAlertasDTO[]>{
-    return this.http.get<UsuarioConTotalAlertasDTO[]>(`${this.url}/usuarios_maslertas`);
+  getQuantity(): Observable<UsuarioConTotalAlertasDTO[]> {
+    return this.http.get<UsuarioConTotalAlertasDTO[]>(
+      `${this.url}/usuarios_maslertas`
+    );
+  }
+
+  getAlertasPorPlaca(placa: string): Observable<Alerta[]> {
+    return this.http.get<Alerta[]>(
+      `${this.url}/alertas_vehiculo?placa=${placa}`
+    );
+  }
+  getAlertasPorPeriodo(fecha1: string, fecha2: string): Observable<Alerta[]> {
+    return this.http.get<Alerta[]>(
+      `${this.url}/alertas_periodo?fecha1=${fecha1}&fecha2=${fecha2}`
+    );
   }
 }

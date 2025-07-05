@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -52,10 +51,9 @@ export class InsertareditaralertaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Inicializar formulario una sola vez
     this.form = this.formBuilder.group({
       asunto: ['', Validators.required],
-      fecha: [new Date(), Validators.required],
+      fecha: ['', Validators.required],
       descripcion: ['', Validators.required],
       vehiculoId: [null, Validators.required],
     });
@@ -88,6 +86,10 @@ export class InsertareditaralertaComponent implements OnInit {
     }
   }
 
+  cancelar() {
+    this.router.navigate(['/alerta/listaralerta']);
+  }
+
   aceptar() {
     if (this.form.valid) {
       this.alerta.asunto = this.form.value.asunto;
@@ -102,7 +104,7 @@ export class InsertareditaralertaComponent implements OnInit {
           this.alertaService.list().subscribe((data) => {
             this.alertaService.setList(data);
           });
-          console.log('Actualización exitosa');
+          alert('Alerta actualizada exitosamente');
           this.router.navigate(['/alerta/listaralerta']);
         });
       } else {
@@ -110,12 +112,12 @@ export class InsertareditaralertaComponent implements OnInit {
           this.alertaService.list().subscribe((data) => {
             this.alertaService.setList(data);
           });
-          console.log('Inserción exitosa');
+          alert('Alerta registrada exitosamente'); // CA05
           this.router.navigate(['/alerta/listaralerta']);
         });
       }
     } else {
-      console.log('Formulario inválido');
+      this.form.markAllAsTouched(); // Marca errores visibles en pantalla
     }
   }
 }

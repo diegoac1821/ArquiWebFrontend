@@ -8,9 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { UsuarioService } from '../../services/usuario.service';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-login',
-  imports: [MatFormFieldModule, FormsModule, MatInputModule, MatButtonModule],
+  imports: [MatFormFieldModule, FormsModule, MatInputModule, MatButtonModule,RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
