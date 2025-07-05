@@ -1,9 +1,11 @@
 /* Fondo total celeste claro */
-body, .container {
-  background-color: #5BC0E4;
+body,
+.container {
+  background-color: #5bc0e4;
+  padding: 60px 20px;
   margin: 0;
   min-height: 100vh;
-  font-family: 'Akshar', sans-serif;
+  font-family: "Akshar", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,9 +26,9 @@ form {
 form h2 {
   font-size: 2rem;
   font-weight: 700; /* más grueso */
-  color: #27193E;
+  color: #27193e;
   margin-bottom: 2rem;
-  font-family: 'Akshar', sans-serif;
+  font-family: "Akshar", sans-serif;
 }
 
 /* Campos del formulario */
@@ -39,7 +41,7 @@ mat-form-field {
 
 /* Botón Aceptar */
 button[type="submit"] {
-  background-color: #27193E !important;
+  background-color: #27193e !important;
   color: white !important;
   font-weight: bold;
   width: 100%;
@@ -52,3 +54,26 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #3d2b5c !important;
 }
+
+.mt-2 {
+  margin-top: 10px; 
+}
+
+/* Botón Cancelar */
+button[type="button"] {
+  background-color: #27193e !important;
+  color: white !important;
+  font-weight: bold;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+button[type="button"]:hover {
+  background-color: #3d2b5c !important;
+}
+
+
+

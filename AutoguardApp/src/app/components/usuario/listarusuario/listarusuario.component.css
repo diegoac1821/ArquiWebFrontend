@@ -1,14 +1,15 @@
 /* Fondo general */
 .container {
-  background-color: #5BC0E4;
-  min-height: 100vh; 
-  padding: 2rem;
+  background-color: #5bc0e4;
+  padding: 60px 20px;
+  flex-direction: column;
+  min-height: 100vh;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Título estilizado */
 h2 {
-  background-color: #472F64;
+  background-color: #472f64;
   color: white;
   font-weight: bold;
   font-size: 2rem;
@@ -20,14 +21,14 @@ h2 {
 }
 
 /* Botón Insertar */
-button[color='primary'] {
-  background-color: #27193E !important;
+button[color="primary"] {
+  background-color: #27193e !important;
   color: white !important;
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
-button[color='primary']:hover {
+button[color="primary"]:hover {
   background-color: #3a2d50 !important;
 }
 
@@ -42,7 +43,7 @@ table {
 /* Encabezado de tabla */
 .mat-header-cell {
   background-color: white;
-  color: #27193E;
+  color: #27193e;
   font-weight: bold;
   text-align: center;
 }
@@ -61,11 +62,11 @@ table {
 
 /* Íconos de editar y eliminar con mismo color */
 button[mat-icon-button] mat-icon {
-  color: #27193E !important;
+  color: #27193e !important;
 }
 
 /* Ícono de Ver Perfil (color más claro para mayor visibilidad) */
-button[mat-icon-button][color='primary'] mat-icon {
+button[mat-icon-button][color="primary"] mat-icon {
   color: #ffffff !important; /* Azul claro profundo */
 }
 

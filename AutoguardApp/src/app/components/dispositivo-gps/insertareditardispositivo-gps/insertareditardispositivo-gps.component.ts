@@ -150,6 +150,9 @@ export class InsertareditardispositivoGpsComponent {
     }
   }
 
+    cancelar() {
+    this.router.navigate(['/dispositivo-gps/listardispositivogps']); }
+
   init() {
     if (this.edicion) {
       this.dS.listId(this.id).subscribe((data) => {

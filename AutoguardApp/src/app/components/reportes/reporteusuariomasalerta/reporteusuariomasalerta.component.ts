@@ -79,13 +79,9 @@ export class ReporteusuariomasalertaComponent implements OnInit {
           data: data.map((item) => item.totalAlertas),
           label: 'Cantidad de Alertas',
           backgroundColor: [
-            '#ffff00',
-            '#ff5733',
-            '#8633ff',
-            '#33ff35',
-            '#f149d8',
-            '#33beff',
-            '#ffa07a',
+            '#5BC0E4', // Primer color (color de fondo)
+            '#472F64', // Segundo color (color de título)
+            '#27193E',
           ],
           borderColor: '#333',
           borderWidth: 1,

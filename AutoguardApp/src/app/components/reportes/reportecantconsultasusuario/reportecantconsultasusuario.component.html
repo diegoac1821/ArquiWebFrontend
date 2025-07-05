@@ -1,15 +1,21 @@
-<div  class="title-container">
-    <div style="text-align: center" class="title">
-   <h1 >Cantidad de Consultas por Usuario</h1>
-   </div>
-    <div style="text-align: center" class="chart-container">
-        <canvas baseChart 
-                [datasets]="barChartData"
-                [labels]="barChartLabels"
-                [options]="barChartOptions"
-                [legend]="barChartLegend"
-                [type]="barChartType"
-            >
-        </canvas>
-    </div>
+<div class="container" style="display: flex; justify-content: center; align-items: center; flex-direction: column; padding: 2rem; background-color: #5BC0E4; min-height: 100vh;">
+
+  <!-- Título visual uniforme -->
+  <div style="background-color: #472F64; padding: 1rem 2rem; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0,0,0,0.2); margin-bottom: 2rem;">
+    <h1 style="color: white; margin: 0; font-family: 'Akshar', sans-serif;">
+      Cantidad de Consultas por Usuario
+    </h1>
+  </div>
+
+  <!-- Contenedor blanco para el gráfico -->
+  <div style="background: white; border-radius: 12px; padding: 1.5rem; width: 90%; max-width: 1000px; box-shadow: 0px 0px 12px rgba(0,0,0,0.1);">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [type]="barChartType">
+    </canvas>
+  </div>
+
 </div>

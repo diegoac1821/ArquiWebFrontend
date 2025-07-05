@@ -121,4 +121,5 @@ export class ListarreclamoComponent implements OnInit {
       });
     });
   }
+
 }

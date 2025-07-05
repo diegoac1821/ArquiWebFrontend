@@ -1,5 +1,6 @@
 <div class="container">
-  <h2 style="text-align: center; margin-top: 2rem">Lista de Vehículos</h2>
+  <!-- Título -->
+  <h2>Lista de Vehículos</h2>
 
   <!-- Contenedor de acciones -->
   <div class="actions-container">
@@ -31,16 +32,31 @@
     </div>
   </div>
 
-  <!-- Mostrar tarjetas de vehículos -->
+  <!-- Tarjetas de vehículos -->
   <div class="card-container">
     <mat-card class="vehiculo-card" *ngFor="let vehiculo of vehiculosPaginados">
       <mat-card-title>{{ vehiculo.placa }}</mat-card-title>
+
+      <!-- Imagen dentro de la tarjeta -->
+      <img
+        mat-card-image
+        src="assets/vehiculo.jpg"
+        alt="Vehículo"
+        style="
+          max-width: 150px;
+          height: auto;
+          margin: 0 auto 1rem;
+          display: block;
+        "
+      />
+
       <mat-card-content>
         <p><strong>Color:</strong> {{ vehiculo.color }}</p>
         <p><strong>Marca:</strong> {{ vehiculo.marca }}</p>
         <p><strong>Modelo:</strong> {{ vehiculo.modelo }}</p>
         <p><strong>Usuario:</strong> {{ vehiculo.usuario.username }}</p>
       </mat-card-content>
+
       <mat-card-actions>
         <button
           mat-icon-button

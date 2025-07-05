@@ -57,18 +57,50 @@ export class InsertareditarComponent implements OnInit {
     });
 
     this.form = this.formBuilder.group({
-      dni: ['', Validators.required],
+      dni: ['', [Validators.required, Validators.pattern(/^\d{8}$/)]], //VALIDA 8 DIGITOS
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],
       direccion: ['', Validators.required],
       correo_electronico: ['', [Validators.required, Validators.email]],
-      fechaNacimiento: ['', Validators.required],
+      fechaNacimiento: ['', [Validators.required, this.mayorDeEdadValidator]],
       edad: ['', [Validators.required, Validators.min(0)]],
-      telefono: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      telefono: ['', [Validators.required, Validators.pattern(/^9\d{8}$/)]], //VALIDA TELEFONO
+      username: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       enabled: [true, Validators.required],
     });
+
+    // Calcular edad automáticamente al cambiar la fecha
+    this.form.get('fechaNacimiento')?.valueChanges.subscribe((fecha: Date) => {
+      if (fecha) {
+        const edadCalculada = this.calcularEdad(fecha);
+        this.form.get('edad')?.setValue(edadCalculada, { emitEvent: false });
+      }
+    });
+  }
+
+  // Validador para mayores de edad
+  mayorDeEdadValidator(control: FormControl) {
+    const fechaNacimiento = new Date(control.value);
+    const hoy = new Date();
+    const edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+    const dia = hoy.getDate() - fechaNacimiento.getDate();
+
+    const cumple18 =
+      edad > 18 || (edad === 18 && (mes > 0 || (mes === 0 && dia >= 0)));
+    return cumple18 ? null : { menorDeEdad: true };
+  }
+
+  calcularEdad(fecha: Date): number {
+    const hoy = new Date();
+    const nacimiento = new Date(fecha);
+    let edad = hoy.getFullYear() - nacimiento.getFullYear();
+    const mes = hoy.getMonth() - nacimiento.getMonth();
+    if (mes < 0 || (mes === 0 && hoy.getDate() < nacimiento.getDate())) {
+      edad--;
+    }
+    return edad;
   }
 
   aceptar() {
@@ -114,22 +146,41 @@ export class InsertareditarComponent implements OnInit {
     }
   }
 
+  cancelar() {
+    this.router.navigate(['/usuario/listarusuario']);
+  }
+
   init() {
     if (this.edicion) {
       this.uS.listId(this.id).subscribe((data) => {
-        this.usuario = data; // ⬅️ Guardamos el usuario completo con roles
-        this.form = new FormGroup({
-          dni: new FormControl(data.dni),
-          nombres: new FormControl(data.nombres),
-          apellidos: new FormControl(data.apellidos),
-          direccion: new FormControl(data.direccion),
-          correo_electronico: new FormControl(data.correo_electronico),
-          fechaNacimiento: new FormControl(data.fechaNacimiento),
-          edad: new FormControl(data.edad),
-          telefono: new FormControl(data.telefono),
-          username: new FormControl(data.username),
-          password: new FormControl(data.password),
-          enabled: new FormControl(data.enabled),
+        this.usuario = data;
+        this.form = this.formBuilder.group({
+          dni: [data.dni, [Validators.required, Validators.pattern(/^\d{8}$/)]],
+          nombres: [data.nombres, Validators.required],
+          apellidos: [data.apellidos, Validators.required],
+          direccion: [data.direccion, Validators.required],
+          correo_electronico: [
+            data.correo_electronico,
+            [Validators.required, Validators.email],
+          ],
+          fechaNacimiento: [
+            data.fechaNacimiento,
+            [Validators.required, this.mayorDeEdadValidator],
+          ],
+          edad: [data.edad, [Validators.required, Validators.min(0)]],
+          telefono: [
+            data.telefono,
+            [Validators.required, Validators.pattern(/^9\d{8}$/)],
+          ],
+          username: [
+            data.username,
+            [Validators.required, Validators.minLength(4)],
+          ],
+          password: [
+            data.password,
+            [Validators.required, Validators.minLength(6)],
+          ],
+          enabled: [data.enabled, Validators.required],
         });
       });
     }

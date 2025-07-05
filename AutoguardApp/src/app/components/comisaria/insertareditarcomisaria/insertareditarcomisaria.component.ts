@@ -104,12 +104,16 @@ export class InsertareditarcomisariaComponent implements OnInit {
   init() {
     if (this.edicion) {
       this.comisariaService.listId(this.id).subscribe((data) => {
-        this.form = new FormGroup({
-          id: new FormControl(data.id),
-          nombre: new FormControl(data.nombre),
-          direccion: new FormControl(data.direccion),
-          distrito: new FormControl(data.distrito),
-          telefono: new FormControl(data.telefono),
+        this.comisaria = data;
+        this.form = this.formBuilder.group({
+          codigo: [data.id],
+          nombre: [data.nombre, Validators.required],
+          direccion: [data.direccion, Validators.required],
+          distrito: [data.distrito, Validators.required],
+          telefono: [
+            data.telefono,
+            [Validators.required, Validators.pattern(/^9\d{8}$/)],
+          ],
         });
       });
     }
