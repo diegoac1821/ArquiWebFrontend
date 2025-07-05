@@ -14,14 +14,20 @@
 
     <!-- Nro serie -->
 
-    <mat-form-field class="example-full-width">
-      <mat-label>Numero de serie</mat-label>
-      <input matInput placeholder="Al caso" formControlName="numeroSerie" />
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Número de serie*</mat-label>
+      <span matPrefix>GPS</span>
+      <input
+        matInput
+        formControlName="numeroSerie"
+        maxlength="3"
+        placeholder="001"
+       />
       <mat-error *ngIf="form.get('numeroSerie')?.hasError('required')">
-        El numero de serie es obligatorio!!
+        Número de serie requerido
       </mat-error>
     </mat-form-field>
-
+    
     <!-- Precio -->
 
     <mat-form-field class="example-full-width">
