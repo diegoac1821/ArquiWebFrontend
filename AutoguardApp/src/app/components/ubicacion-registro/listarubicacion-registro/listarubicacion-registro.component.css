@@ -6,6 +6,7 @@
   min-height: 100vh;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+
 /* Título estilizado */
 h2 {
   background-color: #472F64;
@@ -49,6 +50,7 @@ button[color='primary']:hover {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
   overflow: hidden;
+  width: 100%; /* Asegura que la tarjeta ocupe el 100% del ancho disponible */
 }
 
 mat-card-header {
@@ -87,13 +89,31 @@ mat-paginator {
   background-color: #f2f8fc;
 }
 
-/* Íconos de editar y eliminar con mismo color */
+/* Íconos de editar y eliminar con texto */
+button[mat-icon-button] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 button[mat-icon-button] mat-icon {
-  color: #27193E !important;
+  color: white !important;  /* Cambiar color del ícono del lápiz a blanco */
 }
 
 /* Resaltar el footer */
 footer {
   color: #472F64;
   font-size: 14px;
+}
+
+/* Contenedor de botones (Eliminar y Editar) */
+.button-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: space-between;
+}
+
+button.mat-icon-button {
+  padding: 0.5rem;
 }
