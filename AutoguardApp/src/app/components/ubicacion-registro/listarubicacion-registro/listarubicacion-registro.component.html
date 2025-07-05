@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Lista de Ubicaciones</h2>
+  <h2 class="text-center">Lista de Ubicaciones</h2>
 
   <div style="text-align: left; margin: 1rem 0">
     <button mat-raised-button color="primary" [routerLink]="['/ubicacion/insertarubicacion']">
@@ -8,11 +8,12 @@
   </div>
 
   <section class="card-container">
-    <div class="col-md-4 mb-4" *ngFor="let location of locations">
-      <mat-card class="location-card">
+    <div class="col-md-4 mb-4" *ngFor="let location of paginatedLocations">
+      <mat-card class="location-card" style="width: 89%;"> 
         <mat-card-header>
           <mat-card-title>Ubicación ID: {{ location.id }}</mat-card-title>
         </mat-card-header>
+
         <mat-card-content>
           <google-map
             [center]="{ lat: location.lat, lng: location.lng }"
@@ -21,6 +22,7 @@
           >
             <map-marker [position]="{ lat: location.lat, lng: location.lng }"></map-marker>
           </google-map>
+
           <div class="location-details">
             <p><strong>Latitud:</strong> {{ location.lat }}</p>
             <p><strong>Longitud:</strong> {{ location.lng }}</p>
@@ -28,12 +30,28 @@
             <p><strong>Hora:</strong> {{ location.hora }}</p>
             <p><strong>GPS:</strong> {{ location.gps || 'No disponible' }}</p>
           </div>
+
+          <div class="button-container" style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <button mat-icon-button color="primary" (click)="eliminar(location.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" [routerLink]="['/ubicacion-registro/insertareditarubicacion-registro', location.id]">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
         </mat-card-content>
       </mat-card>
     </div>
   </section>
 
-  <mat-paginator [length]="locations.length" [pageSize]="3" [pageSizeOptions]="[3, 6, 9]" aria-label="Selecciona página"></mat-paginator>
+  <!-- Paginador de ubicaciones -->
+  <mat-paginator 
+    [length]="totalLocations" 
+    [pageSize]="pageSize" 
+    [pageSizeOptions]="[3, 6, 9]" 
+    (page)="onPageChange($event)" 
+    aria-label="Selecciona página">
+  </mat-paginator>
 
   <footer class="pt-4 mt-4 border-top text-center small footer-text">
     © 2025 Sistema de Ubicaciones – Proyecto
