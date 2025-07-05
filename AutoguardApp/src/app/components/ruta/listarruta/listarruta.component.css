@@ -1,7 +1,7 @@
 /* Fondo general */
 .container {
   background-color: #5BC0E4;
-  min-height: 100vh; 
+  min-height: 100vh;
   padding: 2rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
@@ -19,6 +19,27 @@ h2 {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
+/* Botones superiores */
+.botones-superiores {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.izquierda {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.derecha {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
+
 /* Botón Insertar */
 button[color='primary'] {
   background-color: #27193E !important;
@@ -28,6 +49,18 @@ button[color='primary'] {
 }
 
 button[color='primary']:hover {
+  background-color: #3a2d50 !important;
+}
+
+/* Botón Consultar con el mismo estilo que Insertar */
+button.boton-consultar {
+  background-color: #27193E !important;
+  color: white !important;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button.boton-consultar:hover {
   background-color: #3a2d50 !important;
 }
 

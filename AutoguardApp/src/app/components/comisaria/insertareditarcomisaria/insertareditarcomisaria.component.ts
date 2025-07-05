@@ -97,6 +97,10 @@ export class InsertareditarcomisariaComponent implements OnInit {
     }
   }
 
+  cancelar() {
+    this.router.navigate(['/comisaria/listarcomisaria']);
+  }
+
   init() {
     if (this.edicion) {
       this.comisariaService.listId(this.id).subscribe((data) => {

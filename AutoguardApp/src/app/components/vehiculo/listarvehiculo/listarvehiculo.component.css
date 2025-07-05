@@ -1,6 +1,6 @@
 .container {
   background-color: #5BC0E4;
-  min-height: 100vh; 
+  min-height: 100vh;
   padding: 2rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
@@ -27,7 +27,6 @@ h2 {
   flex-wrap: wrap;
 }
 
-/* Botón Insertar */
 button[color='primary'] {
   background-color: #27193E !important;
   color: white !important;
@@ -47,7 +46,6 @@ button[color='primary']:hover {
 .search-field .mat-form-field-flex {
   border-bottom: 2px solid #27193E;
   padding-bottom: 4px;
-  align-items: right;
   background: transparent;
 }
 
@@ -56,52 +54,72 @@ button[color='primary']:hover {
   font-weight: 500;
 }
 
-.search-field mat-label {
+.search-field mat-label,
+.search-field mat-icon {
   color: #27193E !important;
   font-weight: 500;
 }
 
-.search-field mat-icon {
-  color: #27193E !important;
-}
-
-/* Tabla */
-table {
-  width: 100%;
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.mat-header-cell {
-  background-color: white;
-  color: #27193E;
-  font-weight: bold;
-  text-align: center;
-}
-
-.mat-cell {
-  text-align: center;
-  padding: 12px;
-  color: #333;
-}
-
-.mat-row:nth-child(even) {
-  background-color: #f2f8fc;
-}
-
-button[mat-icon-button] mat-icon {
-  color: #27193E !important;
-}
-
-mat-paginator {
+/* Tarjetas */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
   margin-top: 1.5rem;
-  width: 100%;
+}
+
+.vehiculo-card {
+  width: 300px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.vehiculo-card:hover {
+  transform: translateY(-5px);
+}
+
+mat-card-title {
+  font-family: 'Akshar', sans-serif;
+  background-color: #907bb1;
+  color: white;
+  font-size: 1.5rem;
+  padding: 0.75rem;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+mat-card-content p {
+  margin: 0.5rem 0;
+  color: #333;
+  font-weight: 500;
+  padding: 0 1rem;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 1rem 1rem 1rem;
+  gap: 0.5rem;
+}
+
+mat-card-actions button[mat-icon-button] mat-icon {
+  color: #472F64 !important;
+  font-size: 22px;
+}
+
+/* Estilo al paginador */
+mat-paginator {
+  margin-top: 2rem;
   background-color: white;
   border-radius: 8px;
   padding: 0.5rem 1rem;
   display: flex;
-  justify-content: flex-end; /* 🔥 Esto alinea todo a la derecha */
+  justify-content: right; /* 🔥 centrado */
   align-items: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }

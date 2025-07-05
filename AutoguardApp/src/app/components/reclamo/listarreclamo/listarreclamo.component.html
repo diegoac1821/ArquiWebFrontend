@@ -1,29 +1,36 @@
 <div class="container">
-  <div style="text-align: center; margin: 6%">
+  <div style="text-align: center; margin-top: 2rem">
     <h1>Lista de Reclamos</h1>
   </div>
 
   <!-- Botones -->
-  <div style="display: flex; gap: 1rem; margin: 1rem 0">
-    <button
-      mat-raised-button
-      color="primary"
-      [routerLink]="['/reclamo/insertareditarreclamos']"
-    >
-      ➕ Insertar
-    </button>
-    <button mat-raised-button color="accent" (click)="filtrarSinResolver()">
-      ❌ Ver Reclamos sin Resolver
-    </button>
-    <button mat-raised-button color="warn" (click)="listarTodos()">
-      🔁 Ver Todos los Reclamos
-    </button>
+  <div class="botones-reclamo">
+    <!-- Botón Insertar a la izquierda -->
+    <div *ngIf="esCliente">
+      <button
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/reclamo/insertareditarreclamos']"
+      >
+        ➕ Insertar
+      </button>
+    </div>
+
+    <!-- Botones de filtro a la derecha (solo admin) -->
+    <div class="botones-filtro" *ngIf="!esCliente">
+      <button mat-raised-button color="accent" (click)="filtrarSinResolver()">
+        ❌ Ver Reclamos sin Resolver
+      </button>
+      <button mat-raised-button color="warn" (click)="listarTodos()">
+        🔁 Ver Todos los Reclamos
+      </button>
+    </div>
   </div>
 
   <!-- Tabla -->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <!-- ID -->
-    <ng-container matColumnDef="id">
+    <!-- ID (solo admin) -->
+    <ng-container matColumnDef="id" *ngIf="!esCliente">
       <th mat-header-cell *matHeaderCellDef>ID</th>
       <td mat-cell *matCellDef="let element">{{ element.id }}</td>
     </ng-container>
@@ -48,32 +55,46 @@
       <td mat-cell *matCellDef="let element">{{ element.descripcion }}</td>
     </ng-container>
 
-    <!-- Resuelto -->
-    <ng-container matColumnDef="estado">
+    <!-- Resuelto (solo admin) -->
+    <ng-container matColumnDef="estado" *ngIf="!esCliente">
       <th mat-header-cell *matHeaderCellDef>Resuelto</th>
       <td mat-cell *matCellDef="let element">
         {{ element.resuelto ? "Sí" : "No" }}
       </td>
     </ng-container>
-    
-<!-- Usuario (solo ID) -->
-<ng-container matColumnDef="usuario">
-  <th mat-header-cell *matHeaderCellDef>Usuario (ID)</th>
-  <td mat-cell *matCellDef="let element">
-    {{ element.usuario?.id }}
-  </td>
-</ng-container>
+
+    <!-- Usuario (solo admin) -->
+    <ng-container matColumnDef="usuario" *ngIf="!esCliente">
+      <th mat-header-cell *matHeaderCellDef>Usuario (ID)</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.usuario?.id }}
+      </td>
+    </ng-container>
 
     <!-- Editar -->
-    <ng-container matColumnDef="editar">
-      <th mat-header-cell *matHeaderCellDef>Editar</th>
+    <!-- Editar o Marcar como Resuelto -->
+    <ng-container matColumnDef="accion">
+      <th mat-header-cell *matHeaderCellDef>Acción</th>
       <td mat-cell *matCellDef="let element">
-        <button
-          mat-icon-button
-          [routerLink]="['/reclamo/insertareditarreclamo', element.id]"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
+        <ng-container *ngIf="esCliente; else adminBoton">
+          <button
+            mat-icon-button
+            [routerLink]="['/reclamo/insertareditarreclamo', element.id]"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </ng-container>
+
+        <ng-template #adminBoton>
+          <button
+            mat-button
+            color="primary"
+            (click)="marcarComoResuelto(element)"
+            [disabled]="element.resuelto"
+          >
+            ✅ Marcar como Resuelto
+          </button>
+        </ng-template>
       </td>
     </ng-container>
 

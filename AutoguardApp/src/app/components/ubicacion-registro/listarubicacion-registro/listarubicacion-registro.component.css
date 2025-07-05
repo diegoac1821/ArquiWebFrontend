@@ -31,20 +31,48 @@ button[color='primary']:hover {
   background-color: #3a2d50 !important;
 }
 
-/* Tabla */
-table {
-  width: 100%;
-  background-color: white;
-  border-radius: 8px;
+/* Tarjetas de ubicación */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.card-container .col-md-4 {
+  flex: 1 1 calc(33.333% - 16px); /* 3 tarjetas por fila, con un espacio entre ellas */
+  max-width: calc(33.333% - 16px);
+}
+
+.location-card {
+  background-color: #FFFFFF; /* Fondo blanco para las tarjetas */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
   overflow: hidden;
 }
 
-/* Encabezado de tabla */
-.mat-header-cell {
+mat-card-header {
+  background-color: #472F64; /* Fondo oscuro en la cabecera */
+  color: white;
+  padding: 1rem;
+}
+
+mat-card-content {
+  padding: 1rem;
+}
+
+.location-details p {
+  color: #333;
+  font-size: 14px;
+  margin: 0.5rem 0;
+}
+
+/* Paginador */
+mat-paginator {
+  margin-top: 1rem;
   background-color: white;
-  color: #27193E;
-  font-weight: bold;
-  text-align: center;
+  border-radius: 8px;
+  padding: 0.5rem;
 }
 
 /* Celdas de tabla */
@@ -64,10 +92,8 @@ button[mat-icon-button] mat-icon {
   color: #27193E !important;
 }
 
-/* Paginador */
-mat-paginator {
-  margin-top: 1rem;
-  background-color: white;
-  border-radius: 8px;
-  padding: 0.5rem;
+/* Resaltar el footer */
+footer {
+  color: #472F64;
+  font-size: 14px;
 }

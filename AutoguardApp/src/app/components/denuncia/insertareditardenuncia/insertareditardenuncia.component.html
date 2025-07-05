@@ -3,6 +3,7 @@
     <h2 style="text-align: center; margin-top: 2rem">
       {{ edicion ? "Editar Denuncia" : "Registrar Denuncia" }}
     </h2>
+
     <!-- Descripción -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Descripción</mat-label>
@@ -15,15 +16,15 @@
       <input matInput formControlName="motivo" />
     </mat-form-field>
 
-    <!-- Estado -->
-      <mat-form-field>
-        <mat-label>Estado</mat-label>
-        <mat-select formControlName="estado">
-          @for (t of estado; track t) {
-          <mat-option [value]="t.value">{{ t.viewValue }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
+    <!-- Estado (solo visible para ADMIN) -->
+    <mat-form-field appearance="fill" class="w-100" *ngIf="isAdmin">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="estado">
+        <mat-option *ngFor="let t of estado" [value]="t.value">
+          {{ t.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <!-- Comisaría -->
     <mat-form-field appearance="fill" class="w-100">
@@ -35,8 +36,12 @@
       </mat-select>
     </mat-form-field>
 
-    <!-- Vehículo (Placa) -->
-    <mat-form-field appearance="fill" class="w-100">
+    <!-- Vehículo (visible para todos, editable solo para ADMIN) -->
+    <mat-form-field
+      appearance="fill"
+      class="w-100"
+      *ngIf="vehiculos.length > 0"
+    >
       <mat-label>Vehículo (placa)</mat-label>
       <mat-select formControlName="vehiculoId">
         <mat-option *ngFor="let v of vehiculos" [value]="v.placa">

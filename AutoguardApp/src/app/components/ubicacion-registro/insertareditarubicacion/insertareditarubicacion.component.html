@@ -39,7 +39,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="w-100">
+    <mat-form-field appearance="fill" class="w-100" *ngIf="!esCliente">
       <mat-label>ID del GPS</mat-label>
       <input matInput formControlName="dgpsId" placeholder="Ej. 1" />
       <mat-error

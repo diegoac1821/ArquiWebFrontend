@@ -1,31 +1,36 @@
-mat-toolbar {
+/* Fondo con imagen de pantalla completa */
+.inicio-container {
+  background-image: url('/assets/home.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
   display: flex;
-  justify-content: flex-start;
-  background-color: #5BC0E4;
-  color: white;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-mat-toolbar button {
-  margin-right: 10px;
+/* Contenido centrado sobre la imagen */
+.inicio-container .contenido {
+  background-color: rgba(255, 255, 255, 0.85); /* fondo blanco con transparencia */
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 600px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-mat-menu-item mat-icon {
-  margin-right: 8px;
+/* Estilos del título */
+.inicio-container h1 {
+  font-size: 2.8rem;
+  color: #1976d2;
+  margin-bottom: 1rem;
+  font-weight: bold;
 }
 
-.mat-button {
-  color: white;
-}
-
-.mat-button:hover {
-  background-color: #5BC0E4;
-  color: white;
-}
-.container {
-  animation: fadeIn 0.8s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Estilos del párrafo */
+.inicio-container p {
+  font-size: 1.2rem;
+  color: #333;
 }
