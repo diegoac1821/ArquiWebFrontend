@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estado Vehicular | AutoGuard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="../css/estadovehicular.css" />
+  <link rel="shortcut icon" href="../../img/LOGO.png" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <nav>
+  <div class="barreraNavegacion">
+    <a href="index.html">
+      <img src="../../img/LOGO.png" alt="AutoGuard Logo" class="imgLogo" />
+    </a>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="estadovehicular.html">Estado Vehicular</a></li>
+    </ul>
+  </div>
+
+  <!-- Botón al lado derecho -->
+ <form action="/login" method="get" style="display: inline;">
+    <button type="submit" class="login-register-btn">
+      <i class="fas fa-user-alt user-icon"></i> Iniciar sesión
+    </button>
+  </form>
+</nav>
+
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main id="main-section">
+    <section class="introduction estado-intro">
+      <h1>Estado Vehicular en Tiempo Real</h1>
+      <p>
+        Monitorea los parámetros más importantes de tu vehículo con datos actualizados al instante. Mantén el control y prevé cualquier alerta para la seguridad de tu vehículo.
+      </p>
+    </section>
+
+    <section class="dashboard-cards">
+      <article class="card speed">
+        <h3>Velocidad Promedio</h3>
+        <p><span class="data-number">65</span> km/h</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: 65%;"></div>
+        </div>
+      </article>
+
+      <article class="card fuel">
+        <h3>Nivel de Combustible</h3>
+        <p><span class="data-number">40</span>%</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: 40%;"></div>
+        </div>
+      </article>
+
+      <article class="card temperature">
+        <h3>Temperatura Motor</h3>
+        <p><span class="data-number">90</span> °C</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: 90%;"></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="recent-alerts">
+      <h2>Alertas Recientes</h2>
+      <ul>
+        <li><strong>Exceso de velocidad</strong> detectado a las 10:45 AM</li>
+        <li><strong>Bajo nivel de combustible</strong> en vehículo #1023</li>
+        <li><strong>Temperatura elevada</strong> en motor vehículo #1007</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <p>&copy; 2025 AutoGuard | Todos los derechos reservados</p>
+    </div>
+  </footer>
+</body>
+</html>

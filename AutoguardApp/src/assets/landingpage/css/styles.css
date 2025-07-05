@@ -63,18 +63,29 @@ header nav a img{
     width: auto;
     background-color: white;
 }
-.botonIngresar{
-    margin-top: 12px;
-    padding: 24px 120px;
-    gap: 0px;
-    opacity: 0px;
-    display: flex;         
-    justify-content: center;
-    align-items: center; 
-    font-family: 'Inter';
-    font-size: 14px;
-    font-weight: 600;
+.login-register-btn {
+  background-color: #5BC0E4;
+  color: white;
+  padding: 22px 3px 22px 3px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
 }
+
+.login-register-btn:hover {
+  background-color: #3faed0;
+}
+
+.user-icon {
+  font-size: 13px;
+}
+
 .botonIngresar:hover {
     background-color: #5BC0E2;
     color: black;
