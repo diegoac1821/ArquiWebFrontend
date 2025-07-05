@@ -20,7 +20,7 @@
     <mat-card-content>
       <p><strong>Precio:</strong> S/ {{ gps.precio }}</p>
       <p><strong>Fecha de Adquisición:</strong> {{ gps.fechaAdquisicion | date: 'dd/MM/yyyy' }}</p>
-      <p><strong>Vehículo:</strong> {{ gps.vehiculo?.placa || 'No asignado' }}</p>
+      <p><strong>Vehículo:</strong> {{ gps.vehiculo.placa || 'No asignado' }}</p>
     </mat-card-content>
 
     <mat-card-actions align="end">
