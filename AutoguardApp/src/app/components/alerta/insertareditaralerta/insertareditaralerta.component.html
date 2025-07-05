@@ -1,12 +1,16 @@
 <div class="container">
   <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem">
     <h2 style="text-align: center; margin-top: 2rem">
-      {{ edicion ? "Editar Alerta" : "Registrar Alerta" }}
+      {{ edicion ? 'Editar Alerta' : 'Registrar Alerta' }}
     </h2>
+
     <!-- Asunto -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Asunto</mat-label>
       <input matInput formControlName="asunto" />
+      <mat-error *ngIf="form.get('asunto')?.touched && form.get('asunto')?.hasError('required')">
+        El asunto es obligatorio.
+      </mat-error>
     </mat-form-field>
 
     <!-- Fecha -->
@@ -15,12 +19,18 @@
       <input matInput [matDatepicker]="picker" formControlName="fecha" />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="form.get('fecha')?.touched && form.get('fecha')?.hasError('required')">
+        La fecha es obligatoria.
+      </mat-error>
     </mat-form-field>
 
     <!-- Descripción -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Descripción</mat-label>
       <textarea matInput formControlName="descripcion"></textarea>
+      <mat-error *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.hasError('required')">
+        La descripción es obligatoria.
+      </mat-error>
     </mat-form-field>
 
     <!-- Vehículo -->
@@ -31,11 +41,19 @@
           {{ v.placa }}
         </mat-option>
       </mat-select>
+      <mat-error *ngIf="form.get('vehiculoId')?.touched && form.get('vehiculoId')?.hasError('required')">
+        Debe seleccionar un vehículo.
+      </mat-error>
     </mat-form-field>
 
-    <!-- Botón -->
+    <!-- Botones -->
     <div style="margin-top: 2rem">
-      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+      <button mat-raised-button color="primary" type="button">
+        Aceptar
+      </button>
+      <button mat-raised-button type="button" (click)="cancelar()" class="btn-cancelar">
+        Cancelar
+      </button>
     </div>
   </form>
 </div>
