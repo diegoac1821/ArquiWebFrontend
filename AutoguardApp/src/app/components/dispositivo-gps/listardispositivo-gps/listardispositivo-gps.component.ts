@@ -34,9 +34,7 @@ import { MatCardModule } from '@angular/material/card';
   styleUrl: './listardispositivo-gps.component.css',
 })
 export class ListardispositivoGPSComponent implements OnInit {
-  dataSource: MatTableDataSource<Dispositivo_GPS> =
-    new MatTableDataSource<Dispositivo_GPS>();
-
+  dataSource: MatTableDataSource<Dispositivo_GPS> = new MatTableDataSource<Dispositivo_GPS>();
   displayedColumns: string[] = [
     'id',
     'numeroSerie',
@@ -49,13 +47,20 @@ export class ListardispositivoGPSComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  // --- Paginación manual para los cards ---
+  pagedData: Dispositivo_GPS[] = [];
+  pageSize = 5;
+  pageIndex = 0;
+
   constructor(
     private dispositivo_gpsService: DispositivoGPSService,
     private loginService: LoginService,
   ) {}
+
   get isAdmin(): boolean {
     return this.loginService.showRole() === 'ADMIN';
   }
+
   ngOnInit(): void {
     const username = this.loginService.getUsername();
     const esCliente = this.loginService.showRole() === 'CLIENTE';
@@ -65,10 +70,22 @@ export class ListardispositivoGPSComponent implements OnInit {
       if (esCliente && username !== null) {
         lista = lista.filter((d) => d.vehiculo?.usuario?.username === username);
       }
-
       this.dataSource = new MatTableDataSource(lista);
-      this.dataSource.paginator = this.paginator;
+      this.setPagedData();
     });
+  }
+
+  setPagedData() {
+    const data = this.dataSource.filteredData;
+    const start = this.pageIndex * this.pageSize;
+    const end = start + this.pageSize;
+    this.pagedData = data.slice(start, end);
+  }
+
+  onPageChange(event: any) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.setPagedData();
   }
 
   eliminar(id: number) {
@@ -83,11 +100,9 @@ export class ListardispositivoGPSComponent implements OnInit {
             (d) => d.vehiculo?.usuario?.username === username
           );
         }
-
         this.dataSource = new MatTableDataSource(lista);
-        this.dataSource.paginator = this.paginator;
+        this.setPagedData();
       });
     });
   }
-  
 }
