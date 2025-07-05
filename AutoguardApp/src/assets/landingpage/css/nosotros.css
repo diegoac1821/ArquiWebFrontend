@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    background: #27193E;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    max-width: 100%; 
+}
+
+body { 
+    font-family: 'Inter', sans-serif;
+}
+header {
+    width: 100%;
+    background-color: white;
+    padding: 10px 0;
+ 
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.barreraNavegacion {
+    max-width: 1200px;
+    margin: 0 1px 0 0; /* Mueve hacia la izquierda */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: white;
+}
+
+.barreraNavegacion a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    margin: 0 15px;
+    font-family: 'Arial', sans-serif;
+    background-color: white;
+}
+
+.barreraNavegacion ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: white;
+}
+
+.barreraNavegacion ul li {
+    margin-right: 20px;
+    background-color: white;
+}
+
+.barreraNavegacion ul li a:hover {
+    color: black;
+}
+
+.imgLogo {
+    height: 50px;
+    width: auto;
+    background-color: white;
+}
+
+.botonIngresar {
+    padding: 10px 60px;
+    gap: 0px;
+    opacity: 0px;
+    display: flex;         
+    justify-content: center;
+    align-items: center; 
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #5BC0E4;
+    border-color: transparent;
+    border-radius: 3%;
+    color: white;
+
+   
+}
+
+.botonIngresar:hover {
+    background-color: #5BC0E2;
+    color: white;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: white;
+}
+
+.barreraNavegacion ul,
+.botonIngresar {
+    display: flex;
+    align-items: center; 
+    
+}
+
+/*para darle color al pasar el puntero sobre el menu de opciones*/
+li a:hover{
+    background: lightblue;
+    padding: 10px 10px ;
+}
+
+/* 1ra SECCION INTRODUCCION */
+
+#main-section {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    align-items: flex-start; 
+    text-align: center; 
+    margin-top: 100px;
+
+}
+
+h1 {
+    color: white; 
+    font-size: 36px; 
+    margin-bottom: 20px; 
+}
+
+.image-container {
+    text-align: center; 
+  
+}
+
+img {
+    width: 700px; 
+    height: auto; 
+    border-radius: 10px; 
+   
+}
+
+/* 2DA SECCION CONOCE  MAS */
+
+.conocemas {
+    clear: both; 
+    padding: 20px;
+    margin-top: 50px; 
+    background-color: #5BC0E4;
+    color: white;
+    width: 100vw; 
+}
+
+h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: white; 
+    background-color: #5BC0E4;
+}
+
+h3 {
+    font-size: 1.8em;
+    margin-top: 0; /* Ajusta este margen para alinearlo con la parte superior */
+    margin-bottom: 15px; 
+    color: white; 
+    background-color: #5BC0E4;
+}
+
+.parrafo {
+    background-color: white; 
+    padding: 20px;
+    border-radius: 10px;
+    text-align: justify;
+    margin-bottom: 30px;
+    max-width: 800px; 
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+}
+
+.Misionvision {
+    display: flex; 
+    justify-content: space-between;    
+    background-color: #5BC0E4;
+}
+
+.mision, .vision {
+    flex: 1; 
+    margin: 0 10px; 
+    padding: 20px;
+    background-color: #5BC0E4;
+}
+.mision, .vision ,.parrafo{
+    color: black;
+}
+footer{
+    background-color:  #27193E;
+    color: white;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+footer p{
+    
+    margin: 0;
+    color:white;
+    text-align: center;
+    font-size: 1em;
+    margin-top: 1rem;
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+
+footer img{
+    height: 80px;
+    margin-top: 1rem;
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+.footer-container.p{
+    background-color: transparent;
+}
