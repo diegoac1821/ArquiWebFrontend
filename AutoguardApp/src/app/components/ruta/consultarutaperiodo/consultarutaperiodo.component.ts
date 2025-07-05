@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
+import { Router } from '@angular/router'; 
 @Component({
   selector: 'app-consultarutaperiodo',
   templateUrl: './consultarutaperiodo.component.html',
@@ -34,7 +35,7 @@ export class ConsultarutaperiodoComponent {
   dataSource!: MatTableDataSource<RutasperiodoplacaDTO>;
   displayedColumns: string[] = ['id', 'fecha', 'placa', 'distancia', 'duracion'];
 
-  constructor(private rutaService: RutaService) {}
+  constructor(private rutaService: RutaService,  private router: Router) {}
 
   consultarRutas(): void {
     const params = {
@@ -54,6 +55,11 @@ export class ConsultarutaperiodoComponent {
       }
     });
   }
+
+  cancelar(): void {
+  this.router.navigate(['/ruta/listarruta']); // ajusta esta ruta según corresponda
+}
+  
 
   mostrarRutaEnMapa(ruta: RutasperiodoplacaDTO): void {
     const origen = {

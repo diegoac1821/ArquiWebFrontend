@@ -1,0 +1,52 @@
+/* Contenedor general */
+.container {
+  background-color: #5BC0E4;
+  min-height: 100vh;
+  padding: 60px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-family: 'Akshar', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título */
+.container h2 {
+  background-color: #472F64;
+  color: white;
+  font-weight: bold;
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 800px;
+}
+
+/* Mapa con bordes y sombra */
+#map {
+  height: 500px;
+  width: 100%;
+  max-width: 1000px;
+  border: 2px solid #472F64;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+}
+
+/* Botón regresar */
+button[mat-raised-button] {
+  background-color: #27193E !important;
+  color: white !important;
+  font-weight: bold;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #3c285d !important;
+}

@@ -7,16 +7,42 @@
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Texto</mat-label>
       <input matInput formControlName="texto" />
+      <mat-error
+        *ngIf="
+          form.get('texto')?.hasError('required') && form.get('texto')?.touched
+        "
+      >
+        El texto de la respuesta es obligatorio.
+      </mat-error>
     </mat-form-field>
 
     <!-- ID de la consulta relacionada -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>ID de la Consulta</mat-label>
       <input matInput type="number" formControlName="consultaId" />
+      <mat-error
+        *ngIf="
+          form.get('consultaId')?.hasError('required') &&
+          form.get('consultaId')?.touched
+        "
+      >
+        El ID de la consulta es obligatorio.
+      </mat-error>
     </mat-form-field>
 
-    <div style="margin-top: 2rem">
-      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+    <div class="botones-acciones">
+      <button mat-raised-button type="submit" [disabled]="form.invalid">
+        Aceptar
+      </button>
+
+      <button
+        mat-raised-button
+        type="button"
+        (click)="cancelar()"
+        class="btn-cancelar"
+      >
+        Cancelar
+      </button>
     </div>
   </form>
 </div>
