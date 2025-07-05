@@ -1,27 +1,37 @@
 <div class="container">
-  <h2 style="text-align: center; margin-top: 2rem;">Lista de Alertas</h2>
+  <h2 style="text-align: center; margin-top: 2rem">Lista de Alertas</h2>
 
   <!-- Botón Insertar -->
-  <div style="text-align: left; margin: 1rem 0;">
-    <button mat-raised-button color="primary" [routerLink]="['/alertas/insertareditaralerta']">
+  <div style="text-align: left; margin: 1rem 0">
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/alertas/insertareditaralerta']"
+    >
       ➕ Insertar Alerta
     </button>
   </div>
-
-    <div class="filtros-container">
-    <!-- Buscar por Placa -->
-    <mat-form-field appearance="fill">
+  <div class="grupo-busqueda">
+    <mat-form-field appearance="outline" class="search-field">
       <mat-label>Buscar por Placa</mat-label>
-      <input matInput [(ngModel)]="placaFiltro" placeholder="Ej. ABC-123" />
+      <input matInput [(ngModel)]="placaFiltro" placeholder="Ej. ABC123" />
     </mat-form-field>
-    <button mat-raised-button color="accent" (click)="buscarPorPlaca()">
-      <mat-icon>search</mat-icon> Buscar Placa
+
+    <button
+      mat-raised-button
+      class="btn-buscar"
+      (click)="filtrarAlertasPorPlaca()"
+    >
+      <mat-icon>search</mat-icon> Buscar por placa
+    </button>
+
+    <button mat-raised-button class="btn-ver" (click)="ngOnInit()">
+      <mat-icon>refresh</mat-icon> Ver todo
     </button>
   </div>
 
   <!-- Tabla -->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
     <!-- ID Alerta -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>ID Alerta</th>
@@ -37,7 +47,9 @@
     <!-- Fecha -->
     <ng-container matColumnDef="fecha">
       <th mat-header-cell *matHeaderCellDef>Fecha</th>
-      <td mat-cell *matCellDef="let element">{{ element.fecha | date:'yyyy-MM-dd' }}</td>
+      <td mat-cell *matCellDef="let element">
+        {{ element.fecha | date : "yyyy-MM-dd" }}
+      </td>
     </ng-container>
 
     <!-- Descripción -->
@@ -50,7 +62,7 @@
     <ng-container matColumnDef="vehiculo">
       <th mat-header-cell *matHeaderCellDef>Vehiculo</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.vehiculo?.placa || 'Sin vehículo' }}
+        {{ element.vehiculo?.placa || element.vehiculo || "Sin vehículo" }}
       </td>
     </ng-container>
 
@@ -58,7 +70,11 @@
     <ng-container matColumnDef="editar">
       <th mat-header-cell *matHeaderCellDef>Editar</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="accent" [routerLink]="['/alertas/insertareditaralerta', element.id]">
+        <button
+          mat-icon-button
+          color="accent"
+          [routerLink]="['/alertas/insertareditaralerta', element.id]"
+        >
           <mat-icon>edit</mat-icon>
         </button>
       </td>
@@ -78,9 +94,8 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-<mat-paginator
+  <mat-paginator
     [pageSizeOptions]="[5, 10, 20]"
     showFirstLastButtons
   ></mat-paginator>
-
 </div>

@@ -11,11 +11,13 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 @Component({
   selector: 'app-listaralerta',
   standalone: true,
 
-  imports: [   MatTableModule,
+  imports: [
+    MatTableModule,
     MatButtonModule,
     MatIconModule,
     RouterLink,
@@ -23,7 +25,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatPaginatorModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   templateUrl: './listaralerta.component.html',
   styleUrls: ['./listaralerta.component.css'],
@@ -43,6 +47,7 @@ export class ListaralertaComponent implements OnInit {
   placaFiltro: string = '';
   fechaInicio: Date | null = null;
   fechaFin: Date | null = null;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private alertaService: AlertaService) {}
@@ -63,26 +68,15 @@ export class ListaralertaComponent implements OnInit {
       });
     });
   }
+  filtrarAlertasPorPlaca(): void {
+    if (this.placaFiltro.trim() === '') return;
 
-  buscarPorPlaca(): void {
-    if (!this.placaFiltro.trim()) return;
     this.alertaService
       .getAlertasPorPlaca(this.placaFiltro)
-      .subscribe((data) => {
+      .subscribe((data: Alerta[]) => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
       });
   }
-
-  buscarPorFechas(): void {
-    if (!this.fechaInicio || !this.fechaFin) return;
-    const inicioStr = this.fechaInicio.toISOString().split('T')[0];
-    const finStr = this.fechaFin.toISOString().split('T')[0];
-    this.alertaService
-      .getAlertasPorFechas(inicioStr, finStr)
-      .subscribe((data) => {
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.paginator = this.paginator;
-      });
-  }
+ 
 }
