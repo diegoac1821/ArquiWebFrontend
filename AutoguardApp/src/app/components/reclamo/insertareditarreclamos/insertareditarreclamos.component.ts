@@ -7,7 +7,7 @@ import {
   ValidatorFn,
   AbstractControl,
   ValidationErrors,
-  ReactiveFormsModule
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ReclamoService } from '../../../services/reclamo.service';
@@ -64,7 +64,8 @@ export class InsertareditarreclamosComponent implements OnInit {
   ngOnInit(): void {
     const username = this.loginService.getUsername();
     const roles = this.loginService.showRole();
-    this.esAdmin = roles.includes('ADMIN');
+
+    this.esAdmin = roles !== null && roles.includes('ADMIN');
 
     if (username) {
       this.usuarioService.buscarPorUsername(username).subscribe((usuario) => {
@@ -78,9 +79,27 @@ export class InsertareditarreclamosComponent implements OnInit {
             this.init();
           } else {
             this.form = this.formBuilder.group({
-              asunto: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-              fecha: [new Date(), [Validators.required, this.fechaNoFuturaValidator()]],
-              descripcion: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500), this.espaciosValidator()]],
+              asunto: [
+                '',
+                [
+                  Validators.required,
+                  Validators.minLength(3),
+                  Validators.maxLength(100),
+                ],
+              ],
+              fecha: [
+                new Date(),
+                [Validators.required, this.fechaNoFuturaValidator()],
+              ],
+              descripcion: [
+                '',
+                [
+                  Validators.required,
+                  Validators.minLength(10),
+                  Validators.maxLength(500),
+                  this.espaciosValidator(),
+                ],
+              ],
             });
           }
         });
@@ -124,8 +143,14 @@ export class InsertareditarreclamosComponent implements OnInit {
 
       this.form = this.formBuilder.group({
         asunto: new FormControl(data.asunto, [Validators.required]),
-        fecha: new FormControl(data.fecha, [Validators.required, this.fechaNoFuturaValidator()]),
-        descripcion: new FormControl(data.descripcion, [Validators.required, this.espaciosValidator()]),
+        fecha: new FormControl(data.fecha, [
+          Validators.required,
+          this.fechaNoFuturaValidator(),
+        ]),
+        descripcion: new FormControl(data.descripcion, [
+          Validators.required,
+          this.espaciosValidator(),
+        ]),
       });
     });
   }
