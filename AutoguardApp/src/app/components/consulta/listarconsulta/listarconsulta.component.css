@@ -1,8 +1,9 @@
 /* Fondo general */
 .container {
-  background-color: #5BC0E4;
-  min-height: 100vh; 
-  padding: 2rem;
+  background-color: #5bc0e4;
+  padding: 60px 20px;
+  flex-direction: column;
+  min-height: 100vh;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 

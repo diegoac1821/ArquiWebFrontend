@@ -105,18 +105,21 @@ export class InsertareditarvehiculoComponent implements OnInit {
   }
 
   init() {
-    if (this.edicion) {
-      this.vS.listId(this.placa).subscribe((data) => {
-        this.form = new FormGroup({
-          placa: new FormControl(data.placa),
-          color: new FormControl(data.color),
-          marca: new FormControl(data.marca),
-          modelo: new FormControl(data.modelo),
-          usuarioId: new FormControl(data.usuario.id),
-        });
+  if (this.edicion) {
+    this.vS.listId(this.placa).subscribe((data) => {
+      this.form = this.formBuilder.group({
+        placa: [
+          data.placa,
+          [Validators.required, Validators.pattern(/^[A-Z]{3}-\d{3}$/)],
+        ],
+        color: [data.color, Validators.required],
+        marca: [data.marca, Validators.required],
+        modelo: [data.modelo, Validators.required],
+        usuarioId: [data.usuario.id, Validators.required],
       });
-    }
+    });
   }
+}
 
   esAdmin(): boolean {
     return this.rol === 'ADMIN';

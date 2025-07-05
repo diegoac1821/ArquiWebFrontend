@@ -10,27 +10,29 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 1rem;
 }
 
 /* Contenido centrado sobre la imagen */
 .inicio-container .contenido {
-  background-color: rgba(255, 255, 255, 0.85); /* fondo blanco con transparencia */
+  background-color: rgba(255, 255, 255, 0.88); /* blanco con leve transparencia */
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: 16px;
   max-width: 600px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
-/* Estilos del título */
+/* Título principal */
 .inicio-container h1 {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   color: #1976d2;
   margin-bottom: 1rem;
-  font-weight: bold;
+  font-weight: 700;
 }
 
-/* Estilos del párrafo */
+/* Párrafo descriptivo */
 .inicio-container p {
   font-size: 1.2rem;
   color: #333;
+  line-height: 1.6;
 }
