@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -15,7 +21,7 @@ import { Dispositivo_GPS } from '../../../models/dispositivo_GPS';
 import { Vehiculo } from '../../../models/vehiculo';
 import { DispositivoGPSService } from '../../../services/dispositivo-gps.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
-
+import { LoginService } from '../../../services/login.service';
 @Component({
   selector: 'app-insertareditardispositivo-gps',
   imports: [
@@ -40,13 +46,14 @@ export class InsertareditardispositivoGpsComponent {
 
   id: number = 0;
   edicion: boolean = false;
-
+  esCliente: boolean = false; 
   constructor(
     private dS: DispositivoGPSService,
     private vehiculoService: VehiculoService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
@@ -54,8 +61,10 @@ export class InsertareditardispositivoGpsComponent {
       this.id = data['id'];
       this.edicion = this.id != null;
       this.init();
-    });
+      this.esCliente = this.loginService.showRole() === 'CLIENTE';
 
+    });
+    this.esCliente = this.loginService.showRole() === 'CLIENTE';
     this.form = this.formBuilder.group({
       codigo: [''],
       numeroSerie: ['', Validators.required],
@@ -67,17 +76,24 @@ export class InsertareditardispositivoGpsComponent {
 
   // ✅ Lógica de carga de vehículos, con excepción para edición
   cargarVehiculosDisponibles(placaActual: string | null = null) {
-    this.vehiculoService.list().subscribe(vehiculos => {
-      this.dS.list().subscribe(gpsList => {
-        const placasUsadas = gpsList
-          .filter(g => g.vehiculo?.placa !== placaActual) // filtra todas excepto la actual si está editando
-          .map(g => g.vehiculo?.placa);
+  const username = this.loginService.getUsername();
+  const esCliente = this.loginService.showRole() === 'CLIENTE';
 
-        // Muestra solo las placas que no están ya asignadas
-        this.vehiculos = vehiculos.filter(v => !placasUsadas.includes(v.placa));
-      });
+  this.vehiculoService.list().subscribe(vehiculos => {
+    if (esCliente && username !== null) {
+      vehiculos = vehiculos.filter(v => v.usuario?.username === username);
+    }
+
+    this.dS.list().subscribe(gpsList => {
+      const placasUsadas = gpsList
+        .filter(g => g.vehiculo?.placa !== placaActual)
+        .map(g => g.vehiculo?.placa);
+
+      this.vehiculos = vehiculos.filter(v => !placasUsadas.includes(v.placa));
     });
-  }
+  });
+}
+
 
   aceptar() {
     if (this.form.valid) {
@@ -94,7 +110,7 @@ export class InsertareditardispositivoGpsComponent {
         : this.dS.insert(this.dispositivo_gps);
 
       accion.subscribe(() => {
-        this.dS.list().subscribe(data => this.dS.setList(data));
+        this.dS.list().subscribe((data) => this.dS.setList(data));
         this.router.navigate(['/dispositivo-gps/listardispositivogps']);
       });
     }

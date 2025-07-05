@@ -8,10 +8,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatOptionModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'; 
 
-import { Router } from '@angular/router';
-
+import { Router } from '@angular/router'; 
+import { LoginService } from '../../../services/login.service';
 declare const google: any;
 
 @Component({
@@ -25,10 +25,11 @@ declare const google: any;
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatOptionModule,
+    MatOptionModule
   ],
 })
 export class InsertarUbicacionComponent implements OnInit, AfterViewInit {
+
   ubicacion: ubicacion_registro = new ubicacion_registro();
   dispositivos: Dispositivo_GPS[] = [];
   gpsSeleccionado!: Dispositivo_GPS;
@@ -36,33 +37,41 @@ export class InsertarUbicacionComponent implements OnInit, AfterViewInit {
   constructor(
     private gpsService: DispositivoGPSService,
     private ubicacionService: UbicacionRegistroService,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
-    this.gpsService.list().subscribe((data) => {
-      this.dispositivos = data;
-    });
-  }
+  const username = this.loginService.getUsername();
+  const esCliente = this.loginService.showRole() === 'CLIENTE';
 
+  this.gpsService.list().subscribe(data => {
+    let lista = data;
+
+    if (esCliente && username !== null) {
+      lista = data.filter(gps =>
+        gps.vehiculo?.usuario?.username === username
+      );
+    }
+
+    this.dispositivos = lista;
+  });
+}
   ngAfterViewInit(): void {
     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-      const map = new google.maps.Map(
-        document.getElementById('map') as HTMLElement,
-        {
-          center: { lat: -12.0453, lng: -77.0311 },
-          zoom: 15,
-        }
-      );
+      const map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
+        center: { lat: -12.0453, lng: -77.0311 },
+        zoom: 15,
+      });
 
-      map.addListener('click', (event: google.maps.MapMouseEvent) => {
+      map.addListener("click", (event: google.maps.MapMouseEvent) => {
         if (event.latLng) {
           this.ubicacion.latitud = event.latLng.lat().toString();
           this.ubicacion.longitud = event.latLng.lng().toString();
 
           new google.maps.Marker({
             position: event.latLng,
-            map: map,
+            map: map
           });
         }
       });
@@ -70,12 +79,8 @@ export class InsertarUbicacionComponent implements OnInit, AfterViewInit {
   }
 
   guardarUbicacion(): void {
-    if (
-      !this.gpsSeleccionado ||
-      !this.ubicacion.latitud ||
-      !this.ubicacion.longitud
-    ) {
-      alert('❌ Selecciona un GPS y marca la ubicación en el mapa');
+    if (!this.gpsSeleccionado || !this.ubicacion.latitud || !this.ubicacion.longitud) {
+      alert("❌ Selecciona un GPS y marca la ubicación en el mapa");
       return;
     }
 
@@ -86,14 +91,10 @@ export class InsertarUbicacionComponent implements OnInit, AfterViewInit {
 
     this.ubicacionService.insert(this.ubicacion).subscribe({
       next: () => {
-        alert('✅ Ubicación registrada correctamente');
+        alert("✅ Ubicación registrada correctamente");
         this.router.navigate(['/ubicacion-registro/listarubicacionregistro']); // ⬅️ REDIRECCIÓN
       },
-      error: () => alert('❌ Error al registrar ubicación'),
+      error: () => alert("❌ Error al registrar ubicación"),
     });
-  }
-
-  cancelar(): void {
-    this.router.navigate(['/ubicacion-registro/listarubicacionregistro']);
   }
 }

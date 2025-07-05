@@ -19,7 +19,7 @@ import { ubicacion_registro } from '../../../models/ubicacion_registro';
 import { UbicacionRegistroService } from '../../../services/ubicacion-registro.service';
 import { Dispositivo_GPS } from '../../../models/dispositivo_GPS';
 import { DispositivoGPSService } from '../../../services/dispositivo-gps.service';
-
+import { LoginService } from '../../../services/login.service';
 @Component({
   selector: 'app-insertareditarubicacion',
   providers: [provideNativeDateAdapter()],
@@ -42,13 +42,15 @@ export class InsertareditarubicacionComponent implements OnInit {
   listaGps: Dispositivo_GPS[] = [];//aqui
   id: number = 0;
   edicion: boolean = false;
-
+  esCliente: boolean = false;
   constructor(
     private ubicacionService: UbicacionRegistroService,
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private gpsService: DispositivoGPSService,//aqui
+    private gpsService: DispositivoGPSService,
+    private loginService: LoginService
+    //aqui
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +59,7 @@ export class InsertareditarubicacionComponent implements OnInit {
       this.edicion = data['id'] != null;
       this.init();
     });
+    this.esCliente = this.loginService.showRole() === 'CLIENTE';
 
     this.gpsService.list().subscribe((data) => {
     this.listaGps = data;
