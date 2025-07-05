@@ -1,11 +1,13 @@
 /* Contenedor general */
 .container {
-  background-color: #5BC0E4; /* celeste claro */
+  background-color: #5BC0E4; /* Celeste claro */
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center; /* Centrado vertical */
+  align-items: center; /* Centrado horizontal */
   padding: 40px 20px;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
 /* Título */
