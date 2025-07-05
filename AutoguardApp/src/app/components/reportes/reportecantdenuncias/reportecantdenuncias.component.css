@@ -1,0 +1,48 @@
+/* Contenedor general */
+.container {
+  background-color: #5BC0E4; /* Celeste claro */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrado vertical */
+  align-items: center; /* Centrado horizontal */
+  padding: 40px 20px;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Título */
+h1 {
+  background-color: #472F64; /* Azul oscuro */
+  color: #FFFFFF;
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  width: 100%;
+}
+
+/* Contenedor del gráfico */
+.chart-container {
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  justify-content: center; /* Centrado horizontal */
+  align-items: center; /* Centrado vertical */
+  width: 80%; /* Reduce el ancho para centrarlo mejor */
+  max-width: 800px; /* Limita el ancho máximo */
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+
+/* Asegura que el canvas no se estire innecesariamente */
+canvas {
+  display: block;
+  width: 100%; /* Usamos el 100% del ancho del contenedor */
+  height: 400px; /* Altura fija del gráfico */
+}
