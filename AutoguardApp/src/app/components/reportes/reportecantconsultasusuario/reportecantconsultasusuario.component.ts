@@ -1,8 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Chart, ChartDataset, ChartOptions, ChartType, registerables } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { ConsultaService } from '../../../services/consulta.service';
-
 
 Chart.register(...registerables);
 
@@ -12,49 +11,97 @@ Chart.register(...registerables);
   templateUrl: './reportecantconsultasusuario.component.html',
   styleUrl: './reportecantconsultasusuario.component.css'
 })
-export class ReportecantconsultasusuarioComponent {
-  barChartOptions: ChartOptions = {
-    responsive: true
-  };
-  barChartLabels: string[] = [];
-  barChartType: ChartType = 'bar';  // Si prefieres gráfico de barras, cambia a 'bar'
+export class ReportecantconsultasusuarioComponent implements OnInit {
+  barChartType: ChartType = 'bar';
   barChartLegend = true;
+  barChartLabels: string[] = [];
   barChartData: ChartDataset[] = [];
+
+  // Colores institucionales
+  asignarColor(): string[] {
+    return [
+      '#5BC0E4', // celeste claro (fondo de barra)
+      '#472F64', // morado oscuro (puede alternar en border)
+      '#27193E'  // más oscuro (para detalles)
+    ];
+  }
+
+  // Opciones del gráfico (estilo, etiquetas, leyenda, etc.)
+  barChartOptions: ChartOptions = {
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Cantidad de Consultas',
+          font: {
+            size: 14
+          }
+        }
+      },
+      x: {
+        title: {
+          display: true,
+          text: 'Usuarios',
+          font: {
+            size: 14
+          }
+        },
+        ticks: {
+          autoSkip: false,
+          maxRotation: 45,
+          minRotation: 45,
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          font: {
+            size: 13,
+            family: 'Akshar'
+          }
+        }
+      },
+      title: {
+        display: true,
+        text: 'Cantidad de Consultas por Usuario',
+        font: {
+          size: 18,
+          weight: 'bold',
+          family: 'Akshar'
+        },
+        padding: {
+          top: 10,
+          bottom: 20
+        }
+      }
+    }
+  };
 
   constructor(private conS: ConsultaService) {}
 
-  // Función para generar un color hexadecimal aleatorio
-  generarColorAleatorio(): string {
-    const letras = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letras[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
-
   ngOnInit(): void {
     this.conS.getQuantity().subscribe(data => {
-      this.barChartLabels = data.map(item => `${item.nombres} ${item.apellidos}`);  
+      this.barChartLabels = data.map(item => `${item.nombres} ${item.apellidos}`);
 
-      // Crear un arreglo de colores aleatorios con la misma longitud que los datos
-      const coloresAleatorios = data.map(() => this.generarColorAleatorio());
+      const colores = this.asignarColor();
 
       this.barChartData = [{
         data: data.map(item => item.cantidadConsultas),
-        label: 'Cantidad de consultas',
-        backgroundColor: coloresAleatorios,  // Asignar los colores aleatorios
-        borderColor: '#d13f20',
+        label: 'Cantidad de Consultas',
+        backgroundColor: colores,
+        borderColor: '#27193E',
         borderWidth: 1
       }];
 
-      // Forzar la actualización del gráfico (si es necesario)
       if (this.chart) {
-        this.chart.update(); // Si usas BaseChartDirective, esto forzará la actualización
+        this.chart.update();
       }
     });
   }
 
-  // Variable para acceder al gráfico y forzar la actualización
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 }
