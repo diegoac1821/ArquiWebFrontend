@@ -40,8 +40,10 @@ import { HomeComponent } from './components/home/home.component';
 import { seguridadGuard } from './guard/seguridad.guard';
 import { ReporteusuariomasalertaComponent } from './components/reportes/reporteusuariomasalerta/reporteusuariomasalerta.component';
 import { VerUbicacionComponent } from './components/ubicacion-registro/verubicacion/verubicacion.component';
+import { LandingpageComponent } from './components/landingpage/landingpage.component';
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'landing', pathMatch: 'full' },
+  { path: 'landing', component: LandingpageComponent },
 
   // Ruta pública
   { path: 'login', component: LoginComponent },
