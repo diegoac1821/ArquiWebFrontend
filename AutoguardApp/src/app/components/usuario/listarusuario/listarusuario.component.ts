@@ -8,8 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
-
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'app-listarusuario',
   templateUrl: './listarusuario.component.html',
@@ -21,12 +20,20 @@ import { CommonModule } from '@angular/common';
     MatIconModule,
     RouterLink,
     CommonModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTooltipModule,
   ],
 })
 export class ListarusuarioComponent implements OnInit {
   dataSource: MatTableDataSource<Usuario> = new MatTableDataSource();
-displayedColumns: string[] = ['dni', 'enabled', 'editar', 'eliminar', 'perfil'];
+  displayedColumns: string[] = [
+    'dni',
+    'enabled',
+    'estado',
+    'editar',
+    'eliminar',
+    'perfil',
+  ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -46,9 +53,22 @@ displayedColumns: string[] = ['dni', 'enabled', 'editar', 'eliminar', 'perfil'];
 
   eliminar(id: number) {
     this.usuarioService.delete(id).subscribe(() => {
-      this.usuarioService.list().subscribe(data => {
+      this.usuarioService.list().subscribe((data) => {
         this.usuarioService.setList(data);
       });
+    });
+  }
+  cambiarEstado(usuario: Usuario) {
+    console.log('🟡 Usuario antes del cambio:', usuario);
+
+    this.usuarioService.cambiarEstado(usuario.id).subscribe({
+      next: () => {
+        usuario.enabled = !usuario.enabled; // actualizar localmente
+        console.log('🟢 Estado cambiado. Nuevo estado:', usuario.enabled);
+      },
+      error: (err) => {
+        console.error('🔴 Error al cambiar el estado:', err);
+      },
     });
   }
 }

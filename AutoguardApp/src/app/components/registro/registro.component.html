@@ -1,0 +1,65 @@
+<div class="main-login-wrapper">
+  <div class="login-container">
+    <div>
+      <img src="assets/logoautoguard.png" alt="Logo de la empresa" class="logo" />
+    </div>
+
+    <h2>Registrar Usuario</h2>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>DNI</mat-label>
+      <input matInput [(ngModel)]="usuario.dni" required />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Nombres</mat-label>
+      <input matInput [(ngModel)]="usuario.nombres" required />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Apellidos</mat-label>
+      <input matInput [(ngModel)]="usuario.apellidos" required />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Dirección</mat-label>
+      <input matInput [(ngModel)]="usuario.direccion" required />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput type="email" [(ngModel)]="usuario.correoElectronico" required />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Fecha de nacimiento</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="usuario.fechaNacimiento" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Teléfono</mat-label>
+      <input matInput [(ngModel)]="usuario.telefono" required />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput [(ngModel)]="usuario.username" required />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" [(ngModel)]="usuario.password" required />
+    </mat-form-field>
+
+    <button mat-raised-button class="custom-button" (click)="registrar()">Registrarse</button>
+
+    <div class="register-link">
+      ¿Ya tienes una cuenta?
+      <a routerLink="/login">Inicia sesión</a>
+    </div>
+  </div>
+
+  <div class="login-image"></div>
+</div>

@@ -55,7 +55,7 @@ h2 {
 /* Imagen de fondo lado derecho */
 .login-image {
   width: 50%;
-  background-image: url('/assets/fondologin.jpeg'); /* ← cambia a tu ruta */
+  background-image: url('/assets/fondologin.jpeg'); /* ← misma imagen */
   background-size: cover;
   background-position: center;
 }
@@ -72,6 +72,7 @@ h2 {
 ::ng-deep .mat-form-field-label {
   color: #27193E !important;
 }
+
 .register-link {
   margin-top: 1rem;
   font-size: 0.95rem;

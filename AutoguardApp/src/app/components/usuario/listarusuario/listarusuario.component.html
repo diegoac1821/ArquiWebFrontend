@@ -25,6 +25,20 @@
         {{ element.enabled ? "Sí" : "No" }}
       </td>
     </ng-container>
+    <!-- Cambiar Estado -->
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef>Estado</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-icon-button
+          (click)="cambiarEstado(element)"
+          [matTooltip]="element.enabled ? 'Deshabilitar' : 'Habilitar'"
+          [color]="element.enabled ? 'warn' : 'primary'"
+        >
+          <mat-icon>{{ element.enabled ? "block" : "check_circle" }}</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
     <!-- Editar -->
     <ng-container matColumnDef="editar">
