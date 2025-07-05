@@ -5,6 +5,9 @@ import {
   FormGroup,
   Validators,
   ReactiveFormsModule,
+  ValidatorFn,
+  AbstractControl,
+  ValidationErrors,
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ReclamoService } from '../../../services/reclamo.service';
@@ -59,35 +62,42 @@ export class InsertareditarreclamosComponent {
   ) {}
 
   ngOnInit(): void {
-  const username = this.loginService.getUsername();
-  const roles = this.loginService.showRole();
-  this.esAdmin = roles.includes('ADMIN');
+    const username = this.loginService.getUsername();
+    const roles = this.loginService.showRole();
+    this.esAdmin = roles.includes('ADMIN');
 
-  if (username) {
-    this.usuarioService.buscarPorUsername(username).subscribe((usuario) => {
-      this.usuario = usuario;
+    if (username) {
+      this.usuarioService.buscarPorUsername(username).subscribe((usuario) => {
+        this.usuario = usuario;
 
-      this.route.params.subscribe((data: Params) => {
-        this.id = data['id'];
+        this.route.params.subscribe((data: Params) => {
+          this.id = data['id'];
 
-        // ✅ Validar correctamente si es edición
-        this.edicion = this.id !== undefined && this.id !== null;
+          // Validar correctamente si es edición
+          this.edicion = this.id !== undefined && this.id !== null;
 
-        if (this.edicion) {
-          this.init(); // ← solo si se está editando
-        } else {
-          // ← inicializa formulario para insertar
-          this.form = this.formBuilder.group({
-            asunto: ['', Validators.required],
-            fecha: ['', Validators.required],
-            descripcion: ['', Validators.required],
+          if (this.edicion) {
+            this.init(); // ← solo si se está editando
+          } else {
+            // ← inicializa formulario para insertar
+            this.form = this.formBuilder.group({
+              asunto: ['', 
+                [ Validators.required,
+                  Validators.minLength(3),
+                  Validators.maxLength(100),]],
+              fecha: ['', 
+                  Validators.required, this.fechaNoFuturaValidator()],
+              descripcion: ['',
+                  Validators.required,
+                  Validators.minLength(10),
+                  Validators.maxLength(500),
+                  this.espaciosValidator(),],
+                });
+            }
           });
-        }
-      });
-    });
-  }
-}
-
+        });
+      }
+    }
 
   aceptar() {
     if (this.form.valid) {
@@ -114,6 +124,28 @@ export class InsertareditarreclamosComponent {
         });
       }
     }
+  }
+
+  fechaNoFuturaValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const fechaSeleccionada = new Date(control.value);
+      const hoy = new Date();
+      if (fechaSeleccionada > hoy) {
+        return { fechaFutura: true };
+      }
+      return null;
+    };
+  }
+
+  espaciosValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const texto = control.value || '';
+      return texto.trim().length === 0 ? { soloEspacios: true } : null;
+    };
+  }
+
+  cancelar() {
+    this.router.navigate(['/reclamo/listarreclamo']);
   }
 
   init() {
