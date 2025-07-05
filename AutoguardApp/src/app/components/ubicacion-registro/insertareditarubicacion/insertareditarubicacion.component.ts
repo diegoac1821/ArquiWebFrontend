@@ -20,6 +20,8 @@ import { UbicacionRegistroService } from '../../../services/ubicacion-registro.s
 import { Dispositivo_GPS } from '../../../models/dispositivo_GPS';
 import { DispositivoGPSService } from '../../../services/dispositivo-gps.service';
 import { LoginService } from '../../../services/login.service';
+import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-insertareditarubicacion',
   providers: [provideNativeDateAdapter()],
@@ -32,6 +34,7 @@ import { LoginService } from '../../../services/login.service';
     MatDatepickerModule,
     MatSelectModule,
     MatButtonModule,
+    RouterLink
   ],
   templateUrl: './insertareditarubicacion.component.html',
   styleUrl: './insertareditarubicacion.component.css',
