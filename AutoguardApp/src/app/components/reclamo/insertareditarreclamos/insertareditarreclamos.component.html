@@ -23,6 +23,9 @@
       <mat-error *ngIf="form.get('fecha')?.hasError('required')">
         La fecha es obligatoria.
       </mat-error>
+      <mat-error *ngIf="form.get('fecha')?.hasError('fechaFutura')">
+        No se permite una fecha futura.
+      </mat-error>
     </mat-form-field>
 
     <!-- Descripción -->
@@ -32,19 +35,20 @@
       <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
         La descripción es obligatoria.
       </mat-error>
+      <mat-error *ngIf="form.get('descripcion')?.hasError('soloEspacios')">
+        No puede contener solo espacios.
+      </mat-error>
     </mat-form-field>
 
-    <!-- Botón -->
+    <!-- Botones -->
     <div style="margin-top: 2rem; text-align: center">
       <button mat-raised-button color="primary" type="submit">Aceptar</button>
     </div>
 
-      <button
-        mat-raised-button
-        type="button"
-        (click)="cancelar()"
-        class="btn-cancelar" class="mt-2">
+    <div style="text-align: center; margin-top: 1rem">
+      <button mat-raised-button type="button" (click)="cancelar()" color="warn">
         Cancelar
       </button>
+    </div>
   </form>
 </div>
