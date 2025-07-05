@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { LoginService } from '../../services/login.service';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../models/usuario';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-menu',
   standalone: true,
@@ -33,7 +33,8 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +54,7 @@ export class MenuComponent implements OnInit {
 
   cerrar(): void {
     sessionStorage.clear();
+    this.router.navigate(['/landing']);
   }
 
   verificar(): boolean {
