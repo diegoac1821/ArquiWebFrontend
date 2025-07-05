@@ -41,12 +41,14 @@ import { seguridadGuard } from './guard/seguridad.guard';
 import { ReporteusuariomasalertaComponent } from './components/reportes/reporteusuariomasalerta/reporteusuariomasalerta.component';
 import { VerUbicacionComponent } from './components/ubicacion-registro/verubicacion/verubicacion.component';
 import { LandingpageComponent } from './components/landingpage/landingpage.component';
+import { RegistroComponent } from './components/registro/registro.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: 'landing', component: LandingpageComponent },
 
   // Ruta pública
   { path: 'login', component: LoginComponent },
+  { path: 'registro', component: RegistroComponent },
 
   // Todas las rutas protegidas por seguridadGuard
   {

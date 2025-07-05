@@ -37,8 +37,6 @@ import { MatButtonModule } from '@angular/material/button';
 export class InsertareditarComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   usuario: Usuario = new Usuario();
-  estado: boolean = true;
-
   id: number = 0;
   edicion: boolean = false;
 
@@ -52,25 +50,25 @@ export class InsertareditarComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
-      this.edicion = data['id'] != null;
+      this.edicion = this.id != null;
       this.init();
     });
 
     this.form = this.formBuilder.group({
-      dni: ['', [Validators.required, Validators.pattern(/^\d{8}$/)]], //VALIDA 8 DIGITOS
+      dni: ['', [Validators.required, Validators.pattern(/^\d{8}$/)]],
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],
       direccion: ['', Validators.required],
       correo_electronico: ['', [Validators.required, Validators.email]],
       fechaNacimiento: ['', [Validators.required, this.mayorDeEdadValidator]],
-      edad: ['', [Validators.required, Validators.min(0)]],
-      telefono: ['', [Validators.required, Validators.pattern(/^9\d{8}$/)]], //VALIDA TELEFONO
+      edad: ['', []], // sin validaciones, se oculta y se calcula
+      telefono: ['', [Validators.required, Validators.pattern(/^9\d{8}$/)]],
       username: ['', [Validators.required, Validators.minLength(4)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       enabled: [true, Validators.required],
     });
 
-    // Calcular edad automáticamente al cambiar la fecha
+    // Calcula la edad automáticamente
     this.form.get('fechaNacimiento')?.valueChanges.subscribe((fecha: Date) => {
       if (fecha) {
         const edadCalculada = this.calcularEdad(fecha);
@@ -79,14 +77,12 @@ export class InsertareditarComponent implements OnInit {
     });
   }
 
-  // Validador para mayores de edad
   mayorDeEdadValidator(control: FormControl) {
     const fechaNacimiento = new Date(control.value);
     const hoy = new Date();
     const edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
     const mes = hoy.getMonth() - fechaNacimiento.getMonth();
     const dia = hoy.getDate() - fechaNacimiento.getDate();
-
     const cumple18 =
       edad > 18 || (edad === 18 && (mes > 0 || (mes === 0 && dia >= 0)));
     return cumple18 ? null : { menorDeEdad: true };
@@ -104,10 +100,6 @@ export class InsertareditarComponent implements OnInit {
   }
 
   aceptar() {
-    console.log('👉 Se hizo clic en Aceptar');
-    console.log('📝 Formulario válido:', this.form.valid);
-    console.log('📦 Datos del formulario:', this.form.value);
-
     if (this.form.valid) {
       this.usuario.dni = this.form.value.dni;
       this.usuario.nombres = this.form.value.nombres;
@@ -115,7 +107,7 @@ export class InsertareditarComponent implements OnInit {
       this.usuario.direccion = this.form.value.direccion;
       this.usuario.correo_electronico = this.form.value.correo_electronico;
       this.usuario.fechaNacimiento = this.form.value.fechaNacimiento;
-      this.usuario.edad = this.form.value.edad;
+      this.usuario.edad = this.form.value.edad; // calculada
       this.usuario.telefono = this.form.value.telefono;
       this.usuario.username = this.form.value.username;
       this.usuario.password = this.form.value.password;
@@ -123,26 +115,16 @@ export class InsertareditarComponent implements OnInit {
 
       if (this.edicion) {
         this.usuario.id = this.id;
-
-        // ✅ roles no se tocan, se preservan
         this.uS.update(this.usuario).subscribe(() => {
-          this.uS.list().subscribe((data) => {
-            this.uS.setList(data);
-          });
+          this.uS.list().subscribe((data) => this.uS.setList(data));
           this.router.navigate(['/usuario/listarusuario']);
         });
       } else {
-        console.log('➕ Insertando nuevo usuario');
         this.uS.insert(this.usuario).subscribe(() => {
-          console.log('✅ Usuario insertado');
-          this.uS.list().subscribe((data) => {
-            this.uS.setList(data);
-          });
+          this.uS.list().subscribe((data) => this.uS.setList(data));
           this.router.navigate(['/usuario/listarusuario']);
         });
       }
-    } else {
-      console.warn('❌ Formulario inválido');
     }
   }
 
@@ -167,20 +149,14 @@ export class InsertareditarComponent implements OnInit {
             data.fechaNacimiento,
             [Validators.required, this.mayorDeEdadValidator],
           ],
-          edad: [data.edad, [Validators.required, Validators.min(0)]],
+          edad: [data.edad], // visible solo si edicion
           telefono: [
             data.telefono,
             [Validators.required, Validators.pattern(/^9\d{8}$/)],
           ],
-          username: [
-            data.username,
-            [Validators.required, Validators.minLength(4)],
-          ],
-          password: [
-            data.password,
-            [Validators.required, Validators.minLength(6)],
-          ],
-          enabled: [data.enabled, Validators.required],
+          username: [data.username, [Validators.required, Validators.minLength(4)]],
+          password: [data.password],
+          enabled: [data.enabled],
         });
       });
     }
