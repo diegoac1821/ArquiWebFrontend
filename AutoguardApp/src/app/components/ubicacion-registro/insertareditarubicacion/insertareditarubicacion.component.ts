@@ -54,42 +54,49 @@ export class InsertareditarubicacionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Obtener parámetros de la URL
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
       this.init();
     });
+
+    // Verificar si el usuario es cliente
     this.esCliente = this.loginService.showRole() === 'CLIENTE';
 
+    // Obtener lista de dispositivos GPS
     this.gpsService.list().subscribe((data) => {
-    this.listaGps = data;
-  });//aqui
+      this.listaGps = data;
+    });
 
+    // Inicializar el formulario
     this.form = this.formBuilder.group({
       id: [''],
       latitud: ['', Validators.required],
       longitud: ['', Validators.required],
       fecha: ['', Validators.required],
       hora: ['', Validators.required],
-      dgpsId: [null, Validators.required],//aqui
+      dgpsId: [null, Validators.required],
     });
   }
 
   aceptar() {
+    // Verificar si el formulario es válido
     if (this.form.valid) {
+      // Crear una nueva instancia de Dispositivo_GPS con el ID
       const gps = new Dispositivo_GPS();
-    gps.id = this.form.value.dgpsId;
-      
+      gps.id = this.form.value.dgpsId;
+
+      // Asignar valores al objeto 'ubicacion'
       this.ubicacion.id = this.form.value.id;
       this.ubicacion.latitud = this.form.value.latitud;
       this.ubicacion.longitud = this.form.value.longitud;
       this.ubicacion.fecha = this.form.value.fecha;
       this.ubicacion.hora = this.form.value.hora;
-      this.ubicacion.disGPS = new Dispositivo_GPS();
-      this.ubicacion.disGPS.id = this.form.value.dgpsId;
+      this.ubicacion.disGPS = gps;
 
+      // Verificar si estamos en edición o en inserción
       if (this.edicion) {
-        this.ubicacion.id = this.id;
         this.ubicacionService.update(this.ubicacion).subscribe(() => {
           this.ubicacionService
             .list()
@@ -108,7 +115,7 @@ export class InsertareditarubicacionComponent implements OnInit {
   }
 
   init() {
-    if (this.edicion) {
+     if (this.edicion) {
       this.ubicacionService.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           id: new FormControl(data.id, Validators.required),
