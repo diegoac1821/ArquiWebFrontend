@@ -10,7 +10,7 @@
 
 <!-- Cards -->
 <div class="card-container">
-  <mat-card class="dispositivo-card" *ngFor="let gps of dataSource.filteredData">
+  <mat-card class="dispositivo-card" *ngFor="let gps of pagedData">
     <h3 class="mat-card-title">
       {{ gps.numeroSerie }} - {{ gps.id }}
     </h3>
@@ -35,6 +35,13 @@
 </div>
 
 
-  <!-- Paginador (si lo necesitas) -->
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <!-- Paginador funcional -->
+<mat-paginator
+  [length]="dataSource.filteredData.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[5, 10, 15, 20]"
+  (page)="onPageChange($event)"
+  showFirstLastButtons>
+</mat-paginator>
+
 </div>
