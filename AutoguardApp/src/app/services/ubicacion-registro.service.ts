@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ubicacion_registro } from '../models/ubicacion_registro';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 const base_url = environment.base;
 @Injectable({
   providedIn: 'root'
 })
 export class UbicacionRegistroService {
-
+ private apiUrl = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCldiPAKk-qJibbdeFxKD7Q1OT4N6Ybop0&libraries=places/ubicaciones';  
  private url = `${base_url}/ubicaciones`;
    private listaCambio = new Subject<ubicacion_registro[]>();
  
@@ -41,4 +41,8 @@ export class UbicacionRegistroService {
    setList(listaNueva: ubicacion_registro[]) {
      this.listaCambio.next(listaNueva);
    }
+    getUbicaciones(): Observable<any> {
+    return this.http.get(this.apiUrl);
+  }
+
 }

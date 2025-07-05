@@ -20,9 +20,8 @@ export class ConsultaService {
 
   // Insertar nueva consulta
   insert(consulta: Consulta): Observable<Consulta> {
-  return this.http.post<Consulta>(`${this.url}`, consulta);
-}
-
+    return this.http.post<Consulta>(`${this.url}`, consulta);
+  }
 
   // Actualizar consulta existente
   update(consulta: Consulta) {
@@ -48,15 +47,23 @@ export class ConsultaService {
     this.listaCambio.next(listaNueva);
   }
   chatbotResponder(mensaje: string) {
+    const prompt = `Eres un asistente especializado en temas vehiculares.
+Solo puedes responder preguntas sobre vehículos, rutas, dispositivos GPS, seguridad vial y denuncias relacionadas con vehículos.
+Si la pregunta no está relacionada con esos temas, responde exactamente con:
+"Lo siento, solo puedo ayudarte con temas vehiculares."
+
+Además, tu respuesta no debe superar los 1000 caracteres. 
+Pregunta del usuario: "${mensaje}"`;
+
     const body = {
       contents: [
         {
-          parts: [{ text: mensaje }],
+          parts: [{ text: prompt }],
         },
       ],
     };
 
-    const apiKey = 'AIzaSyCaFF12cp6ywFINlt6CTDuMx6JW_XJyEbA'; // Tu clave de prueba
+    const apiKey = 'AIzaSyCaFF12cp6ywFINlt6CTDuMx6JW_XJyEbA'; // clave de prueba
 
     return this.http.post<any>(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
@@ -66,9 +73,10 @@ export class ConsultaService {
       }
     );
   }
-  
-   getQuantity():Observable<CantConsultasxUsuarioDTO[]>{
-      return this.http.get<CantConsultasxUsuarioDTO[]>(`${this.url}/cantidadconsultas`);
-  
-    }
+
+  getQuantity(): Observable<CantConsultasxUsuarioDTO[]> {
+    return this.http.get<CantConsultasxUsuarioDTO[]>(
+      `${this.url}/cantidadconsultas`
+    );
+  }
 }

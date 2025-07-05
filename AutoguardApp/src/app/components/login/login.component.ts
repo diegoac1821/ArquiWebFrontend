@@ -7,15 +7,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { UsuarioService } from '../../services/usuario.service';
 @Component({
   selector: 'app-login',
-  imports: [MatFormFieldModule,FormsModule,MatInputModule,MatButtonModule],
+  imports: [MatFormFieldModule, FormsModule, MatInputModule, MatButtonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
-export class LoginComponent  implements OnInit {
+export class LoginComponent implements OnInit {
   constructor(
     private loginService: LoginService,
+    private usuarioService: UsuarioService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
@@ -24,18 +26,41 @@ export class LoginComponent  implements OnInit {
   mensaje: string = '';
   ngOnInit(): void {}
   login() {
-    
-    let request = new JwtRequest();
+    const request = new JwtRequest();
     request.username = this.username;
     request.password = this.password;
-    this.loginService.login(request).subscribe(
-      (data: any) => {
-        sessionStorage.setItem('token', data.jwttoken);
-        this.router.navigate(['homes']);
+
+    // Validar si el usuario está habilitado antes de loguear
+    this.usuarioService.buscarPorUsername(this.username).subscribe(
+      (usuario) => {
+        if (!usuario.enabled) {
+          this.snackBar.open(
+            'Tu cuenta está deshabilitada. Contacta al administrador.',
+            'Aviso',
+            {
+              duration: 3000,
+            }
+          );
+          return;
+        }
+
+        // Usuario habilitado → permitir login
+        this.loginService.login(request).subscribe(
+          (data: any) => {
+            sessionStorage.setItem('token', data.jwttoken);
+            this.router.navigate(['homes']);
+          },
+          (error) => {
+            this.snackBar.open('Credenciales incorrectas.', 'Aviso', {
+              duration: 2000,
+            });
+          }
+        );
       },
       (error) => {
-        this.mensaje = 'Credenciales incorrectas!!!';
-        this.snackBar.open(this.mensaje, 'Aviso', { duration: 2000 });
+        this.snackBar.open('No se encontró el usuario.', 'Aviso', {
+          duration: 2000,
+        });
       }
     );
   }
