@@ -38,6 +38,14 @@ mat-form-field {
   text-align: left;
 }
 
+/* Contenedor de botones en fila */
+.botones-acciones {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
 /* Botones Aceptar y Cancelar */
 button[type="submit"],
 .btn-cancelar {
@@ -55,5 +63,4 @@ button[type="submit"]:hover,
 .btn-cancelar:hover {
   background-color: #3d2b5c !important;
 }
-
 

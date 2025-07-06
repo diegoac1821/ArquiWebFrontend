@@ -83,3 +83,33 @@ mat-paginator {
 .btn-personalizado:hover {
   background-color: #3a2d50 !important;
 }
+
+/* Fila que contiene el botón insertar a la izquierda y los filtros a la derecha */
+.fila-acciones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+/* Parte izquierda: botón insertar */
+.accion-izquierda {
+  flex: 1;
+}
+
+/* Parte derecha: filtros y botones */
+.grupo-busqueda {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  flex: 2;
+}
+
+/* Campo de búsqueda con tamaño mínimo */
+.search-field {
+  min-width: 200px;
+}
+
