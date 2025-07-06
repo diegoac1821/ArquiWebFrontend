@@ -1,0 +1,113 @@
+/* Fondo y contenedor principal */
+.alerta-container {
+  background-color: #5BC0E4;
+  min-height: 100vh;
+  padding: 60px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-family: 'Akshar', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título estilizado */
+.alerta-title {
+  background-color: #472F64;
+  color: white;
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Formulario con diseño horizontal y responsive */
+.alerta-form {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Campos individuales con ancho flexible */
+.alerta-form mat-form-field {
+  flex: 1 1 250px;
+  min-width: 250px;
+}
+
+/* Botones centrados y con separación */
+.botones-acciones {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Botón personalizado morado oscuro */
+.custom-button {
+  background-color: #27193E !important;
+  color: #ffffff !important;
+  padding: 0.75rem 2rem;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-button:hover {
+  background-color: #3c285d !important;
+}
+
+/* Tabla con fondo blanco y bordes suaves */
+.tabla-container {
+  width: 100%;
+  max-width: 1000px;
+  overflow-x: auto;
+  margin-bottom: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo de encabezados de tabla */
+.mat-header-cell {
+  background-color: white;
+  color: #27193E;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Celdas con texto centrado */
+.mat-cell {
+  text-align: center;
+  padding: 12px;
+  color: #333;
+}
+
+/* Filas alternadas */
+.mat-row:nth-child(even) {
+  background-color: #f2f8fc;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 600px) {
+  .alerta-form mat-form-field {
+    flex: 1 1 100%;
+    min-width: unset;
+  }
+
+  .botones-acciones {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
