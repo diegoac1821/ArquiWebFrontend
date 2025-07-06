@@ -40,6 +40,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './insertareditarubicacion.component.css',
 })
 export class InsertareditarubicacionComponent implements OnInit {
+  mensajeExito: boolean = false;
   form: FormGroup = new FormGroup({});
   ubicacion: ubicacion_registro = new ubicacion_registro();
   listaGps: Dispositivo_GPS[] = [];//aqui
@@ -83,13 +84,15 @@ export class InsertareditarubicacionComponent implements OnInit {
     });
   }
 
-  aceptar() {
+ aceptar() {
     // Verificar si el formulario es válido
     if (this.form.valid) {
       // Crear una nueva instancia de Dispositivo_GPS con el ID
       const gps = new Dispositivo_GPS();
       gps.id = this.form.value.dgpsId;
-
+      this.mensajeExito = true;  // Activar el mensaje de éxito
+      
+      
       // Asignar valores al objeto 'ubicacion'
       this.ubicacion.id = this.form.value.id;
       this.ubicacion.latitud = this.form.value.latitud;
@@ -105,6 +108,7 @@ export class InsertareditarubicacionComponent implements OnInit {
             .list()
             .subscribe((data) => this.ubicacionService.setList(data));
           this.router.navigate(['/ubicacion-registro/listarubicacionregistro']);
+          this.limpiarMensajeExito();  // Limpiar el mensaje de éxito después de un tiempo
         });
       } else {
         this.ubicacionService.insert(this.ubicacion).subscribe(() => {
@@ -112,10 +116,19 @@ export class InsertareditarubicacionComponent implements OnInit {
             .list()
             .subscribe((data) => this.ubicacionService.setList(data));
           this.router.navigate(['/ubicacion-registro/listarubicacionregistro']);
+          this.limpiarMensajeExito();  // Limpiar el mensaje de éxito después de un tiempo
         });
       }
     }
   }
+
+  // Método para limpiar el mensaje de éxito después de un pequeño retraso
+  limpiarMensajeExito() {
+    setTimeout(() => {
+      this.mensajeExito = false;
+    }, 3000); // El mensaje se ocultará después de 3 segundos
+  }
+
 
   init() {
      if (this.edicion) {
