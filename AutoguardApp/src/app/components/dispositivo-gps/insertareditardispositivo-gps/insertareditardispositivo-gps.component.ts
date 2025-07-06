@@ -60,7 +60,6 @@ export class InsertareditardispositivoGpsComponent {
   ) {}
 
   ngOnInit(): void {
-
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = this.id != null;
@@ -77,21 +76,15 @@ export class InsertareditardispositivoGpsComponent {
           Validators.pattern(/^\d{1,3}$/), // Solo números de hasta 3 cifras
         ],
       ],
-      precio: [
-        '',
-        [
+      precio: ['',[
           Validators.required,
           Validators.pattern(/^\d+(\.\d{1,2})?$/),
           Validators.min(0.01),
-        ],
-      ],
-      fechaAdquisicion: [
-        '',
-        [Validators.required, this.fechaNoFuturaValidator()],
-      ],
+        ],],
+      fechaAdquisicion: ['',[Validators.required, this.fechaNoFuturaValidator()],],
       placav: [null, Validators.required],
-    });
-  }
+      });
+    }
 
   fechaNoFuturaValidator() {
     return (control: FormControl) => {
@@ -133,8 +126,7 @@ export class InsertareditardispositivoGpsComponent {
       this.dispositivo_gps.numeroSerie =
         'GPS' + this.form.value.numeroSerie.padStart(3, '0');
       this.dispositivo_gps.precio = this.form.value.precio;
-      this.dispositivo_gps.fechaAdquisicion =
-        this.form.value.fechaAdquisicion;
+      this.dispositivo_gps.fechaAdquisicion = this.form.value.fechaAdquisicion;
 
       this.dispositivo_gps.vehiculo = new Vehiculo();
       this.dispositivo_gps.vehiculo.placa = this.form.value.placav;
@@ -150,8 +142,9 @@ export class InsertareditardispositivoGpsComponent {
     }
   }
 
-    cancelar() {
-    this.router.navigate(['/dispositivo-gps/listardispositivogps']); }
+  cancelar() {
+    this.router.navigate(['/dispositivo-gps/listardispositivogps']);
+  }
 
   init() {
     if (this.edicion) {
@@ -159,7 +152,10 @@ export class InsertareditardispositivoGpsComponent {
         const soloNumero = data.numeroSerie?.replace('GPS', '') || '';
         this.form = this.formBuilder.group({
           codigo: [data.id],
-          numeroSerie: [soloNumero, [Validators.required, Validators.pattern(/^\d{1,3}$/)]],
+          numeroSerie: [
+            soloNumero,
+            [Validators.required, Validators.pattern(/^\d{1,3}$/)],
+          ],
           precio: [data.precio, [Validators.required]],
           fechaAdquisicion: [data.fechaAdquisicion, [Validators.required]],
           placav: [data.vehiculo.placa, Validators.required],
