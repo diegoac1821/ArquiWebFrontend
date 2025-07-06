@@ -8,7 +8,7 @@ import { UsuarioService } from '../../services/usuario.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core'; // ✅ Esto importa el adaptador
+import { MatNativeDateModule } from '@angular/material/core'; 
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -18,14 +18,14 @@ import { ReactiveFormsModule } from '@angular/forms';
   standalone: true,
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.css',
-  providers: [], // No necesitas añadir un provider extra con MatNativeDateModule
+  providers: [], 
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule, // ✅ Importa el adaptador aquí
+    MatNativeDateModule, 
     MatButtonModule,
     RouterModule
   ],

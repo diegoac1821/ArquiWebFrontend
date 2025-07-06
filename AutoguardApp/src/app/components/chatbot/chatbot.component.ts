@@ -8,8 +8,8 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './chatbot.component.html',
   styleUrls: ['./chatbot.component.css'],
    imports: [
-    CommonModule,     // Para *ngIf, *ngFor, [ngClass]
-    FormsModule       // Para [(ngModel)]
+    CommonModule,    
+    FormsModule      
   ],
 })
 export class ChatbotComponent {

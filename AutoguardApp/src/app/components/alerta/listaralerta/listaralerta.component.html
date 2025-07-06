@@ -1,45 +1,47 @@
 <div class="container">
   <h2 style="text-align: center; margin-top: 2rem">Lista de Alertas</h2>
 
-  <!-- Botón Insertar -->
-  <div style="text-align: left; margin: 1rem 0">
-    <button
-      mat-raised-button
-      color="primary"
-      [routerLink]="['/alertas/insertareditaralerta']"
-    >
-      ➕ Insertar Alerta
-    </button>
+  <!-- Fila de acciones: insertar a la izquierda, búsquedas a la derecha -->
+  <div class="fila-acciones">
+    <!-- Botón Insertar -->
+    <div class="accion-izquierda">
+      <button
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/alertas/insertareditaralerta']"
+      >
+        ➕ Insertar Alerta
+      </button>
+    </div>
+
+    <!-- Búsquedas alineadas a la derecha -->
+    <div class="grupo-busqueda">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Buscar por Placa</mat-label>
+        <input matInput [(ngModel)]="placaFiltro" placeholder="Ej. ABC123" />
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        class="btn-personalizado"
+        (click)="filtrarAlertasPorPlaca()"
+      >
+        <mat-icon>search</mat-icon> Buscar por placa
+      </button>
+
+      <button mat-raised-button class="btn-personalizado" (click)="ngOnInit()">
+        <mat-icon>refresh</mat-icon> Ver todo
+      </button>
+
+      <button
+        mat-raised-button
+        class="btn-personalizado"
+        (click)="irAConsultaPorPeriodo()"
+      >
+        <mat-icon>date_range</mat-icon> Consultar por periodo
+      </button>
+    </div>
   </div>
- <!-- Botones de búsqueda -->
-<div class="grupo-busqueda">
-  <mat-form-field appearance="outline" class="search-field">
-    <mat-label>Buscar por Placa</mat-label>
-    <input matInput [(ngModel)]="placaFiltro" placeholder="Ej. ABC123" />
-  </mat-form-field>
-
-  <button
-    mat-raised-button
-    class="btn-personalizado"
-    (click)="filtrarAlertasPorPlaca()"
-  >
-    <mat-icon>search</mat-icon> Buscar por placa
-  </button>
-
-  <button mat-raised-button class="btn-personalizado" (click)="ngOnInit()">
-    <mat-icon>refresh</mat-icon> Ver todo
-  </button>
-
-  <!-- 🔽 Botón agregado aquí -->
-  <button
-    mat-raised-button
-    class="btn-personalizado"
-    (click)="irAConsultaPorPeriodo()"
-  >
-    <mat-icon>date_range</mat-icon> Consultar por periodo
-  </button>
-</div>
-
 
   <!-- Tabla -->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

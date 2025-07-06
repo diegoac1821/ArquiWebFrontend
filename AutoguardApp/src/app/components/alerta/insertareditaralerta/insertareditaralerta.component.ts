@@ -53,7 +53,7 @@ export class InsertareditaralertaComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       asunto: ['', Validators.required],
-      fecha: ['', Validators.required],
+      fecha: [new Date(), Validators.required], //VALIDA LA FECHA ACTUAL
       descripcion: ['', Validators.required],
       vehiculoId: [null, Validators.required],
     });
