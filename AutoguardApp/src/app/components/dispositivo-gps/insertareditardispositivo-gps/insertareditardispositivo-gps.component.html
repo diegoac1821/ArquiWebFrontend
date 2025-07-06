@@ -54,7 +54,7 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngIf="form.get('fechaAdquisicion')?.hasError('required')">
-        La fecha es obligatoria!!
+        La fecha es obligatoria y no debe ser futura!!
       </mat-error>
     </mat-form-field>
 
@@ -68,13 +68,17 @@
       </mat-select>
     </mat-form-field>
 
-    <div style="margin-top: 2rem">
-      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+    <div class="botones-acciones">
+      <button mat-raised-button type="submit" [disabled]="form.invalid">
+        Aceptar
+      </button>
+
       <button
         mat-raised-button
         type="button"
         (click)="cancelar()"
-        class="btn-cancelar" class="mt-2">
+        class="btn-cancelar"
+      >
         Cancelar
       </button>
     </div>
