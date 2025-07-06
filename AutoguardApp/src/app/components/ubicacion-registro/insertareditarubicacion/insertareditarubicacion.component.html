@@ -1,29 +1,28 @@
 <div class="container">
   <form [formGroup]="form" (ngSubmit)="aceptar()" style="margin: 2rem">
     <h2 style="text-align: center; margin-top: 2rem">
-      {{ edicion ? "Editar Ubicacion" : "Registrar Ubicacion" }}
+      {{ edicion ? "Editar Ubicación" : "Registrar Ubicación" }}
     </h2>
 
+    <!-- Campo Latitud -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Latitud</mat-label>
       <input matInput formControlName="latitud" placeholder="19.432608" />
-      <mat-error
-        *ngIf="form.get('latitud')?.invalid && form.get('latitud')?.touched"
-      >
+      <mat-error *ngIf="form.get('latitud')?.invalid && form.get('latitud')?.touched">
         La Latitud es obligatoria.
       </mat-error>
     </mat-form-field>
 
+    <!-- Campo Longitud -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Longitud</mat-label>
       <input matInput formControlName="longitud" placeholder="-99.133209" />
-      <mat-error
-        *ngIf="form.get('longitud')?.invalid && form.get('longitud')?.touched"
-      >
+      <mat-error *ngIf="form.get('longitud')?.invalid && form.get('longitud')?.touched">
         La Longitud es obligatoria.
       </mat-error>
     </mat-form-field>
 
+    <!-- Campo Fecha -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Fecha</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="fecha" />
@@ -31,6 +30,7 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
+    <!-- Campo Hora -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Hora</mat-label>
       <input matInput formControlName="hora" placeholder="08:00:00" />
@@ -39,18 +39,31 @@
       </mat-error>
     </mat-form-field>
 
+    <!-- Campo ID del GPS (Solo para no clientes) -->
     <mat-form-field appearance="fill" class="w-100" *ngIf="!esCliente">
       <mat-label>ID del GPS</mat-label>
       <input matInput formControlName="dgpsId" placeholder="Ej. 1" />
-      <mat-error
-        *ngIf="form.get('dgpsId')?.invalid && form.get('dgpsId')?.touched"
-      >
-        El ID del GPS obligatorio.
+      <mat-error *ngIf="form.get('dgpsId')?.invalid && form.get('dgpsId')?.touched">
+        El ID del GPS es obligatorio.
       </mat-error>
     </mat-form-field>
 
+    <!-- Botón Aceptar -->
     <div style="margin-top: 2rem">
-      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+      <button mat-raised-button color="primary" type="submit">
+        Aceptar
+      </button>
     </div>
+
+  <!-- Mostrar mensaje de éxito -->
+<div *ngIf="mensajeExito" class="mensaje-exito" style="color: green; text-align: center; margin-top: 1rem;">
+  Ubicación actualizada exitosamente
+</div>
+
+
+    <div style="margin-top: 2rem"></div>
+    <button mat-icon-button color="primary" type="submit" [routerLink]="['/ubicacion-registro/listarubicacionregistro']">
+      Cancelar
+    </button>
   </form>
 </div>

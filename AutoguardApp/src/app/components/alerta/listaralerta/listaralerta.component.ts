@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-listaralerta',
   standalone: true,
@@ -50,7 +51,7 @@ export class ListaralertaComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private alertaService: AlertaService) {}
+  constructor(private alertaService: AlertaService, private router: Router) {}
 
   ngOnInit(): void {
     this.alertaService.list().subscribe((data) => {
@@ -78,5 +79,7 @@ export class ListaralertaComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       });
   }
- 
+  irAConsultaPorPeriodo(): void {
+    this.router.navigate(['/alertas/consultaalertaporperiodo']);
+  }
 }

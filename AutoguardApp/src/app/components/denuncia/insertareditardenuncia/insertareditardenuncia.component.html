@@ -5,15 +5,22 @@
     </h2>
 
     <!-- Descripción -->
-    <mat-form-field appearance="fill" class="w-100">
+       <mat-form-field appearance="fill" class="w-100">
       <mat-label>Descripción</mat-label>
-      <input matInput formControlName="descripcion" />
+      <textarea matInput formControlName="descripcion"></textarea>
+      <mat-error *ngIf="form.get('descripcion')?.touched && form.get('descripcion')?.hasError('required')">
+        La descripción es obligatoria.
+      </mat-error>
     </mat-form-field>
+
 
     <!-- Motivo -->
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Motivo</mat-label>
       <input matInput formControlName="motivo" />
+         <mat-error *ngIf="form.get('motivo')?.touched && form.get('motivo')?.hasError('required')">
+        El motivo es obligatorio.
+      </mat-error>
     </mat-form-field>
 
     <!-- Estado (solo visible para ADMIN) -->
@@ -24,6 +31,9 @@
           {{ t.viewValue }}
         </mat-option>
       </mat-select>
+         <mat-error *ngIf="form.get('estado')?.touched && form.get('estado')?.hasError('required')">
+        El estado es obligatorio.
+      </mat-error>
     </mat-form-field>
 
     <!-- Comisaría -->
@@ -34,6 +44,9 @@
           {{ c.nombre }}
         </mat-option>
       </mat-select>
+         <mat-error *ngIf="form.get('comisariaId')?.touched && form.get('comisariaId')?.hasError('required')">
+        Debe seleccionar una comisaría
+      </mat-error>
     </mat-form-field>
 
     <!-- Vehículo (visible para todos, editable solo para ADMIN) -->
@@ -48,11 +61,25 @@
           {{ v.placa }}
         </mat-option>
       </mat-select>
+         <mat-error *ngIf="form.get('vehiculoId')?.touched && form.get('vehiculoId')?.hasError('required')">
+        Debe seleccionar un vehículo
+      </mat-error>
     </mat-form-field>
 
     <!-- Botón -->
-    <div style="margin-top: 2rem">
-      <button mat-raised-button color="primary" type="submit">Aceptar</button>
+   <div class="botones-acciones">
+      <button mat-raised-button type="submit" [disabled]="form.invalid">
+        Aceptar
+      </button>
+
+      <button
+        mat-raised-button
+        type="button"
+        (click)="cancelar()"
+        class="btn-cancelar"
+      >
+        Cancelar
+      </button>
     </div>
   </form>
 </div>

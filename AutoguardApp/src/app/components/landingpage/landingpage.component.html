@@ -1,16 +1,116 @@
+<!-- landing.component.html -->
 <div class="landing-container">
+
+  <!-- encabezado -->
   <header class="landing-header">
-    <img src="assets/img/LOGO.png" alt="Logo" class="logo" />
-    <button class="login-btn" (click)="goToLogin()">Iniciar sesión</button>
+    <div class="logo-container">
+      <img src="../../../assets/LOGO.png" alt="Logo" class="logo" />
+      <span class="logo-text"><strong>AutoGuard</strong></span>
+    </div>
+    <nav class="navbar">
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#estado">Estado Vehicular</a></li>
+        <li><button class="login-btn" (click)="goToLogin()">Iniciar sesión</button></li>
+      </ul>
+    </nav>
   </header>
 
-  <main class="landing-main">
-    <h1>Bienvenido a AutoGuard</h1>
-    <p>Monitorea y protege tus vehículos en tiempo real desde cualquier lugar.</p>
-    <button class="cta-btn" (click)="goToLogin()">Comenzar ahora</button>
+  <!--inicio-->
+  <main class="landing-main" id="inicio">
+    <section class="introduction">
+      <h1 style="margin-top: 3rem">Encuentra tu vehículo en cualquier lugar</h1>
+      <p>Monitorea tus vehículos en tiempo real con <strong>AutoGuard</strong></p>
+      <img src="../../../assets/home.png" class="main-image" alt="Auto tracking" />
+    </section>
+
+    <!-- testimonios -->
+    <section class="testimonials">
+      <h2>Lo que opinan nuestros clientes</h2>
+      <p class="testimonial-subtitle">
+        Con AutoGuard, miles de usuarios ya protegen sus vehículos en tiempo real.
+      </p>
+
+      <div class="carousel-container">
+        <div class="testimonial">
+          <p>"Desde que uso AutoGuard, mi tranquilidad al dejar el auto en la calle es total. El monitoreo es preciso y rápido."</p>
+          <strong>Carla Del Pilar <br> 10 de julio de 2024</strong>
+        </div>
+        <div class="testimonial">
+          <p>"Me sorprendió lo fácil que fue instalar y empezar a rastrear mi flota. ¡Muy recomendable!"</p>
+          <strong>Stephanie Jimenez <br> 26 de agosto de 2024</strong>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <!-- SECCIÓN NOSOTROS -->
+  <section class="about-us" id="nosotros">
+    <h2>Conoce más de nosotros</h2>
+    <p>En AutoGuard, usamos tecnología GPS para que sientas tu vehículo siempre cerca, seguro y bajo control.</p>
+
+    <div class="mission-vision">
+      <div class="block">
+        <div class="text-content">
+          <h3>Misión</h3>
+          <p>Brindar soluciones innovadoras de monitoreo vehicular.</p>
+        </div>
+        <img src="../../../assets/image 50.png" alt="Misión" />
+      </div>
+
+      <div class="block">
+        <div class="text-content">
+          <h3>Visión</h3>
+          <p>Ser la empresa líder en seguridad vehicular en Latinoamérica.</p>
+        </div>
+        <img src="../../../assets/happy.png" alt="Visión" />
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN ESTADO VEHICULAR -->
+  <section class="vehicle-status" id="estado">
+    <div class="estado-container">
+      <h2>Estado de Seguridad Vehicular</h2>
+      <p>
+        Supervisa la seguridad de tu vehículo en tiempo real. Recibe alertas inmediatas ante cualquier actividad sospechosa y mantén el control total estés donde estés.
+      </p>
+
+      <div class="status-cards">
+        <div class="card">
+          <h3>Ubicación Actual</h3>
+          <p><span class="data-number">Av. Arequipa 1234, Lima</span></p>
+          <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+        </div>
+
+        <div class="card">
+          <h3>Sistema de Alarma</h3>
+          <p><span class="data-number">Activado</span></p>
+          <div class="progress-bar"><div class="progress" style="width: 100%;"></div></div>
+        </div>
+
+        <div class="card">
+          <h3>Corte Remoto de Motor</h3>
+          <p><span class="data-number">Disponible</span></p>
+          <div class="progress-bar"><div class="progress" style="width: 60%;"></div></div>
+        </div>
+      </div>
+
+      <div class="alerts">
+        <h3>Alertas Recientes</h3>
+        <ul>
+          <li><strong>Intento de acceso forzado</strong> detectado hace 2 horas</li>
+          <li><strong>GPS desactivado brevemente</strong> ayer a las 11:50 PM</li>
+          <li><strong>Puertas bloqueadas remotamente</strong> a las 10:12 PM</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer class="landing-footer">
     <p>&copy; 2025 AutoGuard. Todos los derechos reservados.</p>
   </footer>
+
 </div>

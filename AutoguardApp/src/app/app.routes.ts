@@ -42,6 +42,7 @@ import { ReporteusuariomasalertaComponent } from './components/reportes/reporteu
 import { VerUbicacionComponent } from './components/ubicacion-registro/verubicacion/verubicacion.component';
 import { LandingpageComponent } from './components/landingpage/landingpage.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { ConsultaalertaporperiodoComponent } from './components/alerta/consultaalertaporperiodo/consultaalertaporperiodo.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: 'landing', component: LandingpageComponent },
@@ -64,6 +65,10 @@ export const routes: Routes = [
       {
         path: 'alertas/insertareditaralerta/:id',
         component: InsertareditaralertaComponent,
+      },
+       {
+        path: 'alertas/consultaalertaporperiodo',
+        component: ConsultaalertaporperiodoComponent,
       },
       {
         path: 'comisaria/listarcomisaria',

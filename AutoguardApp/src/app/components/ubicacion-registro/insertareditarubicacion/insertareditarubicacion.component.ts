@@ -20,6 +20,8 @@ import { UbicacionRegistroService } from '../../../services/ubicacion-registro.s
 import { Dispositivo_GPS } from '../../../models/dispositivo_GPS';
 import { DispositivoGPSService } from '../../../services/dispositivo-gps.service';
 import { LoginService } from '../../../services/login.service';
+import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-insertareditarubicacion',
   providers: [provideNativeDateAdapter()],
@@ -32,11 +34,13 @@ import { LoginService } from '../../../services/login.service';
     MatDatepickerModule,
     MatSelectModule,
     MatButtonModule,
+    RouterLink
   ],
   templateUrl: './insertareditarubicacion.component.html',
   styleUrl: './insertareditarubicacion.component.css',
 })
 export class InsertareditarubicacionComponent implements OnInit {
+  mensajeExito: boolean = false;
   form: FormGroup = new FormGroup({});
   ubicacion: ubicacion_registro = new ubicacion_registro();
   listaGps: Dispositivo_GPS[] = [];//aqui
@@ -54,47 +58,57 @@ export class InsertareditarubicacionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Obtener parámetros de la URL
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
       this.init();
     });
+
+    // Verificar si el usuario es cliente
     this.esCliente = this.loginService.showRole() === 'CLIENTE';
 
+    // Obtener lista de dispositivos GPS
     this.gpsService.list().subscribe((data) => {
-    this.listaGps = data;
-  });//aqui
+      this.listaGps = data;
+    });
 
+    // Inicializar el formulario
     this.form = this.formBuilder.group({
       id: [''],
       latitud: ['', Validators.required],
       longitud: ['', Validators.required],
       fecha: ['', Validators.required],
       hora: ['', Validators.required],
-      dgpsId: [null, Validators.required],//aqui
+      dgpsId: [null, Validators.required],
     });
   }
 
-  aceptar() {
+ aceptar() {
+    // Verificar si el formulario es válido
     if (this.form.valid) {
+      // Crear una nueva instancia de Dispositivo_GPS con el ID
       const gps = new Dispositivo_GPS();
-    gps.id = this.form.value.dgpsId;
+      gps.id = this.form.value.dgpsId;
+      this.mensajeExito = true;  // Activar el mensaje de éxito
       
+      
+      // Asignar valores al objeto 'ubicacion'
       this.ubicacion.id = this.form.value.id;
       this.ubicacion.latitud = this.form.value.latitud;
       this.ubicacion.longitud = this.form.value.longitud;
       this.ubicacion.fecha = this.form.value.fecha;
       this.ubicacion.hora = this.form.value.hora;
-      this.ubicacion.disGPS = new Dispositivo_GPS();
-      this.ubicacion.disGPS.id = this.form.value.dgpsId;
+      this.ubicacion.disGPS = gps;
 
+      // Verificar si estamos en edición o en inserción
       if (this.edicion) {
-        this.ubicacion.id = this.id;
         this.ubicacionService.update(this.ubicacion).subscribe(() => {
           this.ubicacionService
             .list()
             .subscribe((data) => this.ubicacionService.setList(data));
           this.router.navigate(['/ubicacion-registro/listarubicacionregistro']);
+          this.limpiarMensajeExito();  // Limpiar el mensaje de éxito después de un tiempo
         });
       } else {
         this.ubicacionService.insert(this.ubicacion).subscribe(() => {
@@ -102,13 +116,22 @@ export class InsertareditarubicacionComponent implements OnInit {
             .list()
             .subscribe((data) => this.ubicacionService.setList(data));
           this.router.navigate(['/ubicacion-registro/listarubicacionregistro']);
+          this.limpiarMensajeExito();  // Limpiar el mensaje de éxito después de un tiempo
         });
       }
     }
   }
 
+  // Método para limpiar el mensaje de éxito después de un pequeño retraso
+  limpiarMensajeExito() {
+    setTimeout(() => {
+      this.mensajeExito = false;
+    }, 3000); // El mensaje se ocultará después de 3 segundos
+  }
+
+
   init() {
-    if (this.edicion) {
+     if (this.edicion) {
       this.ubicacionService.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           id: new FormControl(data.id, Validators.required),

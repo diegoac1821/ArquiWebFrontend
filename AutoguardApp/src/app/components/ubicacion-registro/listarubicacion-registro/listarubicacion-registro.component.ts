@@ -47,6 +47,10 @@ export class ListarubicacionregistroComponent implements OnInit {
 
   esCliente: boolean = false;
   locations: any[] = []; // Declarar la variable locations como un array vacío
+   paginatedLocations: any[] = []; // Lista de ubicaciones paginadas
+  currentPage: number = 0;
+  pageSize: number = 3;
+  totalLocations: number = 0;
 
   constructor(
     private ubicacionService: UbicacionRegistroService,
@@ -57,57 +61,98 @@ export class ListarubicacionregistroComponent implements OnInit {
 
   ngOnInit(): void {
     const username = this.loginService.getUsername();
-  const rol = this.loginService.showRole()?.trim().toUpperCase();
-  this.esCliente = rol === 'CLIENTE';
+    const rol = this.loginService.showRole()?.trim().toUpperCase();
+    this.esCliente = rol === 'CLIENTE';
 
-  this.ubicacionService.list().subscribe((data) => {
-    let lista = data;
+    this.ubicacionService.list().subscribe((data) => {
 
-    if (this.esCliente && username !== null) {
-      lista = lista.filter(
-        (u) => u.disGPS?.vehiculo?.usuario?.username === username
-      );
-    }
+      let lista = data;
 
-    this.displayedColumns = this.esCliente
-      ? ['fecha', 'hora', 'gps', 'ver', 'eliminar']
-      : [
-          'id',
-          'latitud',
-          'longitud',
-          'fecha',
-          'hora',
-          'gps',
-          'editar',
-          'eliminar',
-        ];
+      if (this.esCliente && username !== null) {
+        lista = lista.filter(
+          (u) => u.disGPS?.vehiculo?.usuario?.username === username
+        );
+      }
 
-    this.dataSource = new MatTableDataSource(lista);
-    this.dataSource.paginator = this.paginator;
+      this.displayedColumns = this.esCliente
+        ? ['fecha', 'hora', 'gps', 'ver', 'eliminar']
+        : [
+            'id',
+            'latitud',
+            'longitud',
+            'fecha',
+            'hora',
+            'gps',
+            'editar',
+            'eliminar',
+          ];
 
-    // Asegúrate de convertir latitud y longitud a números
-    this.locations = lista
-     .filter((location) => {
-    const lat = parseFloat(location.latitud); // Convertir a número
-    const lng = parseFloat(location.longitud); // Convertir a número
-    return !isNaN(lat) && !isNaN(lng); // Filtrar solo si son números válidos
-  })
-    .map((location) => ({
-      lat: parseFloat(location.latitud), // Convertir a número
-      lng: parseFloat(location.longitud), // Convertir a número
-      id: location.id,
-      fecha: location.fecha,  // Añadir fecha
-      hora: location.hora,    // Añadir hora
-      gps: location.disGPS?.numeroSerie, // Añadir GPS
-    }));
-    });
-  }
+      this.dataSource = new MatTableDataSource(lista);
+      this.dataSource.paginator = this.paginator;
+      
 
-  eliminar(id: number) {
-    this.ubicacionService.delete(id).subscribe(() => {
-      this.ubicacionService.list().subscribe((data) => {
-        this.dataSource.data = data; // ← recarga los datos directamente en la tabla
+      // Asegúrate de convertir latitud y longitud a números
+      this.locations = lista
+      .filter((location) => {
+      const lat = parseFloat(location.latitud); // Convertir a número
+      const lng = parseFloat(location.longitud); // Convertir a número
+      return !isNaN(lat) && !isNaN(lng); // Filtrar solo si son números válidos
+    })
+      .map((location) => ({
+        lat: parseFloat(location.latitud), // Convertir a número
+        lng: parseFloat(location.longitud), // Convertir a número
+        id: location.id,
+        fecha: location.fecha,  // Añadir fecha
+        hora: location.hora,    // Añadir hora
+        gps: location.disGPS?.numeroSerie, // Añadir GPS
+      }));
+          this.updatePaginatedLocations();
       });
-    });
   }
+    // Actualizar las ubicaciones visibles según la página actual
+   updatePaginatedLocations() {
+    const startIndex = this.currentPage * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedLocations = this.locations.slice(startIndex, endIndex);
+  }
+
+    // Cambiar de página
+  onPageChange(event: any) {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.updatePaginatedLocations();
+  }
+
+eliminar(id: number) {
+  this.ubicacionService.delete(id).subscribe(() => {
+    // Filtra y elimina la ubicación de la tabla sin hacer una nueva consulta
+    this.dataSource.data = this.dataSource.data.filter((location) => location.id !== id);
+    
+    // Actualiza la lista de ubicaciones filtradas y mapea los datos
+    this.locations = this.dataSource.data
+      .filter((location) => {
+        const lat = parseFloat(location.latitud);
+        const lng = parseFloat(location.longitud);
+        return !isNaN(lat) && !isNaN(lng);
+      })
+      .map((location) => ({
+        lat: parseFloat(location.latitud),
+        lng: parseFloat(location.longitud),
+        id: location.id,
+        fecha: location.fecha,
+        hora: location.hora,
+        gps: location.disGPS?.numeroSerie,
+      }));
+
+    // Actualiza la paginación para reflejar el cambio
+    this.updatePaginatedLocations();
+
+    // Si estamos en una página con menos elementos, aseguramos que se vaya a la primera página
+    if (this.paginatedLocations.length === 0 && this.currentPage > 0) {
+      this.paginator.firstPage(); // Ve a la primera página si la actual está vacía
+    }
+  });
 }
+
+}
+
