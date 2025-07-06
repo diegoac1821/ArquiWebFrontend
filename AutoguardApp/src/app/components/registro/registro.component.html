@@ -1,4 +1,3 @@
-<!-- registro.component.html -->
 <div class="main-login-wrapper">
   <div class="login-container">
     <div>
@@ -8,66 +7,68 @@
     <h2>Registrar Usuario</h2>
 
     <form [formGroup]="form" (ngSubmit)="registrar()">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>DNI</mat-label>
-        <input matInput formControlName="dni" />
-        <mat-error *ngIf="form.get('dni')?.hasError('required')">El DNI es obligatorio.</mat-error>
-        <mat-error *ngIf="form.get('dni')?.hasError('pattern')">Debe tener 8 dígitos.</mat-error>
-      </mat-form-field>
+      <div class="form-grid">
+        <mat-form-field appearance="fill">
+          <mat-label>DNI</mat-label>
+          <input matInput formControlName="dni" />
+          <mat-error *ngIf="form.get('dni')?.hasError('required')">El DNI es obligatorio.</mat-error>
+          <mat-error *ngIf="form.get('dni')?.hasError('pattern')">Debe tener 8 dígitos.</mat-error>
+        </mat-form-field>
 
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Nombres</mat-label>
-        <input matInput formControlName="nombres" />
-        <mat-error *ngIf="form.get('nombres')?.hasError('required')">El nombre es obligatorio.</mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="nombres" />
+          <mat-error *ngIf="form.get('nombres')?.hasError('required')">El nombre es obligatorio.</mat-error>
+        </mat-form-field>
 
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Apellidos</mat-label>
-        <input matInput formControlName="apellidos" />
-        <mat-error *ngIf="form.get('apellidos')?.hasError('required')">Los apellidos son obligatorios.</mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Apellidos</mat-label>
+          <input matInput formControlName="apellidos" />
+          <mat-error *ngIf="form.get('apellidos')?.hasError('required')">Los apellidos son obligatorios.</mat-error>
+        </mat-form-field>
 
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Dirección</mat-label>
-        <input matInput formControlName="direccion" />
-        <mat-error *ngIf="form.get('direccion')?.hasError('required')">La dirección es obligatoria.</mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Dirección</mat-label>
+          <input matInput formControlName="direccion" />
+          <mat-error *ngIf="form.get('direccion')?.hasError('required')">La dirección es obligatoria.</mat-error>
+        </mat-form-field>
 
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Correo electrónico</mat-label>
-        <input matInput type="email" formControlName="correo_electronico" />
-        <mat-error *ngIf="form.get('correo_electronico')?.hasError('required')">El correo es obligatorio.</mat-error>
-        <mat-error *ngIf="form.get('correo_electronico')?.hasError('email')">Correo inválido.</mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput type="email" formControlName="correo_electronico" />
+          <mat-error *ngIf="form.get('correo_electronico')?.hasError('required')">El correo es obligatorio.</mat-error>
+          <mat-error *ngIf="form.get('correo_electronico')?.hasError('email')">Correo inválido.</mat-error>
+        </mat-form-field>
 
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Fecha de nacimiento</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="form.get('fechaNacimiento')?.hasError('required')">Obligatorio.</mat-error>
-        <mat-error *ngIf="form.get('fechaNacimiento')?.hasError('menorDeEdad')">Debe ser mayor de 18.</mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Fecha de nacimiento</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="form.get('fechaNacimiento')?.hasError('required')">Obligatorio.</mat-error>
+          <mat-error *ngIf="form.get('fechaNacimiento')?.hasError('menorDeEdad')">Debe ser mayor de 18.</mat-error>
+        </mat-form-field>
 
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Teléfono</mat-label>
-        <input matInput formControlName="telefono" />
-        <mat-error *ngIf="form.get('telefono')?.hasError('required')">Teléfono requerido.</mat-error>
-        <mat-error *ngIf="form.get('telefono')?.hasError('pattern')">Debe tener 9 dígitos y empezar con 9.</mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="telefono" />
+          <mat-error *ngIf="form.get('telefono')?.hasError('required')">Teléfono requerido.</mat-error>
+          <mat-error *ngIf="form.get('telefono')?.hasError('pattern')">Debe tener 9 dígitos y empezar con 9.</mat-error>
+        </mat-form-field>
 
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Username</mat-label>
-        <input matInput formControlName="username" />
-        <mat-error *ngIf="form.get('username')?.hasError('required')">Username requerido.</mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" />
+          <mat-error *ngIf="form.get('username')?.hasError('required')">Username requerido.</mat-error>
+        </mat-form-field>
 
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password" />
-        <mat-error *ngIf="form.get('password')?.hasError('required')">Password requerido.</mat-error>
-        <mat-error *ngIf="form.get('password')?.hasError('minlength')">Mínimo 6 caracteres.</mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" />
+          <mat-error *ngIf="form.get('password')?.hasError('required')">Password requerido.</mat-error>
+          <mat-error *ngIf="form.get('password')?.hasError('minlength')">Mínimo 6 caracteres.</mat-error>
+        </mat-form-field>
+      </div>
 
       <button mat-raised-button class="custom-button" type="submit" [disabled]="form.invalid">Registrarse</button>
     </form>

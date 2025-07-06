@@ -85,3 +85,13 @@ h2 {
   margin-left: 5px;
   cursor: pointer;
 }
+
+.custom-button {
+  background-color: #5BC0E4 !important;
+  color: #FFFFFF !important; /* Forzamos el blanco */
+  font-weight: bold;
+  padding: 0.6rem 1.5rem;
+  margin-top: 1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
