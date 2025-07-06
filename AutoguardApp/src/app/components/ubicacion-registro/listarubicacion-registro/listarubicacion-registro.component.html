@@ -7,6 +7,11 @@
     </button>
   </div>
 
+  <!-- Mostrar mensaje si no hay ubicaciones registradas -->
+  <div *ngIf="paginatedLocations.length === 0" style="text-align: center; margin-top: 2rem;">
+    <p>No hay ubicaciones registradas.</p>
+  </div>
+
   <section class="card-container">
     <div class="col-md-4 mb-4" *ngFor="let location of paginatedLocations">
       <mat-card class="location-card" style="width: 89%;"> 

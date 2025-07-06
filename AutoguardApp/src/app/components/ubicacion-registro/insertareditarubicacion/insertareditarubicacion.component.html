@@ -54,9 +54,16 @@
         Aceptar
       </button>
     </div>
+
+  <!-- Mostrar mensaje de éxito -->
+<div *ngIf="mensajeExito" class="mensaje-exito" style="color: green; text-align: center; margin-top: 1rem;">
+  Ubicación actualizada exitosamente
+</div>
+
+
     <div style="margin-top: 2rem"></div>
-      <button mat-icon-button color="primary" type="submit" [routerLink]="['/ubicacion-registro/listarubicacionregistro']">
-        Cancelar 
-      </button>
+    <button mat-icon-button color="primary" type="submit" [routerLink]="['/ubicacion-registro/listarubicacionregistro']">
+      Cancelar
+    </button>
   </form>
 </div>
