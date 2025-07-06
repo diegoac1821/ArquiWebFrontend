@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-  ReactiveFormsModule,
   ValidatorFn,
   AbstractControl,
   ValidationErrors,
+  ReactiveFormsModule
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ReclamoService } from '../../../services/reclamo.service';
@@ -44,7 +44,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
   ],
 })
-export class InsertareditarreclamosComponent {
+export class InsertareditarreclamosComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   reclamo: Reclamo = new Reclamo();
   id: number = 0;
@@ -72,36 +72,24 @@ export class InsertareditarreclamosComponent {
 
         this.route.params.subscribe((data: Params) => {
           this.id = data['id'];
-
-          // Validar correctamente si es edición
           this.edicion = this.id !== undefined && this.id !== null;
 
           if (this.edicion) {
-            this.init(); // ← solo si se está editando
+            this.init();
           } else {
-            // ← inicializa formulario para insertar
             this.form = this.formBuilder.group({
-              asunto: ['', 
-                [ Validators.required,
-                  Validators.minLength(3),
-                  Validators.maxLength(100),]],
-              fecha: ['', 
-                  Validators.required, this.fechaNoFuturaValidator()],
-              descripcion: ['',
-                  Validators.required,
-                  Validators.minLength(10),
-                  Validators.maxLength(500),
-                  this.espaciosValidator(),],
-                });
-            }
-          });
+              asunto: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+              fecha: [new Date(), [Validators.required, this.fechaNoFuturaValidator()]],
+              descripcion: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500), this.espaciosValidator()]],
+            });
+          }
         });
-      }
+      });
     }
+  }
 
   aceptar() {
     if (this.form.valid) {
-      this.reclamo.id = this.form.value.codigo;
       this.reclamo.asunto = this.form.value.asunto;
       this.reclamo.fecha = this.form.value.fecha;
       this.reclamo.descripcion = this.form.value.descripcion;
@@ -117,13 +105,29 @@ export class InsertareditarreclamosComponent {
           this.router.navigate(['/reclamo/listarreclamo']);
         });
       } else {
-        this.reclamo.resuelto = false; // por defecto al insertar
+        this.reclamo.resuelto = false;
         this.rS.insert(this.reclamo).subscribe(() => {
           this.rS.list().subscribe((data) => this.rS.setList(data));
           this.router.navigate(['/reclamo/listarreclamo']);
         });
       }
     }
+  }
+
+  cancelar() {
+    this.router.navigate(['/reclamo/listarreclamo']);
+  }
+
+  init() {
+    this.rS.listId(this.id).subscribe((data) => {
+      this.reclamo = data;
+
+      this.form = this.formBuilder.group({
+        asunto: new FormControl(data.asunto, [Validators.required]),
+        fecha: new FormControl(data.fecha, [Validators.required, this.fechaNoFuturaValidator()]),
+        descripcion: new FormControl(data.descripcion, [Validators.required, this.espaciosValidator()]),
+      });
+    });
   }
 
   fechaNoFuturaValidator(): ValidatorFn {
@@ -142,21 +146,5 @@ export class InsertareditarreclamosComponent {
       const texto = control.value || '';
       return texto.trim().length === 0 ? { soloEspacios: true } : null;
     };
-  }
-
-  cancelar() {
-    this.router.navigate(['/reclamo/listarreclamo']);
-  }
-
-  init() {
-    this.rS.listId(this.id).subscribe((data) => {
-      this.reclamo = data;
-
-      this.form = this.formBuilder.group({
-        asunto: new FormControl(data.asunto, Validators.required),
-        fecha: new FormControl(data.fecha, Validators.required),
-        descripcion: new FormControl(data.descripcion, Validators.required),
-      });
-    });
   }
 }

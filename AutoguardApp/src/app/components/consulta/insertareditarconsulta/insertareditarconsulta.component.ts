@@ -60,61 +60,78 @@ export class InsertareditarconsultaComponent implements OnInit {
       this.init();
     });
 
+    const ahora = new Date();
+    const horaActual = ahora.toTimeString().slice(0, 8); // HH:mm:ss
+
     this.form = this.formBuilder.group({
       consulta: ['', Validators.required],
-      fecha: ['', Validators.required],
-      hora: ['', Validators.required],
+      fecha: [this.edicion ? '' : ahora, Validators.required],
+      hora: [this.edicion ? '' : horaActual, Validators.required],
       usuarioId: [null, Validators.required],
     });
   }
 
   aceptar() {
-  if (this.form.valid) {
-    this.consulta.consulta = this.form.value.consulta;
-    this.consulta.fecha = this.form.value.fecha;
-    this.consulta.hora = this.form.value.hora;
-    this.consulta.usuario = new Usuario();
-    this.consulta.usuario.id = this.form.value.usuarioId;
+    if (this.form.valid) {
+      this.consulta.consulta = this.form.value.consulta;
+      this.consulta.fecha = this.form.value.fecha;
+      this.consulta.hora = this.form.value.hora;
+      this.consulta.usuario = new Usuario();
+      this.consulta.usuario.id = this.form.value.usuarioId;
 
-    if (this.edicion) {
-      this.consulta.id = this.id;
-      this.cS.update(this.consulta).subscribe(() => {
-        this.cS.list().subscribe(data => this.cS.setList(data));
-        this.router.navigate(['/consulta/listarconsulta']);
-      });
-    } else {
-      this.cS.insert(this.consulta).subscribe((consultaInsertada) => {
-        this.cS.list().subscribe(data => this.cS.setList(data));
-
-        this.cS.chatbotResponder(this.consulta.consulta).subscribe(response => {
-          const textoRespuesta = response.candidates?.[0]?.content?.parts?.[0]?.text ?? 'No se encontró una respuesta.';
-
-          const respuesta = new Respuesta();
-          respuesta.texto = textoRespuesta;
-          respuesta.consulta = consultaInsertada;
-
-          this.rS.insert(respuesta).subscribe({
-            next: () => {
-              this.rS.list().subscribe(data => this.rS.setList(data));
-              this.router.navigate(['/respuesta/listarrespuesta']);
-            },
-            error: (err) => {
-              console.error('❌ Error al guardar la respuesta:', err);
-              alert('Error al guardar la respuesta. Revisa la consola.');
-            }
-          });
-        }, error => {
-          console.error('❌ Error al obtener la respuesta del chatbot:', error);
-          alert('Error al generar la respuesta del chatbot.');
+      if (this.edicion) {
+        this.consulta.id = this.id;
+        this.cS.update(this.consulta).subscribe(() => {
+          this.cS.list().subscribe((data) => this.cS.setList(data));
+          this.router.navigate(['/consulta/listarconsulta']);
         });
-      }, error => {
-        console.error('❌ Error al guardar la consulta:', error);
-        alert('Error al guardar la consulta.');
-      });
+      } else {
+        this.cS.insert(this.consulta).subscribe(
+          (consultaInsertada) => {
+            this.cS.list().subscribe((data) => this.cS.setList(data));
+
+            this.cS.chatbotResponder(this.consulta.consulta).subscribe(
+              (response) => {
+                const textoRespuesta =
+                  response.candidates?.[0]?.content?.parts?.[0]?.text ??
+                  'No se encontró una respuesta.';
+
+                const respuesta = new Respuesta();
+                respuesta.texto = textoRespuesta;
+                respuesta.consulta = consultaInsertada;
+
+                this.rS.insert(respuesta).subscribe({
+                  next: () => {
+                    this.rS.list().subscribe((data) => this.rS.setList(data));
+                    this.router.navigate(['/respuesta/listarrespuesta']);
+                  },
+                  error: (err) => {
+                    console.error('❌ Error al guardar la respuesta:', err);
+                    alert('Error al guardar la respuesta. Revisa la consola.');
+                  },
+                });
+              },
+              (error) => {
+                console.error(
+                  '❌ Error al obtener la respuesta del chatbot:',
+                  error
+                );
+                alert('Error al generar la respuesta del chatbot.');
+              }
+            );
+          },
+          (error) => {
+            console.error('❌ Error al guardar la consulta:', error);
+            alert('Error al guardar la consulta.');
+          }
+        );
+      }
     }
   }
-}
 
+  cancelar() {
+    this.router.navigate(['/consulta/listarconsulta']);
+  }
 
   init() {
     if (this.edicion) {

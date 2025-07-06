@@ -90,3 +90,20 @@
 .ruta-form mat-form-field:not(:last-child) {
   margin-right: 1.5rem;
 }
+
+/* Contenedor de botones en fila */
+.botones-acciones {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Botón cancelar adicional si quieres estilo distinto */
+.btn-cancelar {
+  background-color: #27193E !important; /* Puedes cambiar el color si deseas */
+}
+
+.btn-cancelar:hover {
+  background-color: #27193E !important;
+}

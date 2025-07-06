@@ -11,6 +11,7 @@
       ➕ Insertar Alerta
     </button>
   </div>
+  <!-- Botones de búsqueda -->
   <div class="grupo-busqueda">
     <mat-form-field appearance="outline" class="search-field">
       <mat-label>Buscar por Placa</mat-label>
@@ -19,13 +20,13 @@
 
     <button
       mat-raised-button
-      class="btn-buscar"
+      class="btn-personalizado"
       (click)="filtrarAlertasPorPlaca()"
     >
       <mat-icon>search</mat-icon> Buscar por placa
     </button>
 
-    <button mat-raised-button class="btn-ver" (click)="ngOnInit()">
+    <button mat-raised-button class="btn-personalizado" (click)="ngOnInit()">
       <mat-icon>refresh</mat-icon> Ver todo
     </button>
   </div>

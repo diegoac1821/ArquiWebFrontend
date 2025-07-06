@@ -26,8 +26,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    CommonModule
-  ]
+    CommonModule,
+  ],
 })
 export class InsertareditarrespuestaComponent implements OnInit {
   form: FormGroup = new FormGroup({});
@@ -51,7 +51,7 @@ export class InsertareditarrespuestaComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       texto: ['', Validators.required],
-      consultaId: [null, Validators.required]
+      consultaId: [null, Validators.required],
     });
   }
 
@@ -62,20 +62,23 @@ export class InsertareditarrespuestaComponent implements OnInit {
 
       console.log(JSON.stringify(this.respuesta));
 
-
       if (this.edicion) {
         this.respuesta.id = this.id;
         this.rS.update(this.respuesta).subscribe(() => {
-          this.rS.list().subscribe(data => this.rS.setList(data));
+          this.rS.list().subscribe((data) => this.rS.setList(data));
           this.router.navigate(['/respuestas/listarrespuesta']);
         });
       } else {
         this.rS.insert(this.respuesta).subscribe(() => {
-          this.rS.list().subscribe(data => this.rS.setList(data));
+          this.rS.list().subscribe((data) => this.rS.setList(data));
           this.router.navigate(['/respuestas/listarrespuesta']);
         });
       }
     }
+  }
+
+  cancelar() {
+    this.router.navigate(['/respuesta/listarrespuesta']);
   }
 
   init() {
@@ -83,7 +86,7 @@ export class InsertareditarrespuestaComponent implements OnInit {
       this.rS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           texto: new FormControl(data.texto),
-          consultaId: new FormControl(data.consulta.id)
+          consultaId: new FormControl(data.consulta.id),
         });
       });
     }

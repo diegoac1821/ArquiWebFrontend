@@ -14,7 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-
+import { LoginService } from '../../../services/login.service'; // Assuming you have a LoginService to get the username
 @Component({
   selector: 'app-verperfilusuario',
   standalone: true,
@@ -26,8 +26,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     CommonModule,
     MatCardModule,
-    MatIconModule
-  ]
+    MatIconModule,
+  ],
 })
 export class VerperfilusuarioComponent implements OnInit {
   form: FormGroup = new FormGroup({});
@@ -36,11 +36,11 @@ export class VerperfilusuarioComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loginService: LoginService // Assuming you have a LoginService to get the username
   ) {}
 
   ngOnInit(): void {
-    // Inicializa el formulario con los controles deshabilitados
     this.form = this.formBuilder.group({
       dni: new FormControl({ value: '', disabled: true }),
       nombres: new FormControl({ value: '', disabled: true }),
@@ -51,12 +51,28 @@ export class VerperfilusuarioComponent implements OnInit {
       edad: new FormControl({ value: '', disabled: true }),
       telefono: new FormControl({ value: '', disabled: true }),
       username: new FormControl({ value: '', disabled: true }),
-      enabled: new FormControl({ value: '', disabled: true })
+      enabled: new FormControl({ value: '', disabled: true }),
     });
 
     this.route.params.subscribe((data: Params) => {
-      this.id = data['id'];
-      this.init();
+      this.id = +data['id'];
+
+      if (this.id === 0) {
+        const username = this.loginService.getUsername();
+        if (username) {
+          this.usuarioService
+            .buscarPorUsername(username)
+            .subscribe((usuario) => {
+              this.patchForm(usuario);
+            });
+        } else {
+          console.error('No se encontró username en el token');
+        }
+      } else {
+        this.usuarioService.listId(this.id).subscribe((usuario) => {
+          this.patchForm(usuario);
+        });
+      }
     });
   }
 
@@ -73,8 +89,22 @@ export class VerperfilusuarioComponent implements OnInit {
         edad: usuario.edad,
         telefono: usuario.telefono,
         username: usuario.username,
-        enabled: usuario.enabled ? 'Sí' : 'No'
+        enabled: usuario.enabled ? 'Sí' : 'No',
       });
+    });
+  }
+  private patchForm(usuario: Usuario): void {
+    this.form.patchValue({
+      dni: usuario.dni,
+      nombres: usuario.nombres,
+      apellidos: usuario.apellidos,
+      direccion: usuario.direccion,
+      correo_electronico: usuario.correo_electronico,
+      fechaNacimiento: usuario.fechaNacimiento,
+      edad: usuario.edad,
+      telefono: usuario.telefono,
+      username: usuario.username,
+      enabled: usuario.enabled ? 'Sí' : 'No',
     });
   }
 }
