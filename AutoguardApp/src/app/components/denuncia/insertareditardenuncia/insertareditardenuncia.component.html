@@ -45,7 +45,7 @@
         </mat-option>
       </mat-select>
          <mat-error *ngIf="form.get('comisariaId')?.touched && form.get('comisariaId')?.hasError('required')">
-        La Comisaria es obligatoria.
+        Debe seleccionar una comisaría
       </mat-error>
     </mat-form-field>
 
@@ -62,7 +62,7 @@
         </mat-option>
       </mat-select>
          <mat-error *ngIf="form.get('vehiculoId')?.touched && form.get('vehiculoId')?.hasError('required')">
-        La placa es obligatoria.
+        Debe seleccionar un vehículo
       </mat-error>
     </mat-form-field>
 
