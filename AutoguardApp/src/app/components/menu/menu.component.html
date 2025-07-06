@@ -14,6 +14,40 @@
 
     <span class="spacer"></span>
 
+    <!-- 🔔 Campana de notificaciones (solo para CLIENTE) -->
+    <ng-container *ngIf="esCliente()">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menuAlertas"
+        aria-label="Notificaciones"
+      >
+        <mat-icon matBadge="{{ alertasUsuario.length }}" matBadgeColor="warn">
+          notifications
+        </mat-icon>
+      </button>
+    </ng-container>
+
+    <!-- Menú de alertas -->
+    <mat-menu #menuAlertas="matMenu">
+      <ng-container *ngIf="alertasUsuario.length > 0; else noAlertas">
+        <button mat-menu-item *ngFor="let alerta of alertasUsuario">
+          <mat-icon>warning</mat-icon>
+          <div
+            style="display: flex; flex-direction: column; white-space: normal"
+          >
+            <strong>{{ alerta.asunto }} - {{ alerta.vehiculo.placa }}</strong>
+            <span style="font-size: 0.85em; color: #666">{{
+              alerta.descripcion
+            }}</span>
+          </div>
+        </button>
+      </ng-container>
+      <ng-template #noAlertas>
+        <button mat-menu-item disabled>No tienes alertas</button>
+      </ng-template>
+    </mat-menu>
+
+    <!-- Botón de salir -->
     <button mat-button [matMenuTriggerFor]="menuSalir">
       <mat-icon>account_circle</mat-icon> Salir
     </button>
@@ -106,14 +140,10 @@
 
   <!-- Menú Salir -->
   <mat-menu #menuSalir="matMenu">
-    <!-- Mostrar el nombre de usuario extraído del token -->
     <button mat-menu-item disabled>
       <mat-icon>person</mat-icon> {{ username }}
     </button>
-    <!-- Opción para cerrar sesión -->
 
-    <!-- Botón Ver Perfil -->
-    <!-- Botón Ver Perfil -->
     <button mat-menu-item [routerLink]="['/usuario/perfil', userId]">
       <mat-icon>visibility</mat-icon>
       <span>Ver perfil</span>

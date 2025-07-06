@@ -5,11 +5,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
-
+import { MatBadgeModule } from '@angular/material/badge';
 import { LoginService } from '../../services/login.service';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../models/usuario';
 import { Router } from '@angular/router';
+import { AlertaService } from '../../services/alerta.service';
+import { Alerta } from '../../models/alerta';
 @Component({
   selector: 'app-menu',
   standalone: true,
@@ -21,6 +23,7 @@ import { Router } from '@angular/router';
     MatMenuModule,
     RouterLink,
     CommonModule,
+    MatBadgeModule 
   ],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
@@ -29,11 +32,14 @@ export class MenuComponent implements OnInit {
   role: string = '';
   logueado: boolean = false;
   username: string = '';
-  userId: number = 0; // <- ID del usuario logueado
+  userId: number = 0;
+
+  alertasUsuario: Alerta[] = [];
 
   constructor(
     private loginService: LoginService,
     private usuarioService: UsuarioService,
+    private alertaService: AlertaService,
     private router: Router
   ) {}
 
@@ -44,9 +50,21 @@ export class MenuComponent implements OnInit {
       this.usuarioService.buscarPorUsername(this.username).subscribe({
         next: (usuario: Usuario) => {
           this.userId = usuario.id;
+
+          // Obtener todas las alertas y filtrar solo las del usuario logueado
+          this.alertaService.list().subscribe({
+            next: (alertas: Alerta[]) => {
+              this.alertasUsuario = alertas.filter(
+                (a) => a.vehiculo?.usuario?.username === this.username
+              );
+            },
+            error: (err) => {
+              console.error('Error al obtener alertas:', err);
+            }
+          });
         },
         error: (err) => {
-          console.error('Error al obtener el usuario por username', err);
+          console.error('Error al obtener usuario por username:', err);
         }
       });
     }
