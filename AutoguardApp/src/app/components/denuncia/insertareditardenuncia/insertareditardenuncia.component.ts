@@ -114,10 +114,8 @@ export class InsertareditardenunciaComponent {
             this.vehiculos = vehiculosCliente;
 
             if (vehiculosCliente.length === 1) {
-              // Si solo tiene uno, asignarlo y mantenerlo deshabilitado
               this.form.patchValue({ vehiculoId: vehiculosCliente[0].placa });
             } else if (vehiculosCliente.length > 1) {
-              // Si tiene más de uno, habilitar el campo para que elija
               this.form.get('vehiculoId')?.enable();
             }
           });
@@ -139,7 +137,6 @@ export class InsertareditardenunciaComponent {
       this.denuncia.vehiculo = new Vehiculo();
       this.denuncia.vehiculo.placa = this.form.value.vehiculoId;
 
-      // Si es CLIENTE, asigna automáticamente el estado "Cerrado"
       this.denuncia.estado = this.isAdmin ? this.form.value.estado : 'Abierto';
 
       if (this.edicion) {

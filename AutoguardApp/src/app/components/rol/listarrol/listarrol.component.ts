@@ -38,7 +38,6 @@ export class ListarrolComponent implements OnInit {
   }
   cambiarRol(id: number, nuevoRol: string) {
     this.rolService.cambiarRol(id, nuevoRol).subscribe(() => {
-      // Refrescar tabla
       this.rolService.list().subscribe((data) => {
         this.dataSource = new MatTableDataSource(data);
       });

@@ -59,15 +59,15 @@ export class ListarusuarioComponent implements OnInit {
     });
   }
   cambiarEstado(usuario: Usuario) {
-    console.log('🟡 Usuario antes del cambio:', usuario);
+    console.log('Usuario antes del cambio:', usuario);
 
     this.usuarioService.cambiarEstado(usuario.id).subscribe({
       next: () => {
-        usuario.enabled = !usuario.enabled; // actualizar localmente
-        console.log('🟢 Estado cambiado. Nuevo estado:', usuario.enabled);
+        usuario.enabled = !usuario.enabled;
+        console.log('Estado cambiado. Nuevo estado:', usuario.enabled);
       },
       error: (err) => {
-        console.error('🔴 Error al cambiar el estado:', err);
+        console.error('Error al cambiar el estado:', err);
       },
     });
   }

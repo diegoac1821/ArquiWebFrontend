@@ -48,6 +48,6 @@ export class ConsultaalertaporperiodoComponent {
   }
 
   cancelar(): void {
-    this.router.navigate(['/alerta/listaralerta']); // Ajusta esta ruta según corresponda
+    this.router.navigate(['/alerta/listaralerta']); 
   }
 }

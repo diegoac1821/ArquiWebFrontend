@@ -72,8 +72,8 @@
 
 /* Botón personalizado */
 .custom-button {
-  background-color: #27193E !important; /* Color morado oscuro */
-  color: #ffffff !important; /* Letras blancas */
+  background-color: #27193E !important; 
+  color: #ffffff !important; 
   padding: 0.75rem 2rem;
   font-weight: bold;
   font-size: 1rem;
@@ -83,7 +83,7 @@
 }
 
 .custom-button:hover {
-  background-color: #3c285d !important; /* Un tono más claro al pasar el mouse */
+  background-color: #3c285d !important; 
 }
 
 /* Espaciado horizontal específico entre los campos */
@@ -101,7 +101,7 @@
 
 /* Botón cancelar adicional si quieres estilo distinto */
 .btn-cancelar {
-  background-color: #27193E !important; /* Puedes cambiar el color si deseas */
+  background-color: #27193E !important; 
 }
 
 .btn-cancelar:hover {

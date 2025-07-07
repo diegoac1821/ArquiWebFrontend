@@ -15,17 +15,10 @@ import {
   styleUrl: './reporteusuariomasalerta.component.css',
 })
 export class ReporteusuariomasalertaComponent implements OnInit {
-  // Tipo del gráfico
   barCharType: ChartType = 'bar';
   barChartLegend = true;
-
-  // Etiquetas del eje X (usuarios)
   barChartLabels: string[] = [];
-
-  // Datos del gráfico
   barChartData: ChartDataset[] = [];
-
-  // Opciones visuales mejoradas
   barChartOptions: ChartOptions = {
     responsive: true,
     scales: {
@@ -79,8 +72,8 @@ export class ReporteusuariomasalertaComponent implements OnInit {
           data: data.map((item) => item.totalAlertas),
           label: 'Cantidad de Alertas',
           backgroundColor: [
-            '#5BC0E4', // Primer color (color de fondo)
-            '#472F64', // Segundo color (color de título)
+            '#5BC0E4', 
+            '#472F64', 
             '#27193E',
           ],
           borderColor: '#333',

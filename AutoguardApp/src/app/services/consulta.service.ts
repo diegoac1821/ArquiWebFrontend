@@ -13,32 +13,30 @@ export class ConsultaService {
 
   constructor(private http: HttpClient) {}
 
-  // Listar todas las consultas
+
   list() {
     return this.http.get<Consulta[]>(this.url);
   }
 
-  // Insertar nueva consulta
   insert(consulta: Consulta): Observable<Consulta> {
     return this.http.post<Consulta>(`${this.url}`, consulta);
   }
 
-  // Actualizar consulta existente
+
   update(consulta: Consulta) {
     return this.http.put(this.url, consulta);
   }
 
-  // Eliminar consulta por ID
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
 
-  // Buscar por ID
+
   listId(id: number) {
     return this.http.get<Consulta>(`${this.url}/${id}`);
   }
 
-  // Observable para reactualizar la tabla después de cambios
+
   getList() {
     return this.listaCambio.asObservable();
   }
@@ -63,7 +61,7 @@ Pregunta del usuario: "${mensaje}"`;
       ],
     };
 
-    const apiKey = 'AIzaSyCaFF12cp6ywFINlt6CTDuMx6JW_XJyEbA'; // clave de prueba
+    const apiKey = 'AIzaSyCaFF12cp6ywFINlt6CTDuMx6JW_XJyEbA'; 
 
     return this.http.post<any>(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,

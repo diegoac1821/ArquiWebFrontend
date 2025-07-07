@@ -51,7 +51,6 @@ export class MenuComponent implements OnInit {
         next: (usuario: Usuario) => {
           this.userId = usuario.id;
 
-          // Obtener todas las alertas y filtrar solo las del usuario logueado
           this.alertaService.list().subscribe({
             next: (alertas: Alerta[]) => {
               this.alertasUsuario = alertas.filter(

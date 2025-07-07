@@ -6,7 +6,7 @@
 .login-container {
   flex: 1;
   padding: 3rem;
-  background-color: #27193E; /* fondo oscuro */
+  background-color: #27193E; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,7 +20,7 @@
 
 h2 {
   margin-bottom: 1.5rem;
-  color: white; /* título blanco */
+  color: white; 
   font-size: 2rem;
   text-align: center;
   font-weight: bold;
@@ -33,7 +33,7 @@ form {
 
 .custom-button {
   margin-top: 2rem;
-  background-color: #5BC0E4 !important; /* celeste */
+  background-color: #5BC0E4 !important; 
   color: white !important;
   font-weight: bold;
   width: 100%;
@@ -45,11 +45,11 @@ form {
   margin-top: 1.5rem;
   text-align: center;
   font-size: 0.95rem;
-  color: white; /* texto blanco */
+  color: white;
 }
 
 .register-link a {
-  color: white; /* link blanco */
+  color: white; 
   font-weight: bold;
   text-decoration: none;
 }
@@ -61,7 +61,6 @@ form {
   background-position: center;
 }
 
-/* 🎯 Campos en columnas */
 .form-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -73,7 +72,7 @@ mat-form-field {
   margin-bottom: 1rem;
 }
 
-/* Responsivo */
+
 @media (max-width: 992px) {
   .form-grid {
     grid-template-columns: repeat(2, 1fr);

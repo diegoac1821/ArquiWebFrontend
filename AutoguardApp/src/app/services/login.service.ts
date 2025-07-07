@@ -36,9 +36,6 @@ export class LoginService {
       const helper = new JwtHelperService();
       const decodedToken: any = helper.decodeToken(token);
 
-     
-
-      // Retornar rol dependiendo del nombre exacto
       if (decodedToken?.rol) return decodedToken.rol;
       if (decodedToken?.role) return decodedToken.role;
       if (decodedToken?.authorities?.length > 0) return decodedToken.authorities[0];

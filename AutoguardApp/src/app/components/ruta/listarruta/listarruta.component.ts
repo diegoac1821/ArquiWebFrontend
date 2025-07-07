@@ -41,10 +41,10 @@ export class ListarrutaComponent implements OnInit {
 
   ngOnInit(): void {
   const username = this.loginService.getUsername();
-  const rol = this.loginService.showRole()?.trim().toUpperCase(); // ← Normaliza el rol
+  const rol = this.loginService.showRole()?.trim().toUpperCase(); 
   this.esCliente = rol === 'CLIENTE';
 
-  console.log('Rol actual normalizado:', rol); // ← DEBUG confiable
+  console.log('Rol actual normalizado:', rol);
 
   this.rutaService.list().subscribe((data) => {
     let rutas = data;

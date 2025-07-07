@@ -1,4 +1,4 @@
-/* Margen inferior automático desde el toolbar */
+
 mat-toolbar {
   position: fixed;
   top: 0;
@@ -10,16 +10,15 @@ mat-toolbar {
   background-color: #ffffff;
   color: white;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  height: 64px; /* Asegura altura fija */
+  height: 64px; 
 }
 
-/* Aplica espacio superior global al contenido general */
 body, main, .main-content, router-outlet + * {
-  margin-top: 64px; /* altura igual a la del toolbar */
+  margin-top: 64px; 
 }
 
 main {
-  margin-top: 64px; /* altura aproximada del toolbar */
+  margin-top: 64px; 
 }
 
 mat-toolbar button {

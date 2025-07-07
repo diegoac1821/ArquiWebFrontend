@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
     request.username = this.username;
     request.password = this.password;
 
-    // Validar si el usuario está habilitado antes de loguear
     this.usuarioService.buscarPorUsername(this.username).subscribe(
       (usuario) => {
         if (!usuario.enabled) {
@@ -44,8 +43,6 @@ export class LoginComponent implements OnInit {
           );
           return;
         }
-
-        // Usuario habilitado → permitir login
         this.loginService.login(request).subscribe(
           (data: any) => {
             sessionStorage.setItem('token', data.jwttoken);

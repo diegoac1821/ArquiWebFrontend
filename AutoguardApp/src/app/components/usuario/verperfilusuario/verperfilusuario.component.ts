@@ -14,7 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { LoginService } from '../../../services/login.service'; // Assuming you have a LoginService to get the username
+import { LoginService } from '../../../services/login.service'; 
 @Component({
   selector: 'app-verperfilusuario',
   standalone: true,
@@ -37,7 +37,7 @@ export class VerperfilusuarioComponent implements OnInit {
     private usuarioService: UsuarioService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private loginService: LoginService // Assuming you have a LoginService to get the username
+    private loginService: LoginService 
   ) {}
 
   ngOnInit(): void {

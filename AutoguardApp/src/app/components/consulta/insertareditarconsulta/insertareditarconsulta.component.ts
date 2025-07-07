@@ -61,7 +61,7 @@ export class InsertareditarconsultaComponent implements OnInit {
     });
 
     const ahora = new Date();
-    const horaActual = ahora.toTimeString().slice(0, 8); // HH:mm:ss
+    const horaActual = ahora.toTimeString().slice(0, 8); 
 
     this.form = this.formBuilder.group({
       consulta: ['', Validators.required],
@@ -106,14 +106,14 @@ export class InsertareditarconsultaComponent implements OnInit {
                     this.router.navigate(['/respuesta/listarrespuesta']);
                   },
                   error: (err) => {
-                    console.error('❌ Error al guardar la respuesta:', err);
+                    console.error('Error al guardar la respuesta:', err);
                     alert('Error al guardar la respuesta. Revisa la consola.');
                   },
                 });
               },
               (error) => {
                 console.error(
-                  '❌ Error al obtener la respuesta del chatbot:',
+                  'Error al obtener la respuesta del chatbot:',
                   error
                 );
                 alert('Error al generar la respuesta del chatbot.');
@@ -121,7 +121,7 @@ export class InsertareditarconsultaComponent implements OnInit {
             );
           },
           (error) => {
-            console.error('❌ Error al guardar la consulta:', error);
+            console.error('Error al guardar la consulta:', error);
             alert('Error al guardar la consulta.');
           }
         );

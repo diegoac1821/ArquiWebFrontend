@@ -57,11 +57,6 @@ table {
   background-color: #f2f8fc;
 }
 
-/* Íconos de editar y eliminar (si los hubiera) */
-button[mat-icon-button] mat-icon {
-  color: #27193E !important;
-}
-
 /* Paginador */
 mat-paginator {
   margin-top: 1rem;

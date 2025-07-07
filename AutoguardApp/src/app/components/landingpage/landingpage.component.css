@@ -10,18 +10,14 @@
 body {
   background-color: #27193e;
   color: #ffffff;
-  padding-top: 90px; /* Altura del header fijo */
+  padding-top: 90px; 
 }
-
-/* ========== GENERAL STYLES ========== */
 
 img {
   border-radius: 15px;
   max-width: 100%;
   height: auto;
 }
-
-/* ========== HEADER ========== */
 
 .landing-header {
   background-color: #fff;
@@ -87,8 +83,6 @@ img {
   background-color: #3daed1;
 }
 
-/* ========== MAIN ========== */
-
 .landing-main {
   background-color: #5bc0e4;
   padding: 3rem 2rem;
@@ -110,8 +104,6 @@ img {
   max-width: 50%;
   margin-top: 1rem;
 }
-
-/* ========== TESTIMONIOS ========== */
 
 .testimonials {
   background-color: #5bc0e4;
@@ -167,7 +159,6 @@ img {
   text-align: right;
 }
 
-/* ========== NOSOTROS (MISIÓN/VISIÓN) ========== */
 
 .about-us {
   background-color: #27193e;
@@ -221,8 +212,6 @@ img {
   border-radius: 12px;
   filter: none !important;
 }
-
-/* ========== ESTADO VEHICULAR ========== */
 
 .vehicle-status {
   background-color: #5bc0e4;
@@ -300,8 +289,6 @@ img {
   text-align: center;
 }
 
-/* ========== FOOTER ========== */
-
 .landing-footer {
   background-color: #27193e;
   color: #fff;
@@ -311,8 +298,6 @@ img {
   text-align: center;
   width: 100%;
 }
-
-/* ========== RESPONSIVE ========== */
 
 @media (max-width: 768px) {
   .mission-vision,

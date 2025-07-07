@@ -47,7 +47,6 @@ export class ListardispositivoGPSComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  // --- Paginación manual para los cards ---
   pagedData: Dispositivo_GPS[] = [];
   pageSize = 5;
   pageIndex = 0;

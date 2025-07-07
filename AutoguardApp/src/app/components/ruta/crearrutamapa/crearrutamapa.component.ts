@@ -115,17 +115,17 @@ export class CrearrutamapaComponent implements OnInit {
       if (status === 'OK') {
         this.directionsRenderer.setDirections(result);
         const leg = result.routes[0].legs[0];
-        this.distancia = leg.distance.value / 1000; // metros a km
+        this.distancia = leg.distance.value / 1000; 
         this.duracion = leg.duration.text;
       } else {
-        console.error('❌ Error al trazar ruta:', status);
+        console.error('Error al trazar ruta:', status);
       }
     });
   }
 
  guardarRuta(): void {
   if (!this.origen || !this.destino || !this.vehiculoSeleccionado) {
-    alert('❌ Faltan datos obligatorios: origen, destino o vehículo.');
+    alert('Faltan datos obligatorios: origen, destino o vehículo.');
     return;
   }
 
@@ -138,7 +138,6 @@ export class CrearrutamapaComponent implements OnInit {
   nuevaRuta.destinoLongitud = this.destino.lng.toString();
   nuevaRuta.distancia = Math.round(this.distancia);
 
-  // ✅ Convierte duración tipo "3 min" -> "00:03:00"
   const minutos = parseInt(this.duracion);
   nuevaRuta.duracion = `00:${minutos.toString().padStart(2, '0')}:00`;
 
@@ -151,8 +150,8 @@ export class CrearrutamapaComponent implements OnInit {
       this.router.navigate(['/ruta/listarruta']);
     },
     error: (err) => {
-      console.error('❌ Error al guardar la ruta:', err);
-      alert('❌ Error al guardar la ruta');
+      console.error('Error al guardar la ruta:', err);
+      alert('Error al guardar la ruta');
       this.guardando = false;
     },
   });

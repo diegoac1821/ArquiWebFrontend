@@ -106,7 +106,7 @@ mat-paginator {
   padding: 0.5rem;
 }
 
-/* Ícono de Ver Ruta (blanco para diferenciar) */
+/* Ícono de Ver Ruta  */
 button[mat-icon-button] mat-icon.visibility-icon {
   color: #ffffff !important; 
 }

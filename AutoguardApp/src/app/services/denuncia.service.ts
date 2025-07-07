@@ -21,22 +21,19 @@ export class DenunciaService {
     return this.http.post(this.url, denuncia);
   }
 
-  // Actualizar denuncia existente
+
   update(denuncia: Denuncia) {
     return this.http.put(this.url, denuncia);
   }
 
-  // Eliminar denuncia por ID
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
 
-  // Buscar por ID
   listId(id: number) {
     return this.http.get<Denuncia>(`${this.url}/${id}`);
   }
 
-  // Observable para reactualizar la tabla después de cambios
   getList() {
     return this.listaCambio.asObservable();
   }

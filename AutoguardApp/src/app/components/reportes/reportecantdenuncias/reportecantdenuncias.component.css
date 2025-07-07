@@ -1,10 +1,10 @@
 /* Contenedor general */
 .container {
-  background-color: #5BC0E4; /* Celeste claro */
+  background-color: #5BC0E4; 
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centrado vertical */
-  align-items: center; /* Centrado horizontal */
+  justify-content: center; 
+  align-items: center; 
   padding: 40px 20px;
   min-height: 100vh;
   width: 100%;
@@ -13,7 +13,7 @@
 
 /* Título */
 h1 {
-  background-color: #472F64; /* Azul oscuro */
+  background-color: #472F64; 
   color: #FFFFFF;
   font-family: "Poppins", sans-serif;
   font-size: 2rem;
@@ -32,17 +32,16 @@ h1 {
   border-radius: 12px;
   padding: 20px;
   display: flex;
-  justify-content: center; /* Centrado horizontal */
-  align-items: center; /* Centrado vertical */
-  width: 80%; /* Reduce el ancho para centrarlo mejor */
-  max-width: 800px; /* Limita el ancho máximo */
+  justify-content: center; 
+  align-items: center;
+  width: 80%; 
+  max-width: 800px; 
   margin-top: 20px;
   box-sizing: border-box;
 }
 
-/* Asegura que el canvas no se estire innecesariamente */
 canvas {
   display: block;
-  width: 100%; /* Usamos el 100% del ancho del contenedor */
-  height: 400px; /* Altura fija del gráfico */
+  width: 100%; 
+  height: 400px; 
 }

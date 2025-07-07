@@ -20,7 +20,7 @@ h2 {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Botón Insertar (y estilo igual para botones visuales) */
+/* Botón Insertar */
 button[color='primary'] {
   background-color: #27193E !important;
   color: white !important;
@@ -32,7 +32,6 @@ button[color='primary']:hover {
   background-color: #3a2d50 !important;
 }
 
-/* Solo visual: Estilo similar para botones accent/warn dentro de botones de filtro */
 .botones-filtro button {
   background-color: #27193E !important;
   color: white !important;
@@ -89,7 +88,7 @@ table {
   background-color: #f2f8fc;
 }
 
-/* Íconos de editar y eliminar (no se tocan) */
+/* Íconos de editar y eliminar */
 button[mat-icon-button] mat-icon {
   color: #27193E !important;
 }

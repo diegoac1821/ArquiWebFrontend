@@ -78,7 +78,6 @@
     <ng-container matColumnDef="editar">
       <th mat-header-cell *matHeaderCellDef>Acción</th>
       <td mat-cell *matCellDef="let element">
-        <!-- Si es CLIENTE, muestra el botón de editar -->
         <button
           *ngIf="!isAdmin"
           mat-icon-button
@@ -87,8 +86,6 @@
         >
           <mat-icon>edit</mat-icon>
         </button>
-
-        <!-- Si es ADMIN, muestra el botón de cerrar -->
         <button
           *ngIf="isAdmin && element.estado !== 'Cerrado'"
           mat-icon-button
