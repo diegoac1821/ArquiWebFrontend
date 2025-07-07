@@ -62,7 +62,7 @@ export class VerMapaRutaComponent implements OnInit {
         if (status === 'OK') {
           directionsRenderer.setDirections(result);
         } else {
-          alert('❌ No se pudo mostrar la ruta en el mapa');
+          alert('No se pudo mostrar la ruta en el mapa');
         }
       }
     );

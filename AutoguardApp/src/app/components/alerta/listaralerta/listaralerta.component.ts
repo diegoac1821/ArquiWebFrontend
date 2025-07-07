@@ -55,7 +55,7 @@ export class ListaralertaComponent implements OnInit {
 
   ngOnInit(): void {
     this.alertaService.list().subscribe((data) => {
-      console.log('Alertas recibidas:', data); // Verifica si viene la placa
+      console.log('Alertas recibidas:', data); 
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
     });

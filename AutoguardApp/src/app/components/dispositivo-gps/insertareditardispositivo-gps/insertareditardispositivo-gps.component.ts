@@ -73,7 +73,7 @@ export class InsertareditardispositivoGpsComponent {
         '',
         [
           Validators.required,
-          Validators.pattern(/^\d{1,3}$/), // Solo números de hasta 3 cifras
+          Validators.pattern(/^\d{1,3}$/),
         ],
       ],
       precio: ['',[

@@ -6,7 +6,7 @@ body, .perfil-container {
   font-family: 'Akshar', sans-serif;
   display: flex;
   justify-content: center;
-  align-items: center; /* antes estaba en center */
+  align-items: center;
   padding: 3rem;
 }
 

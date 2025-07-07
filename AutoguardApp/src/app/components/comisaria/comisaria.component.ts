@@ -12,4 +12,3 @@ export class ComisariaComponent {
     constructor(public route: ActivatedRoute) {}
 
 }
-//leslie

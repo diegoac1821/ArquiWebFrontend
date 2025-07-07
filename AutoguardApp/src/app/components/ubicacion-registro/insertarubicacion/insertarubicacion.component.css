@@ -43,7 +43,7 @@ mat-form-field {
   margin-top: 1.5rem;
 }
 
-/* Botón Guardar (color primario personalizado) */
+/* Botón Guardar */
 button[color="primary"] {
   background-color: #27193E !important;
   color: white !important;
@@ -58,7 +58,7 @@ button[color="primary"]:hover {
   background-color: #3a2d50 !important;
 }
 
-/* Botón Cancelar (estilo igual al guardar) */
+/* Botón Cancelar */
 .btn-cancelar {
   background-color: #27193E !important;
   color: white !important;

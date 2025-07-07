@@ -40,5 +40,4 @@ export class VehiculoService {
   setList(listaNueva: Vehiculo[]) {
     this.listaCambio.next(listaNueva);
   }
-  //leslie
 }

@@ -107,7 +107,7 @@ export class InsertareditarComponent implements OnInit {
       this.usuario.direccion = this.form.value.direccion;
       this.usuario.correo_electronico = this.form.value.correo_electronico;
       this.usuario.fechaNacimiento = this.form.value.fechaNacimiento;
-      this.usuario.edad = this.form.value.edad; // calculada
+      this.usuario.edad = this.form.value.edad; 
       this.usuario.telefono = this.form.value.telefono;
       this.usuario.username = this.form.value.username;
       this.usuario.password = this.form.value.password;
@@ -149,7 +149,7 @@ export class InsertareditarComponent implements OnInit {
             data.fechaNacimiento,
             [Validators.required, this.mayorDeEdadValidator],
           ],
-          edad: [data.edad], // visible solo si edicion
+          edad: [data.edad],
           telefono: [
             data.telefono,
             [Validators.required, Validators.pattern(/^9\d{8}$/)],

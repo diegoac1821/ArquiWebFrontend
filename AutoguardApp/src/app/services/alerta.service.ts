@@ -22,22 +22,18 @@ export class AlertaService {
     return this.http.post(this.url, alerta);
   }
 
-  // Actualizar alerta existente
   update(alerta: Alerta) {
     return this.http.put(this.url, alerta);
   }
 
-  // Eliminar alerta por ID
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
 
-  // Buscar por ID
   listId(id: number) {
     return this.http.get<Alerta>(`${this.url}/${id}`);
   }
 
-  // Observable para reactualizar la tabla después de cambios
   getList() {
     return this.listaCambio.asObservable();
   }

@@ -55,7 +55,7 @@ export class ListarvehiculoComponent implements OnInit {
       }
 
       this.vehiculos = lista;
-      this.aplicarfiltro(); // Aplica filtro y pagina
+      this.aplicarfiltro();
     });
   }
 
@@ -93,7 +93,7 @@ export class ListarvehiculoComponent implements OnInit {
       }
 
       this.vehiculos = lista;
-      this.aplicarfiltro(); // vuelve a aplicar filtro y paginación
+      this.aplicarfiltro(); 
     });
   });
 }

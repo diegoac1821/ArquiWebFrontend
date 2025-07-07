@@ -25,7 +25,7 @@ form {
 /* Título dentro del cuadro */
 form h2 {
   font-size: 2rem;
-  font-weight: 700; /* más grueso */
+  font-weight: 700; 
   color: #27193e;
   margin-bottom: 2rem;
   font-family: "Akshar", sans-serif;

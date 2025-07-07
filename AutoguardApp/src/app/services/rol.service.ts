@@ -18,7 +18,7 @@ export class RolService {
   cambiarRol(id: number, nuevoRol: string) {
     return this.http.put(`${this.url}/cambiar-rol/${id}`, nuevoRol, {
       headers: { 'Content-Type': 'application/json' },
-      responseType: 'text', // si tu backend responde con String
+      responseType: 'text', 
     });
   }
 }

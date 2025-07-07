@@ -77,7 +77,7 @@ export class ListarreclamoComponent implements OnInit {
 
   eliminar(id: number): void {
     this.reclamoService.delete(id).subscribe(() => {
-      this.ngOnInit(); // recargar con la lógica aplicada
+      this.ngOnInit();
     });
   }
 

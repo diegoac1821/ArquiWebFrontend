@@ -15,7 +15,7 @@
 
 /* Contenido centrado sobre la imagen */
 .inicio-container .contenido {
-  background-color: rgba(255, 255, 255, 0.88); /* blanco con leve transparencia */
+  background-color: rgba(255, 255, 255, 0.88); 
   padding: 2rem;
   border-radius: 16px;
   max-width: 600px;

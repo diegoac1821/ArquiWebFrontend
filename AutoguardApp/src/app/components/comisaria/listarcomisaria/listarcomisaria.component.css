@@ -47,7 +47,7 @@ h2 {
   min-width: 200px;
 }
 
-/* Botones Buscar y Ver Todas (mismo estilo que insertar) */
+/* Botones Buscar y Ver Todas*/
 .btn-buscar,
 .btn-ver,
 button[color='primary'] {

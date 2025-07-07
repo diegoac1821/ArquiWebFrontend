@@ -43,7 +43,7 @@ export class InsertareditarubicacionComponent implements OnInit {
   mensajeExito: boolean = false;
   form: FormGroup = new FormGroup({});
   ubicacion: ubicacion_registro = new ubicacion_registro();
-  listaGps: Dispositivo_GPS[] = [];//aqui
+  listaGps: Dispositivo_GPS[] = [];
   id: number = 0;
   edicion: boolean = false;
   esCliente: boolean = false;
@@ -54,26 +54,21 @@ export class InsertareditarubicacionComponent implements OnInit {
     private route: ActivatedRoute,
     private gpsService: DispositivoGPSService,
     private loginService: LoginService
-    //aqui
   ) {}
 
   ngOnInit(): void {
-    // Obtener parámetros de la URL
     this.route.params.subscribe((data: Params) => {
       this.id = data['id'];
       this.edicion = data['id'] != null;
       this.init();
     });
 
-    // Verificar si el usuario es cliente
     this.esCliente = this.loginService.showRole() === 'CLIENTE';
 
-    // Obtener lista de dispositivos GPS
     this.gpsService.list().subscribe((data) => {
       this.listaGps = data;
     });
 
-    // Inicializar el formulario
     this.form = this.formBuilder.group({
       id: [''],
       latitud: ['', Validators.required],
@@ -85,15 +80,11 @@ export class InsertareditarubicacionComponent implements OnInit {
   }
 
  aceptar() {
-    // Verificar si el formulario es válido
     if (this.form.valid) {
-      // Crear una nueva instancia de Dispositivo_GPS con el ID
       const gps = new Dispositivo_GPS();
       gps.id = this.form.value.dgpsId;
-      this.mensajeExito = true;  // Activar el mensaje de éxito
+      this.mensajeExito = true; 
       
-      
-      // Asignar valores al objeto 'ubicacion'
       this.ubicacion.id = this.form.value.id;
       this.ubicacion.latitud = this.form.value.latitud;
       this.ubicacion.longitud = this.form.value.longitud;
@@ -101,14 +92,13 @@ export class InsertareditarubicacionComponent implements OnInit {
       this.ubicacion.hora = this.form.value.hora;
       this.ubicacion.disGPS = gps;
 
-      // Verificar si estamos en edición o en inserción
       if (this.edicion) {
         this.ubicacionService.update(this.ubicacion).subscribe(() => {
           this.ubicacionService
             .list()
             .subscribe((data) => this.ubicacionService.setList(data));
           this.router.navigate(['/ubicacion-registro/listarubicacionregistro']);
-          this.limpiarMensajeExito();  // Limpiar el mensaje de éxito después de un tiempo
+          this.limpiarMensajeExito();  
         });
       } else {
         this.ubicacionService.insert(this.ubicacion).subscribe(() => {
@@ -116,17 +106,16 @@ export class InsertareditarubicacionComponent implements OnInit {
             .list()
             .subscribe((data) => this.ubicacionService.setList(data));
           this.router.navigate(['/ubicacion-registro/listarubicacionregistro']);
-          this.limpiarMensajeExito();  // Limpiar el mensaje de éxito después de un tiempo
+          this.limpiarMensajeExito();  
         });
       }
     }
   }
 
-  // Método para limpiar el mensaje de éxito después de un pequeño retraso
   limpiarMensajeExito() {
     setTimeout(() => {
       this.mensajeExito = false;
-    }, 3000); // El mensaje se ocultará después de 3 segundos
+    }, 3000); 
   }
 
 

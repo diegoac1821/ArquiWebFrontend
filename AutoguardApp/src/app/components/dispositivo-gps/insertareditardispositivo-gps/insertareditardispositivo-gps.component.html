@@ -22,12 +22,12 @@
         formControlName="numeroSerie"
         maxlength="3"
         placeholder="001"
-       />
+      />
       <mat-error *ngIf="form.get('numeroSerie')?.hasError('required')">
         Número de serie requerido
       </mat-error>
     </mat-form-field>
-    
+
     <!-- Precio -->
 
     <mat-form-field class="example-full-width">
@@ -82,6 +82,5 @@
         Cancelar
       </button>
     </div>
-
   </form>
 </div>

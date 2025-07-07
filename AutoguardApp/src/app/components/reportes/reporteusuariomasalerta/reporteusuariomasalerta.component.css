@@ -1,10 +1,10 @@
 /* Contenedor general */
 .container {
-  background-color: #5BC0E4; /* Celeste claro */
+  background-color: #5BC0E4; 
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centrado vertical */
-  align-items: center; /* Centrado horizontal */
+  justify-content: center; 
+  align-items: center; 
   padding: 40px 20px;
   min-height: 100vh;
   box-sizing: border-box;
@@ -12,7 +12,7 @@
 
 /* Título */
 h2 {
-  background-color: #472F64; /* azul oscuro */
+  background-color: #472F64; 
   color: #FFFFFF;
   font-family: "Poppins", sans-serif;
   font-size: 2rem;
@@ -33,7 +33,6 @@ h2 {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Asegura que el canvas no se estire innecesariamente */
 canvas {
   display: block;
   width: 600px !important;

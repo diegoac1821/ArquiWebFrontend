@@ -64,7 +64,7 @@ export class InsertareditarcomisariaComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern(/^9\d{8}$/), // Solo 9 dígitos, empieza con 9
+          Validators.pattern(/^9\d{8}$/), 
         ],
       ],
     });

@@ -59,7 +59,7 @@ export class InsertareditarvehiculoComponent implements OnInit {
     this.form = this.formBuilder.group({
       placa: [
         '',
-        [Validators.required, Validators.pattern(/^[A-Z]{3}-\d{3}$/)], //VALIDACION PLACA ABC-123
+        [Validators.required, Validators.pattern(/^[A-Z]{3}-\d{3}$/)],
       ],
       color: ['', Validators.required],
       marca: ['', Validators.required],

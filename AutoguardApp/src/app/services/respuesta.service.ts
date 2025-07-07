@@ -12,33 +12,28 @@ export class RespuestaService {
 
   constructor(private http: HttpClient) {}
 
-  // Listar todas las respuestas
   list() {
     return this.http.get<Respuesta[]>(this.url);
   }
 
-  // Insertar nueva respuesta
   insert(respuesta: Respuesta): Observable<Respuesta> {
   return this.http.post<Respuesta>(this.url, respuesta);
 }
 
 
-  // Actualizar respuesta existente
   update(respuesta: Respuesta) {
     return this.http.put(this.url, respuesta);
   }
 
-  // Eliminar respuesta por ID
+
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`);
   }
 
-  // Buscar por ID
   listId(id: number) {
     return this.http.get<Respuesta>(`${this.url}/${id}`);
   }
 
-  // Observable para reactualizar la tabla después de cambios
   getList() {
     return this.listaCambio.asObservable();
   }

@@ -33,7 +33,6 @@ import { ReportecantdenunciasComponent } from './components/reportes/reportecant
 import { ConsultarutaperiodoComponent } from './components/ruta/consultarutaperiodo/consultarutaperiodo.component';
 
 import { ReportecantconsultasusuarioComponent } from './components/reportes/reportecantconsultasusuario/reportecantconsultasusuario.component';
-//import { ReportebuscardenunciasporestadoComponent } from './components/reportes/reportebuscardenunciasporestado/reportebuscardenunciasporestado.component';
 import { VerMapaRutaComponent } from './components/ruta/vermaparuta/vermaparuta.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -47,11 +46,11 @@ export const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: 'landing', component: LandingpageComponent },
 
-  // Ruta pública
+
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
 
-  // Todas las rutas protegidas por seguridadGuard
+
   {
     path: '',
     canActivate: [seguridadGuard],
@@ -128,7 +127,7 @@ export const routes: Routes = [
       {
         path: 'respuestas/listarrespuesta',
         component: ListarrespuestaComponent,
-      }, // Duplicado, opcional
+      }, 
       {
         path: 'respuestas/insertareditarrespuesta',
         component: InsertareditarrespuestaComponent,

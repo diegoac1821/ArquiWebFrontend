@@ -48,16 +48,16 @@ export class ConsultarutaperiodoComponent {
       this.dataSource = new MatTableDataSource(data);
 
       if (data.length > 0) {
-        this.mostrarRutaEnMapa(data[0]); // Mostrar solo la primera ruta debajo
+        this.mostrarRutaEnMapa(data[0]); 
       } else {
         const mapDiv = document.getElementById('map');
-        if (mapDiv) mapDiv.innerHTML = ''; // Limpia el mapa si no hay rutas
+        if (mapDiv) mapDiv.innerHTML = ''; 
       }
     });
   }
 
   cancelar(): void {
-  this.router.navigate(['/ruta/listarruta']); // ajusta esta ruta según corresponda
+  this.router.navigate(['/ruta/listarruta']); 
 }
   
 
@@ -90,7 +90,7 @@ export class ConsultarutaperiodoComponent {
         if (status === 'OK') {
           directionsRenderer.setDirections(result);
         } else {
-          alert('❌ No se pudo mostrar la ruta en el mapa');
+          alert('No se pudo mostrar la ruta en el mapa');
         }
       }
     );

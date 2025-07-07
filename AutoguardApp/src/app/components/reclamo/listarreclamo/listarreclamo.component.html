@@ -19,10 +19,10 @@
     <!-- Botones de filtro a la derecha (solo admin) -->
     <div class="botones-filtro" *ngIf="!esCliente">
       <button mat-raised-button color="accent" (click)="filtrarSinResolver()">
-        ❌ Ver Reclamos sin Resolver
+        Ver Reclamos sin Resolver
       </button>
       <button mat-raised-button color="warn" (click)="listarTodos()">
-        🔁 Ver Todos los Reclamos
+        Ver Todos los Reclamos
       </button>
     </div>
   </div>
@@ -92,7 +92,7 @@
             (click)="marcarComoResuelto(element)"
             [disabled]="element.resuelto"
           >
-            ✅ Marcar como Resuelto
+            Marcar como Resuelto
           </button>
         </ng-template>
       </td>

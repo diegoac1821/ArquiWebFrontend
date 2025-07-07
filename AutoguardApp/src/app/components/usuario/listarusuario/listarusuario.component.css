@@ -67,7 +67,7 @@ button[mat-icon-button] mat-icon {
 
 /* Ícono de Ver Perfil (color más claro para mayor visibilidad) */
 button[mat-icon-button][color="primary"] mat-icon {
-  color: #ffffff !important; /* Azul claro profundo */
+  color: #ffffff !important; 
 }
 
 /* Paginador */

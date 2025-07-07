@@ -80,21 +80,21 @@ export class InsertarUbicacionComponent implements OnInit, AfterViewInit {
 
   guardarUbicacion(): void {
     if (!this.gpsSeleccionado || !this.ubicacion.latitud || !this.ubicacion.longitud) {
-      alert("❌ Selecciona un GPS y marca la ubicación en el mapa");
+      alert("Selecciona un GPS y marca la ubicación en el mapa");
       return;
     }
 
     const ahora = new Date();
     this.ubicacion.fecha = ahora;
-    this.ubicacion.hora = ahora.toTimeString().split(' ')[0]; // "HH:mm:ss"
+    this.ubicacion.hora = ahora.toTimeString().split(' ')[0]; 
     this.ubicacion.disGPS = this.gpsSeleccionado;
 
     this.ubicacionService.insert(this.ubicacion).subscribe({
       next: () => {
         alert("✅ Ubicación registrada correctamente");
-        this.router.navigate(['/ubicacion-registro/listarubicacionregistro']); // ⬅️ REDIRECCIÓN
+        this.router.navigate(['/ubicacion-registro/listarubicacionregistro']); 
       },
-      error: () => alert("❌ Error al registrar ubicación"),
+      error: () => alert("Error al registrar ubicación"),
     });
   }
   cancelar(): void {

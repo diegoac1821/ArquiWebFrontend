@@ -17,16 +17,15 @@ export class ReportecantconsultasusuarioComponent implements OnInit {
   barChartLabels: string[] = [];
   barChartData: ChartDataset[] = [];
 
-  // Colores institucionales
   asignarColor(): string[] {
     return [
-      '#5BC0E4', // celeste claro (fondo de barra)
-      '#472F64', // morado oscuro (puede alternar en border)
-      '#27193E'  // más oscuro (para detalles)
+      '#5BC0E4', 
+      '#472F64', 
+      '#27193E'  
     ];
   }
 
-  // Opciones del gráfico (estilo, etiquetas, leyenda, etc.)
+
   barChartOptions: ChartOptions = {
     responsive: true,
     scales: {

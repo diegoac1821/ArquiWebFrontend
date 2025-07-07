@@ -53,7 +53,7 @@ export class InsertareditaralertaComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       asunto: ['', Validators.required],
-      fecha: [new Date(), Validators.required], //VALIDA LA FECHA ACTUAL
+      fecha: [new Date(), Validators.required], 
       descripcion: ['', Validators.required],
       vehiculoId: [null, Validators.required],
     });
@@ -112,12 +112,12 @@ export class InsertareditaralertaComponent implements OnInit {
           this.alertaService.list().subscribe((data) => {
             this.alertaService.setList(data);
           });
-          alert('Alerta registrada exitosamente'); // CA05
+          alert('Alerta registrada exitosamente'); 
           this.router.navigate(['/alerta/listaralerta']);
         });
       }
     } else {
-      this.form.markAllAsTouched(); // Marca errores visibles en pantalla
+      this.form.markAllAsTouched(); 
     }
   }
 }

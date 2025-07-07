@@ -61,8 +61,6 @@ export class ListardenunciaComponent implements OnInit {
               (d) => d.vehiculo?.usuario?.id === usuario.id
             );
             this.dataSource = new MatTableDataSource(denunciasFiltradas);
-
-            // Asignar el paginador después de cargar datos
             setTimeout(() => {
               this.dataSource.paginator = this.paginator;
             });
@@ -70,7 +68,6 @@ export class ListardenunciaComponent implements OnInit {
         });
       }
     } else {
-      // ADMIN ve todas las denuncias
       this.dS.list().subscribe((data: Denuncia[]) => {
         this.dataSource = new MatTableDataSource(data);
         setTimeout(() => {
@@ -96,7 +93,6 @@ export class ListardenunciaComponent implements OnInit {
           });
         });
       } else {
-        // ADMIN ve todas
         this.dS.list().subscribe((data: Denuncia[]) => {
           this.dataSource = new MatTableDataSource(data);
           this.dataSource.paginator = this.paginator;
